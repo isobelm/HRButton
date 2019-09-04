@@ -1,0 +1,22 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/dist": true,
+        "**/coverge": true
+    },
+    "typescript.referencesCodeLens.enabled": true,
+    "tslint.ignoreDefinitionFiles": false,
+    "tslint.exclude": "**/node_modules/**/*",
+    "cSpell.words": [
+        "csrf",
+        "definitelytyped",
+        "promisified"
+    ],
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/379517ef-621b-4397-818a-48a255eb0e53/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/HrButtonBackend",
+    "appService.deploySubpath": ""
+}

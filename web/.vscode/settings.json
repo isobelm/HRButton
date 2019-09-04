@@ -1,0 +1,7 @@
+{
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/379517ef-621b-4397-818a-48a255eb0e53/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/HrButton",
+    "appService.deploySubpath": ""
+}
