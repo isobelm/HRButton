@@ -16,10 +16,6 @@ class ButtonPage extends Component {
     this.startButton = React.createRef();
   }
 
-  componentDidMount() {
-    console.log("Mount");
-  }
-
   render() {
     return (
       <div>
@@ -38,7 +34,9 @@ class ButtonPage extends Component {
       <div>
         {this.renderInfo()}
         {this.renderButton()}
-        {(this.state.graphData!==undefined && !this.state.disabled)?this.renderGraph():undefined}
+        {this.state.graphData !== undefined && !this.state.disabled
+          ? this.renderGraph()
+          : undefined}
       </div>
     );
   }
@@ -47,41 +45,41 @@ class ButtonPage extends Component {
     return (
       <div className="graph-parent">
         <div className="chart">
-        <ResponsiveLine
-          data={this.state.graphData}
-          margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-          xScale={{ type: "point" }}
-          yScale={{ type: "linear", stacked: true, min: "auto", max: "auto" }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            orient: "bottom",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "Last 14 Days",
-            legendOffset: 36,
-            legendPosition: "middle"
-          }}
-          axisLeft={{
-            orient: "left",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "count",
-            legendOffset: -40,
-            legendPosition: "middle"
-          }}
-          colors={{ scheme: "nivo" }}
-          pointSize={10}
-          pointColor={{ theme: "background" }}
-          pointBorderWidth={2}
-          pointBorderColor={{ from: "serieColor" }}
-          pointLabel="y"
-          pointLabelYOffset={-12}
-          useMesh={true}
-          legends={[]}
-        />
+          <ResponsiveLine
+            data={this.state.graphData}
+            margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+            xScale={{ type: "point" }}
+            yScale={{ type: "linear", stacked: true, min: "auto", max: "auto" }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              orient: "bottom",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "Last 14 Days",
+              legendOffset: 36,
+              legendPosition: "middle"
+            }}
+            axisLeft={{
+              orient: "left",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "count",
+              legendOffset: -40,
+              legendPosition: "middle"
+            }}
+            colors={{ scheme: "nivo" }}
+            pointSize={10}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            pointLabel="y"
+            pointLabelYOffset={-12}
+            useMesh={true}
+            legends={[]}
+          />
         </div>
       </div>
     );
@@ -116,19 +114,44 @@ class ButtonPage extends Component {
       <div className="App-header">
         <div className="rows">
           <form className="row" onClick={() => this._handleChange("Donal")}>
-            <input className="ghost-input-small" type="button" value="Donal" />
+            <input
+              className="ghost-input-small"
+              type="button"
+              value="Donal"
+              disabled={this.state.selectedUser === "Donal"}
+            />
           </form>
           <form className="row" onClick={() => this._handleChange("Ebin")}>
-            <input className="ghost-input-small" type="button" value="Ebin" />
+            <input
+              className="ghost-input-small"
+              type="button"
+              value="Ebin"
+              disabled={this.state.selectedUser === "Ebin"}
+            />
           </form>
           <form className="row" onClick={() => this._handleChange("Gemma")}>
-            <input className="ghost-input-small" type="button" value="Gemma" />
+            <input
+              className="ghost-input-small"
+              type="button"
+              value="Gemma"
+              disabled={this.state.selectedUser === "Gemma"}
+            />
           </form>
           <form className="row" onClick={() => this._handleChange("Isobel")}>
-            <input className="ghost-input-small" type="button" value="Isobel" />
+            <input
+              className="ghost-input-small"
+              type="button"
+              value="Isobel"
+              disabled={this.state.selectedUser === "Isobel"}
+            />
           </form>
           <form className="row" onClick={() => this._handleChange("Niall")}>
-            <input className="ghost-input-small" type="button" value="Niall" />
+            <input
+              className="ghost-input-small"
+              type="button"
+              value="Niall"
+              disabled={this.state.selectedUser === "Niall"}
+            />
           </form>
         </div>
       </div>
@@ -172,15 +195,16 @@ class ButtonPage extends Component {
   }
 
   createGraphData(data) {
-    const graphData = [ {
-      id: this.state.selectedUser,
-      data: new Array(data.length),
-    },
-    ]
+    const graphData = [
+      {
+        id: this.state.selectedUser,
+        data: new Array(data.length)
+      }
+    ];
 
-    for(let i = 0; i < data.length; i++){
+    for (let i = 0; i < data.length; i++) {
       graphData[0].data[i] = {
-        x: i+1,
+        x: i + 1,
         y: data[i]
       };
     }

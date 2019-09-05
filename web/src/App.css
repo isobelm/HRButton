@@ -130,7 +130,7 @@
   text-align: center;
 }
 
-.ghost-input-small:hover, .ghost-input-small:focus{
+.ghost-input-small:hover, .ghost-input-small:focus, .ghost-input-small:disabled{
   background:#f12711;
 }
 

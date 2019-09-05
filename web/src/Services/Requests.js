@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'http://hrbuttonbackend.azurewebsites.net/api/',
+    baseURL: 'https://hrbuttonbackend.azurewebsites.net/api/',
     timeout: 10000,
   });
 
