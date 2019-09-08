@@ -176,6 +176,37 @@
   transition: all 0.1s ease-in-out;
 }
 
+.home-button{
+  display: block;
+  font-weight:300;
+  width: 30%;
+  font-size: 18px;
+  border:0px;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #fff;
+  background: #ff7417;
+  padding: 10px;
+  margin: auto;
+  margin-top: 10px;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  text-align: center;
+}
+
+.home-button:disabled{
+  background:#999999;
+}
+
+.home-button:hover{
+  background: #ce2e12;
+}
+
 h1, h2, p, ul, li {
   font-family: sans-serif;
 }

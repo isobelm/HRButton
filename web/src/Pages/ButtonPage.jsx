@@ -13,6 +13,7 @@ class ButtonPage extends Component {
       graphData: undefined
     };
 
+    this.createDefaultGraph()
     this.startButton = React.createRef();
   }
 
@@ -21,9 +22,15 @@ class ButtonPage extends Component {
       <div>
         {this.renderTabs()}
         {this.state.selectedUser !== "" ? (
-          this.renderPage()
+          this.state.selectedUser !== "everyone" ? (
+            this.renderPage()
+          ) : (
+            this.renderBigGraph()
+          )
         ) : (
-          <div className="total">Who was naughty?</div>
+          
+        <div className="total">Loading...</div> 
+          // <div className="total">Who was naughty?</div>
         )}
       </div>
     );
@@ -37,6 +44,7 @@ class ButtonPage extends Component {
         {this.state.graphData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
+          {this.renderHomeButton()}
       </div>
     );
   }
@@ -49,7 +57,7 @@ class ButtonPage extends Component {
             data={this.state.graphData}
             margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
             xScale={{ type: "point" }}
-            yScale={{ type: "linear", stacked: true, min: "auto", max: "auto" }}
+            yScale={{ type: "linear", stacked: false, min: "auto", max: "auto" }}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -85,6 +93,67 @@ class ButtonPage extends Component {
     );
   }
 
+  renderBigGraph() {
+    return (
+      <div className="graph-parent">
+        <div className="chart">
+          <ResponsiveLine
+            data={this.state.graphData}
+            margin={{ top: 50, right: 50, bottom: 60, left: 50 }}
+            xScale={{ type: "point" }}
+            yScale={{ type: "linear", stacked: false, min: "auto", max: "auto" }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              orient: "bottom",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "Last 14 Days",
+              legendOffset: -40,
+              legendPosition: "middle"
+            }}
+            axisLeft={{
+              orient: "left",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "count",
+              legendOffset: 40,
+              legendPosition: "middle"
+            }}
+            colors={{ scheme: "nivo" }}
+            pointSize={10}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            pointLabel="y"
+            pointLabelYOffset={-12}
+            useMesh={true}
+            legends={[
+              {
+                  anchor: 'bottom',
+                  direction: 'row',
+                  justify: false,
+                  translateX: 15,
+                  translateY: 50,
+                  itemsSpacing: -10,
+                  itemDirection: 'left-to-right',
+                  itemWidth: 80,
+                  itemHeight: 20,
+                  itemOpacity: 0.75,
+                  symbolSize: 12,
+                  symbolShape: 'circle',
+                  symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                  effects: []
+              }
+            ]}
+          />
+        </div>
+      </div>
+    );
+  }
+
   renderInfo() {
     return (
       <div>
@@ -107,6 +176,20 @@ class ButtonPage extends Component {
         </form>
       </div>
     );
+  }
+
+  renderHomeButton() {
+    return (
+    <div>
+      <form onClick={() => this._handleHomePress()}>
+        <input
+          className="home-button"
+          type="button"
+          value="Home"
+          disabled={this.state.disabled}
+        />
+    </form>
+  </div>)
   }
 
   renderTabs() {
@@ -165,12 +248,48 @@ class ButtonPage extends Component {
     await getPress(this.state.selectedUser);
     const data = await getTotals(this.state.selectedUser);
     const returnedGraphData = await getDailyCounts(this.state.selectedUser);
-    const graphData = this.createGraphData(returnedGraphData.data);
+    const graphData = this.createGraphData(returnedGraphData.data, this.state.selectedUser);
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
       selectedUser: this.state.selectedUser,
       graphData: graphData,
+      disabled: false
+    });
+  }
+
+  async _handleHomePress() {
+    this.setState({
+      disabled: true
+    });
+    await this.createDefaultGraph(this.state.selectedUser);
+  }
+
+  async createDefaultGraph() {
+    const d = "Donal"
+    const e = "Ebin"
+    const g = "Gemma"
+    const i = "Isobel"
+    const n = "Niall"
+    const graphDataD = await getDailyCounts(d)
+    const graphDataE = await getDailyCounts(e)
+    const graphDataG = await getDailyCounts(g)
+    const graphDataI = await getDailyCounts(i)
+    const graphDataN = await getDailyCounts(n)
+    debugger;
+    const data = [
+      this.createGraphData(graphDataD.data, d)[0],
+      this.createGraphData(graphDataE.data, e)[0],
+      this.createGraphData(graphDataG.data, g)[0],
+      this.createGraphData(graphDataI.data, i)[0],
+      this.createGraphData(graphDataN.data, n)[0],
+    ]
+    debugger;
+    this.setState({
+      dailyCount: undefined,
+      totalCount: undefined,
+      selectedUser: "everyone",
+      graphData: data,
       disabled: false
     });
   }
@@ -194,10 +313,10 @@ class ButtonPage extends Component {
     });
   }
 
-  createGraphData(data) {
+  createGraphData(data, selectedUser) {
     const graphData = [
       {
-        id: this.state.selectedUser,
+        id: selectedUser,
         data: new Array(data.length)
       }
     ];
