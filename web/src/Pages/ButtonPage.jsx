@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveBar } from "@nivo/bar";
+
+const Donal = "Donal";
+const Ebin = "Ebin";
+const Gemma = "Gemma";
+const Isobel = "Isobel";
+const Niall = "Niall";
 
 class ButtonPage extends Component {
   constructor(props) {
@@ -10,11 +17,11 @@ class ButtonPage extends Component {
       totalCount: "Loading..",
       dailyCount: undefined,
       disabled: false,
-      graphData: undefined
+      lineChartData: undefined,
+      barChartData: undefined
     };
 
-    this.createDefaultGraph()
-    this.startButton = React.createRef();
+    this.createHomeCharts();
   }
 
   render() {
@@ -23,28 +30,42 @@ class ButtonPage extends Component {
         {this.renderTabs()}
         {this.state.selectedUser !== "" ? (
           this.state.selectedUser !== "everyone" ? (
-            this.renderPage()
+            this.renderPersonPage()
           ) : (
-            this.renderBigGraph()
+            this.renderHomePage()
           )
         ) : (
-          
-        <div className="total">Loading...</div> 
+          <div className="total">Loading...</div>
           // <div className="total">Who was naughty?</div>
         )}
       </div>
     );
   }
 
-  renderPage() {
+  renderPersonPage() {
     return (
       <div>
         {this.renderInfo()}
         {this.renderButton()}
-        {this.state.graphData !== undefined && !this.state.disabled
+        {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
-          {this.renderHomeButton()}
+        {this.renderHomeButton()}
+      </div>
+    );
+  }
+
+  renderHomePage() {
+    return (
+      <div>
+        <div className="chartTitle">Recent Form</div>
+        {this.state.lineChartData !== undefined
+          ? this.renderBigGraph()
+          : undefined}
+        <div className="chartTitle">Total Presses</div>
+        {this.state.barChartData !== undefined
+          ? this.renderTotalChart()
+          : undefined}
       </div>
     );
   }
@@ -54,10 +75,15 @@ class ButtonPage extends Component {
       <div className="graph-parent">
         <div className="chart">
           <ResponsiveLine
-            data={this.state.graphData}
-            margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+            data={this.state.lineChartData}
+            margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
-            yScale={{ type: "linear", stacked: false, min: "auto", max: "auto" }}
+            yScale={{
+              type: "linear",
+              stacked: false,
+              min: "auto",
+              max: "auto"
+            }}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -98,10 +124,15 @@ class ButtonPage extends Component {
       <div className="graph-parent">
         <div className="chart">
           <ResponsiveLine
-            data={this.state.graphData}
-            margin={{ top: 50, right: 50, bottom: 60, left: 50 }}
+            data={this.state.lineChartData}
+            margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
             xScale={{ type: "point" }}
-            yScale={{ type: "linear", stacked: false, min: "auto", max: "auto" }}
+            yScale={{
+              type: "linear",
+              stacked: false,
+              min: "auto",
+              max: "auto"
+            }}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -110,7 +141,7 @@ class ButtonPage extends Component {
               tickPadding: 5,
               tickRotation: 0,
               legend: "Last 14 Days",
-              legendOffset: -40,
+              legendOffset: 35,
               legendPosition: "middle"
             }}
             axisLeft={{
@@ -119,7 +150,7 @@ class ButtonPage extends Component {
               tickPadding: 5,
               tickRotation: 0,
               legend: "count",
-              legendOffset: 40,
+              legendOffset: -40,
               legendPosition: "middle"
             }}
             colors={{ scheme: "nivo" }}
@@ -132,20 +163,82 @@ class ButtonPage extends Component {
             useMesh={true}
             legends={[
               {
-                  anchor: 'bottom',
-                  direction: 'row',
-                  justify: false,
-                  translateX: 15,
-                  translateY: 50,
-                  itemsSpacing: -10,
-                  itemDirection: 'left-to-right',
-                  itemWidth: 80,
-                  itemHeight: 20,
-                  itemOpacity: 0.75,
-                  symbolSize: 12,
-                  symbolShape: 'circle',
-                  symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                  effects: []
+                anchor: "bottom",
+                direction: "row",
+                justify: false,
+                translateX: 15,
+                translateY: 70,
+                itemsSpacing: -10,
+                itemDirection: "left-to-right",
+                itemWidth: 80,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: "circle",
+                symbolBorderColor: "rgba(0, 0, 0, .5)",
+                effects: []
+              }
+            ]}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  renderTotalChart() {
+    return (
+      <div className="graph-parent">
+        <div className="chart">
+          <ResponsiveBar
+            data={this.state.barChartData}
+            keys={[Donal, Ebin, Gemma, Isobel, Niall]}
+            indexBy="person"
+            margin={{ top: 20, right: 50, bottom: 120, left: 60 }}
+            padding={0.3}
+            colors={{ scheme: "nivo" }}
+            borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              orient: "bottom",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "Last 14 Days",
+              legendOffset: 40,
+              legendPosition: "middle"
+            }}
+            axisLeft={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "total",
+              legendPosition: "middle",
+              legendOffset: -40
+            }}
+            labelSkipWidth={12}
+            labelSkipHeight={12}
+            labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+            animate={true}
+            motionStiffness={90}
+            motionDamping={15}
+            legends={[
+              {
+                dataFrom: 'keys',
+                anchor: "bottom",
+                direction: "row",
+                justify: false,
+                translateX: 15,
+                translateY: 70,
+                itemsSpacing: -10,
+                itemDirection: "left-to-right",
+                itemWidth: 80,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: "circle",
+                symbolBorderColor: "rgba(0, 0, 0, .5)",
+                effects: []
               }
             ]}
           />
@@ -180,60 +273,61 @@ class ButtonPage extends Component {
 
   renderHomeButton() {
     return (
-    <div>
-      <form onClick={() => this._handleHomePress()}>
-        <input
-          className="home-button"
-          type="button"
-          value="Home"
-          disabled={this.state.disabled}
-        />
-    </form>
-  </div>)
+      <div>
+        <form onClick={() => this._handleHomePress()}>
+          <input
+            className="home-button"
+            type="button"
+            value="Home"
+            disabled={this.state.disabled}
+          />
+        </form>
+      </div>
+    );
   }
 
   renderTabs() {
     return (
       <div className="App-header">
         <div className="rows">
-          <form className="row" onClick={() => this._handleChange("Donal")}>
+          <form className="row" onClick={() => this._handleChange(Donal)}>
             <input
               className="ghost-input-small"
               type="button"
-              value="Donal"
-              disabled={this.state.selectedUser === "Donal"}
+              value={Donal}
+              disabled={this.state.selectedUser === Donal}
             />
           </form>
-          <form className="row" onClick={() => this._handleChange("Ebin")}>
+          <form className="row" onClick={() => this._handleChange(Ebin)}>
             <input
               className="ghost-input-small"
               type="button"
-              value="Ebin"
-              disabled={this.state.selectedUser === "Ebin"}
+              value={Ebin}
+              disabled={this.state.selectedUser === Ebin}
             />
           </form>
-          <form className="row" onClick={() => this._handleChange("Gemma")}>
+          <form className="row" onClick={() => this._handleChange(Gemma)}>
             <input
               className="ghost-input-small"
               type="button"
-              value="Gemma"
-              disabled={this.state.selectedUser === "Gemma"}
+              value={Gemma}
+              disabled={this.state.selectedUser === Gemma}
             />
           </form>
-          <form className="row" onClick={() => this._handleChange("Isobel")}>
+          <form className="row" onClick={() => this._handleChange(Isobel)}>
             <input
               className="ghost-input-small"
               type="button"
-              value="Isobel"
-              disabled={this.state.selectedUser === "Isobel"}
+              value={Isobel}
+              disabled={this.state.selectedUser === Isobel}
             />
           </form>
-          <form className="row" onClick={() => this._handleChange("Niall")}>
+          <form className="row" onClick={() => this._handleChange(Niall)}>
             <input
               className="ghost-input-small"
               type="button"
-              value="Niall"
-              disabled={this.state.selectedUser === "Niall"}
+              value={Niall}
+              disabled={this.state.selectedUser === Niall}
             />
           </form>
         </div>
@@ -247,13 +341,16 @@ class ButtonPage extends Component {
     });
     await getPress(this.state.selectedUser);
     const data = await getTotals(this.state.selectedUser);
-    const returnedGraphData = await getDailyCounts(this.state.selectedUser);
-    const graphData = this.createGraphData(returnedGraphData.data, this.state.selectedUser);
+    const returnedLineChartData = await getDailyCounts(this.state.selectedUser);
+    const lineChartData = this.createLineChartData(
+      returnedLineChartData.data,
+      this.state.selectedUser
+    );
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
       selectedUser: this.state.selectedUser,
-      graphData: graphData,
+      lineChartData: lineChartData,
       disabled: false
     });
   }
@@ -262,32 +359,42 @@ class ButtonPage extends Component {
     this.setState({
       disabled: true
     });
-    await this.createDefaultGraph(this.state.selectedUser);
+    await this.createHomeCharts(this.state.selectedUser);
   }
 
-  async createDefaultGraph() {
-    const d = "Donal"
-    const e = "Ebin"
-    const g = "Gemma"
-    const i = "Isobel"
-    const n = "Niall"
-    const graphDataD = await getDailyCounts(d)
-    const graphDataE = await getDailyCounts(e)
-    const graphDataG = await getDailyCounts(g)
-    const graphDataI = await getDailyCounts(i)
-    const graphDataN = await getDailyCounts(n)
-    const data = [
-      this.createGraphData(graphDataD.data, d)[0],
-      this.createGraphData(graphDataE.data, e)[0],
-      this.createGraphData(graphDataG.data, g)[0],
-      this.createGraphData(graphDataI.data, i)[0],
-      this.createGraphData(graphDataN.data, n)[0],
-    ]
+  async createHomeCharts() {
+    const lineChartDataD = await getDailyCounts(Donal);
+    const lineChartDataE = await getDailyCounts(Ebin);
+    const lineChartDataG = await getDailyCounts(Gemma);
+    const lineChartDataI = await getDailyCounts(Isobel);
+    const lineChartDataN = await getDailyCounts(Niall);
+    const lineChartData = [
+      this.createLineChartData(lineChartDataD.data, Donal)[0],
+      this.createLineChartData(lineChartDataE.data, Ebin)[0],
+      this.createLineChartData(lineChartDataG.data, Gemma)[0],
+      this.createLineChartData(lineChartDataI.data, Isobel)[0],
+      this.createLineChartData(lineChartDataN.data, Niall)[0]
+    ];
+
+    const barChartDataD = await getTotals(Donal);
+    const barChartDataE = await getTotals(Ebin);
+    const barChartDataG = await getTotals(Gemma);
+    const barChartDataI = await getTotals(Isobel);
+    const barChartDataN = await getTotals(Niall);
+    const barChartData = [
+      this.createBarChartData(barChartDataD.total, Donal),
+      this.createBarChartData(barChartDataE.total, Ebin),
+      this.createBarChartData(barChartDataG.total, Gemma),
+      this.createBarChartData(barChartDataI.total, Isobel),
+      this.createBarChartData(barChartDataN.total, Niall)
+    ];
+
     this.setState({
       dailyCount: undefined,
       totalCount: undefined,
       selectedUser: "everyone",
-      graphData: data,
+      lineChartData,
+      barChartData,
       disabled: false
     });
   }
@@ -300,19 +407,19 @@ class ButtonPage extends Component {
       disabled: true
     });
     const data = await getTotals(selectedUser);
-    const returnedGraphData = await getDailyCounts(selectedUser);
-    const graphData = this.createGraphData(returnedGraphData.data);
+    const returnedLineChartData = await getDailyCounts(selectedUser);
+    const lineChartData = this.createLineChartData(returnedLineChartData.data);
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
       selectedUser: selectedUser,
-      graphData: graphData,
+      lineChartData: lineChartData,
       disabled: false
     });
   }
 
-  createGraphData(data, selectedUser) {
-    const graphData = [
+  createLineChartData(data, selectedUser) {
+    const lineChartData = [
       {
         id: selectedUser,
         data: new Array(data.length)
@@ -320,13 +427,20 @@ class ButtonPage extends Component {
     ];
 
     for (let i = 0; i < data.length; i++) {
-      graphData[0].data[i] = {
+      lineChartData[0].data[i] = {
         x: i + 1,
         y: data[i]
       };
     }
 
-    return graphData;
+    return lineChartData;
+  }
+
+  createBarChartData(data, selectedUser) {
+    let chartData = {};
+    chartData["person"] = selectedUser;
+    chartData[selectedUser] = data
+    return chartData;
   }
 }
 
