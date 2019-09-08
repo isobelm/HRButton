@@ -58,7 +58,7 @@ class ButtonPage extends Component {
   renderHomePage() {
     return (
       <div>
-        <div className="chartTitle">Recent Form</div>
+        <div className="chartTitle">Recent Behaviour</div>
         {this.state.lineChartData !== undefined
           ? this.renderBigGraph()
           : undefined}
@@ -222,7 +222,7 @@ class ButtonPage extends Component {
             motionDamping={15}
             legends={[
               {
-                dataFrom: 'keys',
+                dataFrom: "keys",
                 anchor: "bottom",
                 direction: "row",
                 justify: false,
@@ -437,7 +437,7 @@ class ButtonPage extends Component {
   createBarChartData(data, selectedUser) {
     let chartData = {};
     chartData["person"] = selectedUser;
-    chartData[selectedUser] = data
+    chartData[selectedUser] = data;
     return chartData;
   }
 }
