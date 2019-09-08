@@ -276,7 +276,6 @@ class ButtonPage extends Component {
     const graphDataG = await getDailyCounts(g)
     const graphDataI = await getDailyCounts(i)
     const graphDataN = await getDailyCounts(n)
-    debugger;
     const data = [
       this.createGraphData(graphDataD.data, d)[0],
       this.createGraphData(graphDataE.data, e)[0],
@@ -284,7 +283,6 @@ class ButtonPage extends Component {
       this.createGraphData(graphDataI.data, i)[0],
       this.createGraphData(graphDataN.data, n)[0],
     ]
-    debugger;
     this.setState({
       dailyCount: undefined,
       totalCount: undefined,
