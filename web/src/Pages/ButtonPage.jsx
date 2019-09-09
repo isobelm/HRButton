@@ -193,7 +193,7 @@ class ButtonPage extends Component {
             data={this.state.barChartData}
             keys={[Donal, Ebin, Gemma, Isobel, Niall]}
             indexBy="person"
-            margin={{ top: 20, right: 50, bottom: 120, left: 60 }}
+            margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
             padding={0.3}
             colors={{ scheme: "nivo" }}
             borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
@@ -204,9 +204,6 @@ class ButtonPage extends Component {
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "Last 14 Days",
-              legendOffset: 40,
-              legendPosition: "middle"
             }}
             axisLeft={{
               tickSize: 5,
@@ -214,7 +211,7 @@ class ButtonPage extends Component {
               tickRotation: 0,
               legend: "total",
               legendPosition: "middle",
-              legendOffset: -40
+              legendOffset: -40,
             }}
             enableLabel={false}
             animate={true}
@@ -227,7 +224,7 @@ class ButtonPage extends Component {
                 direction: "row",
                 justify: false,
                 translateX: 15,
-                translateY: 70,
+                translateY: 60,
                 itemsSpacing: -10,
                 itemDirection: "left-to-right",
                 itemWidth: 80,
