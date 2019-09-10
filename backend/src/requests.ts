@@ -3,33 +3,39 @@ import { DailyPresses, TotalPresses } from './data';
 
 DateTime.local().setZone('utc');
 
-export const postUserPress = async (user: string, callback: any, error: any) => {
+export const postUserPress = async (user: string, type: string, callback: any, error: any) => {
   try {
     const today = DateTime.local().toISODate();
-    const dailyPressesRet = await DailyPresses.findOne({ user, date: today });
-    const totalPressesRet = await TotalPresses.findOne({ user });
+    const dailyPressesRet = await DailyPresses.findOne({ user, date: today, type });
+    const totalPressesRet = await TotalPresses.findOne({ user, type });
 
     if (!totalPressesRet) {
-      const totalPresses = new TotalPresses({ user, count: 1 });
-      await totalPresses.save();
+      const totalPresses = new TotalPresses({ user, count: 1, type, highscore: 1 });
       if (!dailyPressesRet) {
-        const dailyPresses = new DailyPresses({ user, date: today, count: 1 });
+        const dailyPresses = new DailyPresses({ user, date: today, count: 1, type });
         await dailyPresses.save();
       } else {
         dailyPressesRet.count = +dailyPressesRet.count + 1;
         await dailyPressesRet.save();
       }
+      if (dailyPressesRet.count > totalPresses.highscore) {
+        totalPresses.highscore = dailyPressesRet.count;
+      }
+      await totalPresses.save();
       callback();
     } else {
       totalPressesRet.count = +totalPressesRet.count + 1;
-      totalPressesRet.save();
       if (!dailyPressesRet) {
-        const dailyPresses = new DailyPresses({ user, date: today, count: 1 });
+        const dailyPresses = new DailyPresses({ user, date: today, count: 1, type });
         await dailyPresses.save();
       } else {
         dailyPressesRet.count = +dailyPressesRet.count + 1;
         await dailyPressesRet.save();
       }
+      if (dailyPressesRet.count > totalPressesRet.highscore) {
+        totalPressesRet.highscore = dailyPressesRet.count;
+      }
+      totalPressesRet.save();
       callback();
     }
   } catch (e) {
@@ -37,11 +43,11 @@ export const postUserPress = async (user: string, callback: any, error: any) => 
   }
 };
 
-export const getUserCounts = async (user: string, callback: any, error: any) => {
+export const getUserCounts = async (user: string, type: string, callback: any, error: any) => {
   try {
     const today = DateTime.local().toISODate();
-    const dailyPressesRet = await DailyPresses.findOne({ user, date: today });
-    const totalPressesRet = await TotalPresses.findOne({ user });
+    const dailyPressesRet = await DailyPresses.findOne({ user, date: today, type });
+    const totalPressesRet = await TotalPresses.findOne({ user, type });
 
     if (!totalPressesRet) {
       if (!dailyPressesRet) {
@@ -61,14 +67,14 @@ export const getUserCounts = async (user: string, callback: any, error: any) => 
   }
 };
 
-export const getUserDailyCounts = async (user: string, callback: any, error: any) => {
+export const getUserDailyCounts = async (user: string, type: string, callback: any, error: any) => {
   try {
     let dateTime = DateTime.local();
     const data = new Array(14);
 
     for (let i = 0; i < 14; i++) {
       const day = dateTime.toISODate();
-      const dailyPressesRet = await DailyPresses.findOne({ user, date: day });
+      const dailyPressesRet = await DailyPresses.findOne({ user, type, date: day });
       if (!dailyPressesRet) {
         data[13 - i] = 0;
       } else {

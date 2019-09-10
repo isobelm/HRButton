@@ -6,6 +6,8 @@
   background: #f12711; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f12711, #f5af19); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-appearance: none;
+  font-size: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,6 +77,8 @@
   border:0px;
   outline: none;
   width: 100%;
+  -webkit-appearance: none;
+  font-size: 60px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -115,6 +119,7 @@
   border:0px;
   outline: none;
   width: 100%;
+  -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -138,7 +143,7 @@
   display: block;
   font-weight:300;
   width: 80%;
-  font-size: 60px;
+  -webkit-appearance: none;  font-size: 60px;
   border:0px;
   outline: none;
   -webkit-box-sizing: border-box;
@@ -168,7 +173,7 @@
   background-color: transparent;
   padding:10px 30px;
   width: 100%;
-  min-width: 350px;
+  -webkit-appearance: none;  min-width: 350px;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
@@ -182,7 +187,7 @@
   width: 30%;
   font-size: 18px;
   border:0px;
-  outline: none;
+  -webkit-appearance: none;  outline: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
