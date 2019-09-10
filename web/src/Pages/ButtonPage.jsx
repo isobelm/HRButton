@@ -8,6 +8,7 @@ const Ebin = "Ebin";
 const Gemma = "Gemma";
 const Isobel = "Isobel";
 const Niall = "Niall";
+const Rory = "Rory";
 
 class ButtonPage extends Component {
   constructor(props) {
@@ -166,11 +167,11 @@ class ButtonPage extends Component {
                 anchor: "bottom",
                 direction: "row",
                 justify: false,
-                translateX: 15,
+                translateX: 0,
                 translateY: 70,
-                itemsSpacing: -10,
+                itemsSpacing: 5,
                 itemDirection: "left-to-right",
-                itemWidth: 80,
+                itemWidth: 60,
                 itemHeight: 20,
                 itemOpacity: 0.75,
                 symbolSize: 12,
@@ -191,7 +192,7 @@ class ButtonPage extends Component {
         <div className="chart">
           <ResponsiveBar
             data={this.state.barChartData}
-            keys={[Donal, Ebin, Gemma, Isobel, Niall]}
+            keys={[Donal, Ebin, Gemma, Isobel, Niall, Rory]}
             indexBy="person"
             margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
             padding={0.3}
@@ -223,11 +224,11 @@ class ButtonPage extends Component {
                 anchor: "bottom",
                 direction: "row",
                 justify: false,
-                translateX: 15,
+                translateX: 0,
                 translateY: 60,
-                itemsSpacing: -10,
+                itemsSpacing: 5,
                 itemDirection: "left-to-right",
-                itemWidth: 80,
+                itemWidth: 60,
                 itemHeight: 20,
                 itemOpacity: 0.75,
                 symbolSize: 12,
@@ -325,6 +326,14 @@ class ButtonPage extends Component {
               disabled={this.state.selectedUser === Niall}
             />
           </form>
+          <form className="row" onClick={() => this._handleChange(Rory)}>
+            <input
+              className="ghost-input-small"
+              type="button"
+              value={Rory}
+              disabled={this.state.selectedUser === Rory}
+            />
+          </form>
         </div>
       </div>
     );
@@ -363,12 +372,14 @@ class ButtonPage extends Component {
     const lineChartDataG = await getDailyCounts(Gemma);
     const lineChartDataI = await getDailyCounts(Isobel);
     const lineChartDataN = await getDailyCounts(Niall);
+    const lineChartDataR = await getDailyCounts(Rory);
     const lineChartData = [
       this.createLineChartData(lineChartDataD.data, Donal)[0],
       this.createLineChartData(lineChartDataE.data, Ebin)[0],
       this.createLineChartData(lineChartDataG.data, Gemma)[0],
       this.createLineChartData(lineChartDataI.data, Isobel)[0],
-      this.createLineChartData(lineChartDataN.data, Niall)[0]
+      this.createLineChartData(lineChartDataN.data, Niall)[0],
+      this.createLineChartData(lineChartDataR.data, Rory)[0]
     ];
 
     const barChartDataD = await getTotals(Donal);
@@ -376,12 +387,14 @@ class ButtonPage extends Component {
     const barChartDataG = await getTotals(Gemma);
     const barChartDataI = await getTotals(Isobel);
     const barChartDataN = await getTotals(Niall);
+    const barChartDataR = await getTotals(Rory);
     const barChartData = [
       this.createBarChartData(barChartDataD.total, Donal),
       this.createBarChartData(barChartDataE.total, Ebin),
       this.createBarChartData(barChartDataG.total, Gemma),
       this.createBarChartData(barChartDataI.total, Isobel),
-      this.createBarChartData(barChartDataN.total, Niall)
+      this.createBarChartData(barChartDataN.total, Niall),
+      this.createBarChartData(barChartDataR.total, Rory)
     ];
 
     this.setState({
