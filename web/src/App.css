@@ -7,11 +7,12 @@
   background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f12711, #f5af19); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   -webkit-appearance: none;
-  font-size: 60px;
+  border: 0;
+  font-size: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row-reverse;
+  align-items: right;
+  justify-content: end;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -115,7 +116,7 @@
   display: block;
   font-weight:300;
   width: 100%;
-  font-size: 18px;
+  font-size: 14px;
   border:0px;
   outline: none;
   width: 100%;
@@ -125,14 +126,15 @@
   box-sizing: border-box;
   color: #fff;
   background: transparent;
-  padding: 10px 10px;
-  margin: 5px 0px;
+  padding: 5px 10px;
+  margin: 0px 0px;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
-  text-align: center;
+  align-self: right;
+  text-align: right;
 }
 
 .ghost-input-small:hover, .ghost-input-small:focus, .ghost-input-small:disabled{
@@ -143,7 +145,7 @@
   display: block;
   font-weight:300;
   width: 80%;
-  -webkit-appearance: none;  font-size: 60px;
+  -webkit-appearance: none;  font-size: 40px;
   border:0px;
   outline: none;
   -webkit-box-sizing: border-box;
@@ -187,7 +189,8 @@
   width: 30%;
   font-size: 18px;
   border:0px;
-  -webkit-appearance: none;  outline: none;
+  -webkit-appearance: none;
+  outline: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -224,7 +227,8 @@ h1, h2, p, ul, li {
 }
 
 .rows .row {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: flex-end;
 }
 
 .App-footer li a {
@@ -234,6 +238,63 @@ h1, h2, p, ul, li {
   text-decoration: none;
   padding: 20px;
   display: inline-block;
+}
+
+.title-select {
+  border: 0;
+  width: 100%;
+  -webkit-appearance: none;
+  font-weight: 300;
+  border-radius: 0;
+  padding: 20px 16px 15px 30px;
+  text-align: center;
+  font-size: calc(14px + 2vmin);
+  color: white;
+  background: #f12711; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f12711, #f5af19); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.title-select-items div,.select-selected {
+  border: 0;
+  width: 100%;
+  -webkit-appearance: none;
+  font-weight: 300;
+  border-radius: 0;
+  padding: 20px 16px 15px 30px;
+  text-align: center;
+  font-size: calc(14px + 2vmin);
+  color: white;
+  background: #f12711; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f12711, #f5af19); /*W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
+}
+
+.title-select select {
+  display: none; /*hide original SELECT element: */
+  -webkit-appearance: none;
+}
+
+.title-select-selected {
+  background-color: DodgerBlue;
+  -webkit-appearance: none;
+}
+
+.title-select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  -webkit-appearance: none;
+}
+
+.title-select-hide {
+  display: none;
+  -webkit-appearance: none;
 }
 
 .App-footer li a:active, .App-footer li a:hover{

@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import ButtonPage from './Pages/ButtonPage';
+import MainPage from './Pages/MainPage';
 
 function App() {
   return (
-    <ButtonPage/>
+    <MainPage/>
   );
 }
 
