@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import Page from "./Page";
 import Dropdown from "./Dropdown";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import ButtonPage from "./ButtonPage";
 
 const mode = {
   Master: "Master",
   HR: "HR",
   GoofChold: "GoofChold",
-  Mistake: "MISTAKE",
-  Yike: "yike"
+  MISTAKE: "MISTAKE",
+  Yike: "Yike"
 };
 
 const css = {
@@ -58,16 +55,24 @@ const css = {
 class MainPage extends Component {
   constructor(props) {
     super(props);
+
+    let startMode = mode.Master;
+    const type = props.location.pathname.slice(1);
+    if (type) {
+      startMode = type;
+    }
+
     this.state = {
-      mode: mode.Master
+      mode: startMode
     };
 
     this.handleChange.bind(this);
   }
 
   setSelected = option => {
-    window.open(`/${option}`, '_self');
-    this.setState({mode: option});
+    this.setState({ mode: option });
+    console.log()
+    this.props.history.push(`/${option}`);
   };
 
   render() {
@@ -76,39 +81,10 @@ class MainPage extends Component {
         {
           <Dropdown
             options={mode}
-            selected={mode}
+            selected={this.state.mode}
             setSelected={this.setSelected}
           />
         }
-        {this.renderPage()}
-      </div>
-    );
-  }
-
-  renderPage() {
-    return (
-      <div>
-        <Router>
-          <Route exact path="/" component={() => <div/>} />
-          <Route path="/:type" component={Page} />
-        </Router>
-      </div>
-    );
-  }
-
-  renderDropdown() {
-    return (
-      <div className="title-select" style={{ width: "100%" }}>
-        <select
-          style={css[this.state.mode]}
-          value={this.state.mode}
-          onChange={this.handleChange}
-        >
-          <option value={mode.Master}>{mode.Master}</option>
-          <option value={mode.HR}>{mode.HR}</option>
-          <option value={mode.Mistake}>{mode.Mistake}</option>
-          <option value={mode.GoofChold}>{mode.GoofChold}</option>
-        </select>
       </div>
     );
   }
