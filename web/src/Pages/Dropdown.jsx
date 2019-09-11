@@ -25,12 +25,12 @@ class Dropdown extends React.Component {
   }
 
   renderClosed = () => {
-    return (<div className="title-select" onClick={this.handleOpen}>{this.state.selected}</div>)
+    return (<div className="title-select-title" onClick={this.handleOpen}>{this.state.selected}</div>)
   }
 
   render() {
     return (
-      <div>
+      <div className="title-select">
       {this.state.open ? 
       this.renderOpen() : 
       this.renderClosed()}
@@ -43,7 +43,7 @@ class Dropdown extends React.Component {
     let handleChoice = () => {
       this.setState({open: false})
     }
-    optionButtons.push(<div className="title-select" onClick={handleChoice}>{this.state.selected}</div>)
+    optionButtons.push(<div className="title-select-title" onClick={handleChoice}>{this.state.selected}</div>)
 
     this.options.forEach(option => {
       handleChoice = () => {
@@ -53,7 +53,7 @@ class Dropdown extends React.Component {
         })
         this.setSelected(option)
       }
-      optionButtons.push(<div className="title-select" onClick={handleChoice}>{option}</div>)
+      optionButtons.push(<div className="title-select-options" onClick={handleChoice}>{option}</div>)
 
     });
     return (optionButtons)
