@@ -4,7 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
-import { getUserCounts, getUserDailyCounts, postUserPress } from './requests';
+import { getUserCounts, getUserDailyCounts, getUserPress } from './requests';
 
 const API_PORT = 8080;
 const app = express();
@@ -36,7 +36,7 @@ router.get('/getPress', cors(), (req, res) => {
       success: false,
     });
   }
-  postUserPress(
+  getUserPress(
     user,
     type,
     () => {
