@@ -6,16 +6,16 @@ const API = axios.create({
   });
 
 export const getTotals = async (user) => {
-    const result = await API.get(`getCounts`, {params: {user, type: "HRButton"}});
+    const result = await API.get(`getCounts`, {params: {user, type: "HR"}});
     return result.data;
 };
 
 export const getPress = async (user) => {
-    const result = await API.get(`getPress`, {params: {user, type: "HRButton"}});
+    const result = await API.get(`getPress`, {params: {user, type: "HR"}});
     return result.data;
 };
 
 export const getDailyCounts = async (user) => {
-    const result = await API.get(`getDailyCounts`, {params: {user, type: "HRButton"}});
+    const result = await API.get(`getDailyCounts`, {params: {user, type: "HR"}});
     return result.data;
 };
