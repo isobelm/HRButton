@@ -1,7 +1,10 @@
 import { DateTime } from 'luxon';
 import { DailyPresses, TotalPresses } from './data';
 
-DateTime.local().setZone('utc');
+const zone = DateTime.local().setZone('Europe/Dublin');
+if (!zone.isValid) {
+  DateTime.local().setZone('UTC+1');
+}
 
 export const getUserPress = async (user: string, type: string, callback: any, error: any) => {
   try {
