@@ -13,6 +13,9 @@
   flex-direction: row-reverse;
   align-items: right;
   justify-content: end;
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -80,18 +83,18 @@
   width: 100%;
   -webkit-appearance: none;
   font-size: 60px;
-  -webkit-box-sizing: border-box;
+  /* -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: border-box; */
   color: #fff;
   background: transparent;
-  padding: 10px 15px;
+  padding: 100px 15px 10px 15px;
   margin: 20px 0px;
-  -webkit-transition: all 0.1s ease-in-out;
+  /* -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out; */
   text-align: center;
   border-bottom:1px solid #ddd;
 }
@@ -241,46 +244,34 @@ h1, h2, p, ul, li {
 }
 
 .title-select {
+  position: relative;
   border: 0;
-  width: 100%;
-  -webkit-appearance: none;
-  font-weight: 300;
   border-radius: 0;
+  width: 100%;
+  margin: 0 0 1px 0;
   padding: 20px 16px 15px 30px;
+  font-weight: 300;
   text-align: center;
   font-size: calc(14px + 2vmin);
   color: white;
   background: #f12711; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f12711, #f5af19); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.title-select-items div,.select-selected {
-  border: 0;
-  width: 100%;
   -webkit-appearance: none;
-  font-weight: 300;
-  border-radius: 0;
-  padding: 20px 16px 15px 30px;
-  text-align: center;
-  font-size: calc(14px + 2vmin);
-  color: white;
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f12711, #f5af19); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f12711, #f5af19); /*W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
+  appearance: none;
+  -moz-appearance: none;
 }
 
 .title-select select {
-  display: none; /*hide original SELECT element: */
-  -webkit-appearance: none;
+  display: none;
 }
 
-.title-select-selected {
+.select-selected {
   background-color: DodgerBlue;
-  -webkit-appearance: none;
 }
 
-.title-select-selected:after {
+/* Style the arrow inside the select element: */
+.select-selected:after {
   position: absolute;
   content: "";
   top: 14px;
@@ -289,12 +280,39 @@ h1, h2, p, ul, li {
   height: 0;
   border: 6px solid transparent;
   border-color: #fff transparent transparent transparent;
-  -webkit-appearance: none;
 }
 
-.title-select-hide {
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
   display: none;
-  -webkit-appearance: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .App-footer li a:active, .App-footer li a:hover{
