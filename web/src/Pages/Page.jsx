@@ -254,7 +254,7 @@ class Page extends Component {
           <input
             className="ghost-input-button"
             type="button"
-            value="HR"
+            value={this.state.type}
             disabled={this.state.disabled}
           />
         </form>
