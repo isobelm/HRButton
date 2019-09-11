@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Page from "./Page";
 import Dropdown from "./Dropdown";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import ButtonPage from "./ButtonPage";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+// import "../Master.css";
 
 const mode = {
   Master: "Master",
@@ -12,82 +12,50 @@ const mode = {
   Yike: "yike"
 };
 
-const page = {
-  Master: <div>Master</div>,
-  HR: <Page />,
-  GoofChold: <div>GoofChold</div>,
-  Mistake: <div>Mistake</div>,
-  yike: <div>yike</div>
-};
-
 const css = {
-  HR: {
-    border: 0,
-    background: "#f12711" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #f12711, #f5af19)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #f12711, #f5af19)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  },
-  GoofChold: {
-    border: 0,
-    background: "#27f111" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #27f111, #aff519)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #27f111, #aff519)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  },
-  Master: {
-    border: 0,
-    background: "#000000" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #f12711, #f5af19)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #f12711, #f5af19)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  },
-  Mistake: {
-    border: 0,
-    background: "#f12711" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #f12711, #f5af19)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #f12711, #f5af19)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  },
-  Yike: {
-    border: 0,
-    background: "#f12711" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #f12711, #f5af19)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #f12711, #f5af19)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
+  "Master": process.env.PUBLIC_URL + "/GoofChold.css",
+  "HR": process.env.PUBLIC_URL + "../Master.css",
+  "GoofChold": process.env.PUBLIC_URL + "../GoofChold.css",
+  "Mistake": process.env.PUBLIC_URL + "../Master.css",
+  "yike": process.env.PUBLIC_URL + "../yike.css"
 };
 
 class MainPage extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      mode: mode.Master
+      mode: mode.Master,
+      stylePath: css["Master"]
     };
 
     this.handleChange.bind(this);
   }
 
-  setSelected = option => {
-    window.open(`/${option}`, '_self');
+  // componentDidMount() {
+  //   this.setState({stylePath: css[this.mode]})
+  // }
+
+  setSelected = (option) => {
+    // window.open(`/${option}`, '_self');
+    window.location.href = "/" + option;
+    this.setState({mode: option, stylePath: css[option]})
   };
 
   render() {
     return (
-      <div>
-        {
+      <div className="page">
+        <link rel="stylesheet" type="text/css" href={this.state.stylePath} />
+        <div className="page">
+        {  
           <Dropdown
             options={mode}
             selected={mode.Master}
             setSelected={this.setSelected}
-          />
+            />
         }
         {this.renderPage()}
+        </div>
       </div>
     );
   }

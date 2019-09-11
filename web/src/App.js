@@ -4,7 +4,10 @@ import MainPage from './Pages/MainPage';
 
 function App() {
   return (
-    <MainPage/>
+    <div>
+      {/* <link rel="stylesheet" type="text/css" href="App.css"/> */}
+      <MainPage/>
+    </div>
   );
 }
 
