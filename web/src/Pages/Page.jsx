@@ -60,7 +60,7 @@ class Page extends Component {
 
   renderHomePage() {
     return (
-      <div>
+      <div classname="page">
         <div className="chartTitle">Recent Behaviour</div>
         {this.state.lineChartData !== undefined
           ? this.renderBigGraph()
