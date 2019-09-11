@@ -249,7 +249,6 @@ h1, h2, p, ul, li {
   border-radius: 0;
   width: 100%;
   margin: 0 0 1px 0;
-  padding: 20px 16px 15px 30px;
   font-weight: 300;
   text-align: left;
   font-size: calc(14px + 2vmin);
@@ -262,58 +261,27 @@ h1, h2, p, ul, li {
   -moz-appearance: none;
 }
 
-.title-select select {
-  display: none;
+.title-select-title {
+  padding: 20px 16px 15px 30px;
 }
 
-.select-selected {
-  background-color: DodgerBlue;
+.title-select-title:hover {
+  background: #e11701; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e11701, #e59f09); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e11701, #e59f09); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/* Style the arrow inside the select element: */
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+.title-select-options {
+  font-size: calc(12px + 2vmin);
+  padding: 0px 26px 10px 30px;
 }
 
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
+.title-select-options:hover {
+  background: #e11701; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e11701, #e59f09); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e11701, #e59f09); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 0;
-  cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-  position: absolute;
-  background-color: DodgerBlue;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
 
 .App-footer li a:active, .App-footer li a:hover{
   background: #f12711;
