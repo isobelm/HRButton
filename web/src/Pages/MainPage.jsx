@@ -38,8 +38,11 @@ class MainPage extends Component {
 
   setSelected = option => {
     this.setState({ mode: option });
-    console.log()
-    this.props.history.push(`/${option}`);
+    if (option !== mode.Master) {
+      this.props.history.push(`/${option}`);
+    } else {
+      this.props.history.push("/");
+    }
   };
 
   render() {
