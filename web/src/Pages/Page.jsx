@@ -3,21 +3,8 @@ import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 
-
-
-
 class Page extends Component {
-
-    // us = {
-    //     Donal: "Donal",
-    //     Ebin: "Ebin",
-    //     Gemma: "Gemma",
-    //     Isobel: "Isobel",
-    //     Niall: "Niall",
-    //     Rory: "Rory",
-    // }
-
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       selectedUser: "",
@@ -25,17 +12,11 @@ class Page extends Component {
       dailyCount: undefined,
       disabled: false,
       lineChartData: undefined,
-      barChartData: undefined
+      barChartData: undefined,
+      type: this.props.match.params.type
     };
 
-    this.us = [
-      "Donal",
-      "Ebin",
-      "Gemma",
-      "Isobel",
-      "Niall",
-      "Rory",
-    ]
+    this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
 
     this.createHomeCharts();
   }
@@ -52,7 +33,6 @@ class Page extends Component {
           )
         ) : (
           <div className="total">Loading...</div>
-          // <div className="total">Who was naughty?</div>
         )}
       </div>
     );
@@ -219,7 +199,7 @@ class Page extends Component {
               orient: "bottom",
               tickSize: 5,
               tickPadding: 5,
-              tickRotation: 0,
+              tickRotation: 0
             }}
             axisLeft={{
               tickSize: 5,
@@ -227,7 +207,7 @@ class Page extends Component {
               tickRotation: 0,
               legend: "total",
               legendPosition: "middle",
-              legendOffset: -40,
+              legendOffset: -40
             }}
             enableLabel={false}
             animate={true}
@@ -298,26 +278,24 @@ class Page extends Component {
   }
 
   renderTabs() {
-    const tabs = []
-    this.us.forEach((person) => {
-        const tab = (
+    const tabs = [];
+    this.us.forEach(person => {
+      const tab = (
         <form className="row" onClick={() => this._handleChange(person)}>
-            <input
+          <input
             className="ghost-input-small"
             type="button"
             value={person}
             disabled={this.state.selectedUser === person}
-            />
+          />
         </form>
-        )
-        tabs.push(tab)
-    })
+      );
+      tabs.push(tab);
+    });
 
     return (
       <div className="App-header">
-        <div className="rows">
-          {tabs}
-        </div>
+        <div className="rows">{tabs}</div>
       </div>
     );
   }
@@ -326,9 +304,12 @@ class Page extends Component {
     this.setState({
       disabled: true
     });
-    await getPress(this.state.selectedUser);
-    const data = await getTotals(this.state.selectedUser);
-    const returnedLineChartData = await getDailyCounts(this.state.selectedUser);
+    await getPress(this.state.selectedUser, this.state.type);
+    const data = await getTotals(this.state.selectedUser, this.state.type);
+    const returnedLineChartData = await getDailyCounts(
+      this.state.selectedUser,
+      this.state.type
+    );
     const lineChartData = this.createLineChartData(
       returnedLineChartData.data,
       this.state.selectedUser
@@ -346,45 +327,41 @@ class Page extends Component {
     this.setState({
       disabled: true
     });
-    await this.createHomeCharts(this.state.selectedUser);
+    await this.createHomeCharts();
   }
 
   createHomeCharts = async () => {
-    // const lineChart = []
-    // const lineChartData = []
-    // let i = 0
-    // await this.us.forEach(async (person) => {
-    //     lineChart[i] = await getDailyCounts(person).data
-    //     i++
-    // })
-    // i = 0
-    // await this.us.forEach(async (person) => {
-    //     lineChartData.push(this.createLineChartData(lineChart[i].data, person)[0])
-    //     i++
+    const lineChartData = [];
+    let getData = async person => {
+      const dailyCountsData = await getDailyCounts(person, this.state.type);
+      lineChartData.push(
+        this.createLineChartData(dailyCountsData.data, person)[0]
+      );
+    };
 
-    // })
-
-    let getData = async (person) => {
-      lineChartData.push(this.createBarChartData(await getDailyCounts(person).data, person)[0])
+    for await (const person of this.us) {
+      await getData(person);
     }
-    const lineChartData = []
-    await this.us.forEach((person) => getData(person))
+    getData = async person => {
+      const totalCountData = await getTotals(person, this.state.type);
+      barChartData.push(this.createBarChartData(totalCountData.total, person));
+    };
+    const barChartData = [];
 
-    getData = async (person) => {
-      barChartData.push(this.createBarChartData(await getTotals(person).total, person))
+    for await (const person of this.us) {
+      await getData(person);
     }
-    const barChartData = []
-    await this.us.forEach((person) => getData(person))
 
+    console.log(barChartData);
     this.setState({
       dailyCount: undefined,
       totalCount: undefined,
       selectedUser: "everyone",
-      lineChartData: lineChartData.data,
-      barChartData: barChartData.data,
+      lineChartData: lineChartData,
+      barChartData: barChartData,
       disabled: false
     });
-  }
+  };
 
   async _handleChange(selectedUser) {
     this.setState({
@@ -393,8 +370,11 @@ class Page extends Component {
       totalCount: "Loading..",
       disabled: true
     });
-    const data = await getTotals(selectedUser);
-    const returnedLineChartData = await getDailyCounts(selectedUser);
+    const data = await getTotals(selectedUser, this.state.type);
+    const returnedLineChartData = await getDailyCounts(
+      selectedUser,
+      this.state.type
+    );
     const lineChartData = this.createLineChartData(returnedLineChartData.data);
     this.setState({
       dailyCount: data.daily,

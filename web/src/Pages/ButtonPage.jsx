@@ -19,8 +19,11 @@ class ButtonPage extends Component {
       dailyCount: undefined,
       disabled: false,
       lineChartData: undefined,
-      barChartData: undefined
+      barChartData: undefined,
+      type: this.props.match.params.type,
     };
+
+    console.log(this.state.type)
 
     this.createHomeCharts();
   }
@@ -343,9 +346,9 @@ class ButtonPage extends Component {
     this.setState({
       disabled: true
     });
-    await getPress(this.state.selectedUser);
-    const data = await getTotals(this.state.selectedUser);
-    const returnedLineChartData = await getDailyCounts(this.state.selectedUser);
+    await getPress(this.state.selectedUser, this.state.type);
+    const data = await getTotals(this.state.selectedUser, this.state.type);
+    const returnedLineChartData = await getDailyCounts(this.state.selectedUser, this.state.type);
     const lineChartData = this.createLineChartData(
       returnedLineChartData.data,
       this.state.selectedUser
@@ -367,12 +370,12 @@ class ButtonPage extends Component {
   }
 
   async createHomeCharts() {
-    const lineChartDataD = await getDailyCounts(Donal);
-    const lineChartDataE = await getDailyCounts(Ebin);
-    const lineChartDataG = await getDailyCounts(Gemma);
-    const lineChartDataI = await getDailyCounts(Isobel);
-    const lineChartDataN = await getDailyCounts(Niall);
-    const lineChartDataR = await getDailyCounts(Rory);
+    const lineChartDataD = await getDailyCounts(Donal, this.state.type);
+    const lineChartDataE = await getDailyCounts(Ebin, this.state.type);
+    const lineChartDataG = await getDailyCounts(Gemma, this.state.type);
+    const lineChartDataI = await getDailyCounts(Isobel, this.state.type);
+    const lineChartDataN = await getDailyCounts(Niall, this.state.type);
+    const lineChartDataR = await getDailyCounts(Rory, this.state.type);
     const lineChartData = [
       this.createLineChartData(lineChartDataD.data, Donal)[0],
       this.createLineChartData(lineChartDataE.data, Ebin)[0],
@@ -382,12 +385,12 @@ class ButtonPage extends Component {
       this.createLineChartData(lineChartDataR.data, Rory)[0]
     ];
 
-    const barChartDataD = await getTotals(Donal);
-    const barChartDataE = await getTotals(Ebin);
-    const barChartDataG = await getTotals(Gemma);
-    const barChartDataI = await getTotals(Isobel);
-    const barChartDataN = await getTotals(Niall);
-    const barChartDataR = await getTotals(Rory);
+    const barChartDataD = await getTotals(Donal, this.state.type);
+    const barChartDataE = await getTotals(Ebin, this.state.type);
+    const barChartDataG = await getTotals(Gemma, this.state.type);
+    const barChartDataI = await getTotals(Isobel, this.state.type);
+    const barChartDataN = await getTotals(Niall, this.state.type);
+    const barChartDataR = await getTotals(Rory, this.state.type);
     const barChartData = [
       this.createBarChartData(barChartDataD.total, Donal),
       this.createBarChartData(barChartDataE.total, Ebin),
@@ -414,8 +417,8 @@ class ButtonPage extends Component {
       totalCount: "Loading..",
       disabled: true
     });
-    const data = await getTotals(selectedUser);
-    const returnedLineChartData = await getDailyCounts(selectedUser);
+    const data = await getTotals(selectedUser, this.state.type);
+    const returnedLineChartData = await getDailyCounts(selectedUser, this.state.type);
     const lineChartData = this.createLineChartData(returnedLineChartData.data);
     this.setState({
       dailyCount: data.daily,
