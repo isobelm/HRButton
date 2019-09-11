@@ -21,6 +21,13 @@ class Page extends Component {
     this.createHomeCharts();
   }
 
+  componentWillReceiveProps(props, state) {
+    if(props.match.params.type !== state.type) {
+      this.createHomeCharts();
+    }
+    this.setState({type: props.match.params.type});
+  }
+
   render() {
     return (
       <div>
@@ -342,17 +349,17 @@ class Page extends Component {
     for await (const person of this.us) {
       await getData(person);
     }
+
+    const barChartData = [];
     getData = async person => {
       const totalCountData = await getTotals(person, this.state.type);
       barChartData.push(this.createBarChartData(totalCountData.total, person));
     };
-    const barChartData = [];
 
     for await (const person of this.us) {
       await getData(person);
     }
 
-    console.log(barChartData);
     this.setState({
       dailyCount: undefined,
       totalCount: undefined,

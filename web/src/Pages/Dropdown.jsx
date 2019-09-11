@@ -5,8 +5,8 @@ class Dropdown extends React.Component {
     "Master",
     "HR",
     "GoofChold",
-    "Mistake",
-    "yike"
+    "MISTAKE",
+    "Yike"
   ]
 
   setSelected = () => {}
@@ -15,7 +15,7 @@ class Dropdown extends React.Component {
     super(props);
     this.setSelected = props.setSelected
     this.state = {
-      selected: "Master",
+      selected: props.selected,
       open: false
     };
   }
