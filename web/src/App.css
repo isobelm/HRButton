@@ -251,7 +251,7 @@ h1, h2, p, ul, li {
   margin: 0 0 1px 0;
   padding: 20px 16px 15px 30px;
   font-weight: 300;
-  text-align: center;
+  text-align: left;
   font-size: calc(14px + 2vmin);
   color: white;
   background: #f12711; /* fallback for old browsers */
