@@ -8,16 +8,8 @@ const mode = {
   Master: "Master",
   HR: "HR",
   GoofChold: "GoofChold",
-  Mistake: "Mistake",
+  Mistake: "MISTAKE",
   Yike: "yike"
-};
-
-const page = {
-  Master: <div>Master</div>,
-  HR: <Page />,
-  GoofChold: <div>GoofChold</div>,
-  Mistake: <div>Mistake</div>,
-  yike: <div>yike</div>
 };
 
 const css = {
@@ -75,6 +67,7 @@ class MainPage extends Component {
 
   setSelected = option => {
     window.open(`/${option}`, '_self');
+    this.setState({mode: option});
   };
 
   render() {
@@ -83,7 +76,7 @@ class MainPage extends Component {
         {
           <Dropdown
             options={mode}
-            selected={mode.Master}
+            selected={mode}
             setSelected={this.setSelected}
           />
         }
