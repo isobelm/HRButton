@@ -49,15 +49,15 @@ export const getUserCounts = async (user: string, type: string, callback: any, e
 
     if (!totalPresses) {
       if (!dailyPresses) {
-        callback(0, 0);
+        callback(0, 0, 0);
       } else {
-        callback(0, +dailyPresses.count);
+        callback(0, +dailyPresses.count, 0);
       }
     } else {
       if (!dailyPresses) {
-        callback(+totalPresses.count, 0);
+        callback(+totalPresses.count, 0, +totalPresses.highscore);
       } else {
-        callback(+totalPresses.count, +dailyPresses.count);
+        callback(+totalPresses.count, +dailyPresses.count, +totalPresses.highscore);
       }
     }
   } catch (e) {

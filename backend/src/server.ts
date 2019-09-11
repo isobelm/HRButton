@@ -64,10 +64,11 @@ router.get('/getCounts', cors(), (req, res) => {
   getUserCounts(
     user,
     type,
-    (total, daily) => {
+    (total, daily, highscore) => {
       return res.json({
         total,
         daily,
+        highscore,
         success: true,
       });
     },
