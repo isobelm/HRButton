@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
+import GraphColours from "./GraphColours";
 
 class Page extends Component {
   constructor(props) {
@@ -18,11 +19,11 @@ class Page extends Component {
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
     this.colorScheme = {
-      "Goof Chold": "red_purple",
+      "Goof Chold": "pink_yellowGreen",
       "Master": "red_purple",
-      "Yike": "red_purple",
-      "MISTAKE": "red_purple",
-      "HR": "red_purple",
+      "Yike": "dark2",
+      "MISTAKE": "set3",
+      "HR": "red_yellow_green",
     }
 
     this.createHomeCharts();
@@ -86,6 +87,7 @@ class Page extends Component {
         <div className="chart">
           <ResponsiveLine
             data={this.state.lineChartData}
+            colors={d => d.color}
             margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
             yScale={{
@@ -114,7 +116,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: "red_purple" }}
+            // colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -143,6 +145,7 @@ class Page extends Component {
               min: "auto",
               max: "auto"
             }}
+            colors={d => d.color}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -163,7 +166,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: "red_purple" }}
+            // colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -201,11 +204,11 @@ class Page extends Component {
         <div className="chart">
           <ResponsiveBar
             data={this.state.barChartData}
+            colors={d => d.color}
             keys={this.us}
             indexBy="person"
             margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
             padding={0.3}
-            colors={{ scheme: "nivo" }}
             borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
             axisTop={null}
             axisRight={null}
@@ -403,14 +406,15 @@ class Page extends Component {
     const lineChartData = [
       {
         id: selectedUser,
-        data: new Array(data.length)
+        data: new Array(data.length),
+        color: GraphColours[this.state.type][selectedUser]
       }
     ];
 
     for (let i = 0; i < data.length; i++) {
       lineChartData[0].data[i] = {
         x: i + 1,
-        y: data[i]
+        y: data[i],
       };
     }
 
@@ -418,8 +422,13 @@ class Page extends Component {
   }
 
   createBarChartData(data, selectedUser) {
-    let chartData = {};
-    chartData["person"] = selectedUser;
+    const colourName = selectedUser + "Color";
+    let chartData = {
+      person: selectedUser,
+    };
+    chartData[colourName] = GraphColours[this.state.type][selectedUser]
+    // chartData["person"] = selectedUser;
+    // chartData.color = GraphColours[this.state.type][selectedUser]
     chartData[selectedUser] = data;
     return chartData;
   }
