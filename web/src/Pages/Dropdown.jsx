@@ -4,7 +4,7 @@ class Dropdown extends React.Component {
   options = [
     "Master",
     "HR",
-    "GoofChold",
+    "Goof Chold",
     "MISTAKE",
     "Yike"
   ]

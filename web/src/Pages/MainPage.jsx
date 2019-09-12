@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 const mode = {
   Master: "Master",
   HR: "HR",
-  GoofChold: "GoofChold",
+  GoofChold: "Goof Chold",
   MISTAKE: "MISTAKE",
   Yike: "Yike"
 };
@@ -12,7 +12,7 @@ const mode = {
 const css = {
   "Master": process.env.PUBLIC_URL + "/Master.css",
   "HR": process.env.PUBLIC_URL + "../HR.css",
-  "GoofChold": process.env.PUBLIC_URL + "../GoofChold.css",
+  "Goof Chold": process.env.PUBLIC_URL + "../GoofChold.css",
   "MISTAKE": process.env.PUBLIC_URL + "../MISTAKE.css",
   "Yike": process.env.PUBLIC_URL + "../yike.css"
 };
