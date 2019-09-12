@@ -18,7 +18,7 @@ class Page extends Component {
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
     this.colorScheme = {
-      "GoofChold": "red_purple",
+      "Goof Chold": "red_purple",
       "Master": "red_purple",
       "Yike": "red_purple",
       "MISTAKE": "red_purple",
@@ -114,7 +114,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: this.colorScheme[this.state.type] }}
+            colors={{ scheme: "red_purple" }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -163,7 +163,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: "nivo" }}
+            colors={{ scheme: "red_purple" }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
