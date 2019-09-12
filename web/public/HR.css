@@ -10,7 +10,7 @@
 
 :root{
     --color-1: #f12711;
-    --color-2: #FF7575;
+    --color-2: #f5af19;
 }
 
 .App-header {
@@ -28,7 +28,7 @@
   background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
-    color: White;
+  color: White;
 }
 
 .App-link {
@@ -43,6 +43,8 @@
 ::placeholder { 
   color: white;
   }
+
+  
 
 .chart-title{
   color: #000;
@@ -62,11 +64,11 @@
 
 .ghost-input-button{
   color: #fff;
-  background: #f5af19;
+  background: var(--color-2);
 }
 
 .ghost-input-button:hover, .ghost-input-button:focus{
-  background: var(--color-2); 
+  background: var(--color-1); 
 }
 
 .ghost-input-button:disabled{
@@ -75,7 +77,7 @@
 
 .home-button{
   color: #fff;
-  background: #ff7417;
+  background: var(--color-2);
 }
 
 .home-button:disabled{
@@ -83,7 +85,7 @@
 }
 
 .home-button:hover{
-  background: var(--color-2); 
+  background: var(--color-1); 
 }
 
 .App-footer li a {
@@ -98,23 +100,6 @@
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
 }
-
-.title-select-title:hover {
-  background: var(--color-2); /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, var(--color-1), var(--color-2)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
-}
-
-.title-select-options:hover {
-  background: var(--color-2); /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, var(--color-1), var(--color-2)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
-  }
-
 
 .App-footer li a:active, .App-footer li a:hover{
   background: var(--color-2); 

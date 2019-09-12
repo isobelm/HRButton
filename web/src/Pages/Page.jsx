@@ -17,6 +17,13 @@ class Page extends Component {
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
+    this.colorScheme = {
+      "GoofChold": "red_purple",
+      "Master": "red_purple",
+      "Yike": "red_purple",
+      "MISTAKE": "red_purple",
+      "HR": "red_purple",
+    }
 
     this.createHomeCharts();
   }
@@ -107,7 +114,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: "nivo" }}
+            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}

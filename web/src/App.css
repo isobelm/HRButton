@@ -265,20 +265,15 @@ h1, h2, p, ul, li {
   padding: 20px 16px 15px 30px;
 }
 
-.title-select-title:hover {
-  background: #e11701; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #e11701, #e59f09); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #e11701, #e59f09); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 .title-select-options {
   font-size: calc(12px + 2vmin);
   padding: 0px 26px 10px 30px;
 }
 
-.title-select-options:hover {
-  background: #e11701; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #e11701, #e59f09); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #e11701, #e59f09); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.title-select-options:hover, .title-select-title:hover {
+  -webkit-backdrop-filter: brightness(80%);
+  backdrop-filter: brightness(80%);
+  cursor: pointer;
 }
 
 
