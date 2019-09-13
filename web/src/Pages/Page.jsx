@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
+import { MapType } from "../Utilities/Types";
 import GraphColours from "./GraphColours";
 
 class Page extends Component {
@@ -14,7 +15,7 @@ class Page extends Component {
       disabled: false,
       lineChartData: undefined,
       barChartData: undefined,
-      type: this.props.match.params.type
+      type: MapType(decodeURIComponent(this.props.match.params.type))
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
@@ -23,10 +24,10 @@ class Page extends Component {
   }
 
   componentWillReceiveProps(props, state) {
-    if(props.match.params.type !== state.type) {
+    if (props.match.params.type !== state.type) {
       this.createHomeCharts();
     }
-    this.setState({type: props.match.params.type});
+    this.setState({ type: props.match.params.type });
   }
 
   render() {
@@ -109,7 +110,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            // colors={{ scheme: this.colorScheme[this.state.type] }}
+            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -159,7 +160,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            // colors={{ scheme: this.colorScheme[this.state.type] }}
+            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -219,6 +220,7 @@ class Page extends Component {
               legendPosition: "middle",
               legendOffset: -40
             }}
+            colors={Object.values(GraphColours[this.state.type])}
             enableLabel={false}
             animate={true}
             motionStiffness={90}
@@ -415,13 +417,9 @@ class Page extends Component {
   }
 
   createBarChartData(data, selectedUser) {
-    const colourName = selectedUser + "Color";
     let chartData = {
       person: selectedUser,
     };
-    chartData[colourName] = GraphColours[this.state.type][selectedUser]
-    // chartData["person"] = selectedUser;
-    // chartData.color = GraphColours[this.state.type][selectedUser]
     chartData[selectedUser] = data;
     return chartData;
   }

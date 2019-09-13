@@ -83,18 +83,10 @@
   width: 100%;
   -webkit-appearance: none;
   font-size: 60px;
-  /* -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; */
   color: #fff;
   background: transparent;
   padding: 100px 15px 10px 15px;
   margin: 20px 0px;
-  /* -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out; */
   text-align: center;
   border-bottom:1px solid #ddd;
 }
