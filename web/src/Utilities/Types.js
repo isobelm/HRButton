@@ -1,9 +1,9 @@
 export const Types = {
-  "Master": "Master",
-  "HR": "HR",
+  Master: "Master",
+  HR: "HR",
   "Goof Chold": "Goof Chold",
-  "MISTAKE": "MISTAKE",
-  "Yike": "Yike"
+  MISTAKE: "MISTAKE",
+  Yike: "Yike"
 };
 
 let typeMap = {};

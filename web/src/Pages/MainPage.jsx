@@ -11,15 +11,14 @@ const mode = {
 };
 
 const css = {
-  "Master": process.env.PUBLIC_URL + "/Master.css",
-  "HR": process.env.PUBLIC_URL + "../HR.css",
+  Master: process.env.PUBLIC_URL + "/Master.css",
+  HR: process.env.PUBLIC_URL + "../HR.css",
   "Goof Chold": process.env.PUBLIC_URL + "../GoofChold.css",
-  "MISTAKE": process.env.PUBLIC_URL + "../MISTAKE.css",
-  "Yike": process.env.PUBLIC_URL + "../yike.css"
+  MISTAKE: process.env.PUBLIC_URL + "../MISTAKE.css",
+  Yike: process.env.PUBLIC_URL + "../yike.css"
 };
 
 class MainPage extends Component {
-  
   constructor(props) {
     super(props);
     const startMode = MapType(props.location.pathname.slice(1));
@@ -33,8 +32,7 @@ class MainPage extends Component {
   }
 
   setSelected = option => {
-    this.setState({ mode: option,
-      stylePath: css[option] });
+    this.setState({ mode: option, stylePath: css[option] });
     if (option !== mode.Master) {
       this.props.history.push(`/${option}`);
     } else {
@@ -51,7 +49,7 @@ class MainPage extends Component {
             options={mode}
             selected={this.state.mode}
             setSelected={this.setSelected}
-            />
+          />
         }
       </div>
     );

@@ -111,3 +111,6 @@ token.txt
 
 #private key
 id_rsa
+
+#config
+/config
