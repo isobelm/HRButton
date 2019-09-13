@@ -15,7 +15,7 @@ class Page extends Component {
       disabled: false,
       lineChartData: undefined,
       barChartData: undefined,
-      type: MapType(this.props.match.params.type)
+      type: MapType(decodeURIComponent(this.props.match.params.type))
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
@@ -227,6 +227,7 @@ class Page extends Component {
               legendPosition: "middle",
               legendOffset: -40
             }}
+            colors={Object.values(GraphColours[this.state.type])}
             enableLabel={false}
             animate={true}
             motionStiffness={90}
@@ -423,13 +424,9 @@ class Page extends Component {
   }
 
   createBarChartData(data, selectedUser) {
-    const colourName = selectedUser + "Color";
     let chartData = {
       person: selectedUser,
     };
-    chartData[colourName] = GraphColours[this.state.type][selectedUser]
-    // chartData["person"] = selectedUser;
-    // chartData.color = GraphColours[this.state.type][selectedUser]
     chartData[selectedUser] = data;
     return chartData;
   }
