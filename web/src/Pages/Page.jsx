@@ -19,8 +19,6 @@ class Page extends Component {
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
-<<<<<<< HEAD
-=======
     this.colorScheme = {
       "Goof Chold": "pink_yellowGreen",
       Master: "red_purple",
@@ -28,7 +26,6 @@ class Page extends Component {
       MISTAKE: "set3",
       HR: "red_yellow_green"
     };
->>>>>>> 62841b1a0da1ee5a84ed1380cd75b4d370023fbe
 
     this.createHomeCharts();
   }
