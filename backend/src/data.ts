@@ -3,18 +3,21 @@ import { IDailyPresses, ITotalPresses } from './models';
 
 export interface IDailyPressesData extends Document, IDailyPresses {}
 
-const groups = new Schema({
+const dailyPresses = new Schema({
   count: String,
   date: Date,
+  type: String,
   user: String,
 });
 
 export interface ITotalPressesData extends Document, ITotalPresses {}
 
-const users = new Schema({
-  count: String,
+const totalPresses = new Schema({
+  count: Number,
+  highscore: Number,
+  type: String,
   user: String,
 });
 
-export const DailyPresses: Model<IDailyPressesData> = model<IDailyPressesData>('DailyPresses', groups);
-export const TotalPresses: Model<ITotalPressesData> = model<ITotalPressesData>('TotalPresses', users);
+export const DailyPresses: Model<IDailyPressesData> = model<IDailyPressesData>('DailyPresses', dailyPresses);
+export const TotalPresses: Model<ITotalPressesData> = model<ITotalPressesData>('TotalPresses', totalPresses);

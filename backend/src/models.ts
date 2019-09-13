@@ -3,9 +3,12 @@ export interface IDailyPresses {
   count: number;
   date: Date;
   hourly: { [key: string]: number };
+  type: string;
 }
 
 export interface ITotalPresses {
   user: string;
   count: number;
+  highscore: number;
+  type: string;
 }

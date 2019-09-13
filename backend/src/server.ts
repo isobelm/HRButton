@@ -1,15 +1,15 @@
 import bodyParser from 'body-parser';
+import config from 'config';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
-import { getUserCounts, getUserDailyCounts, postUserPress } from './requests';
+import { getUserCounts, getUserDailyCounts, getUserPress } from './requests';
 
 const API_PORT = 8080;
 const app = express();
 const router = express.Router();
-const dbRoute =
-  'mongodb://hrstorage:GF268faDz1ZmDISaVfOArbJHW0LCZGnDApZNoYufFlDy2pqcsT9XNCWtMs3SLYCf25Xs64Cks4PyyZ1NbywtzQ==@hrstorage.documents.azure.com:10255/Storage?ssl=true&replicaSet=globaldb';
+const dbRoute = config.get('ConnectionString');
 
 app.use(cors());
 
@@ -28,14 +28,17 @@ app.use(logger('dev'));
 
 router.get('/getPress', cors(), (req, res) => {
   const user = req.query.user;
-  if (!user) {
+  const type = req.query.type;
+
+  if (!user || !type) {
     return res.json({
       error: 'INVALID INPUTS\n',
       success: false,
     });
   }
-  postUserPress(
+  getUserPress(
     user,
+    type,
     () => {
       return res.json({
         success: true,
@@ -51,7 +54,8 @@ router.get('/getPress', cors(), (req, res) => {
 
 router.get('/getCounts', cors(), (req, res) => {
   const user = req.query.user;
-  if (!user) {
+  const type = req.query.type;
+  if (!user || !type) {
     return res.json({
       error: 'INVALID INPUTS\n',
       success: false,
@@ -59,10 +63,12 @@ router.get('/getCounts', cors(), (req, res) => {
   }
   getUserCounts(
     user,
-    (total, daily) => {
+    type,
+    (total, daily, highscore) => {
       return res.json({
         total,
         daily,
+        highscore,
         success: true,
       });
     },
@@ -76,7 +82,8 @@ router.get('/getCounts', cors(), (req, res) => {
 
 router.get('/getDailyCounts', cors(), (req, res) => {
   const user = req.query.user;
-  if (!user) {
+  const type = req.query.type;
+  if (!user || !type) {
     return res.json({
       error: 'INVALID INPUTS\n',
       success: false,
@@ -84,6 +91,7 @@ router.get('/getDailyCounts', cors(), (req, res) => {
   }
   getUserDailyCounts(
     user,
+    type,
     data => {
       return res.json({
         data,
