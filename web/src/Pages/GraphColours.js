@@ -8,7 +8,7 @@ const GraphColours = {
         "Rory": "#FFAA00",
     },
     "MISTAKE":{
-        "Donal": "#1111100",
+        "Donal": "#111100",
         "Ebin": "#332233",
         "Gemma": "#445555",
         "Isobel": "#777788",
@@ -30,6 +30,14 @@ const GraphColours = {
         "Isobel": "#E6ABFF",
         "Niall": "#250048",
         "Rory": "#FF7575",
+    },
+    "Master":{
+        "Donal": "#369954",
+        "Ebin": "#FFD300",
+        "Gemma": "#1119B2",
+        "Isobel": "#E6724A",
+        "Niall": "#A63FE1",
+        "Rory": "#818181",
     },
 }
 

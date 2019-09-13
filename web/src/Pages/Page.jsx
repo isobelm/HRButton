@@ -110,7 +110,6 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
@@ -160,7 +159,6 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
