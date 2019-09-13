@@ -18,13 +18,6 @@ class Page extends Component {
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
-    this.colorScheme = {
-      "Goof Chold": "pink_yellowGreen",
-      "Master": "red_purple",
-      "Yike": "dark2",
-      "MISTAKE": "set3",
-      "HR": "red_yellow_green",
-    }
 
     this.createHomeCharts();
   }
