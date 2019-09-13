@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 
 class Dropdown extends React.Component {
-  options = [
-    "Master",
-    "HR",
-    "Goof Chold",
-    "MISTAKE",
-    "Yike"
-  ]
+  options = ["Master", "HR", "Goof Chold", "MISTAKE", "Yike"];
 
-  setSelected = () => {}
+  setSelected = () => { };
 
   constructor(props) {
     super(props);
-    this.setSelected = props.setSelected
+    this.setSelected = props.setSelected;
     this.state = {
       selected: props.selected,
       open: false
@@ -21,43 +15,52 @@ class Dropdown extends React.Component {
   }
 
   handleOpen = () => {
-    this.setState({open: true})
-  }
+    this.setState({ open: true });
+  };
 
   renderClosed = () => {
-    return (<div className="title-select-title" onClick={this.handleOpen}>{this.state.selected}</div>)
-  }
+    return (
+      <div className="title-select-title" onClick={this.handleOpen}>
+        {this.state.selected}
+      </div>
+    );
+  };
 
   render() {
     return (
       <div className="title-select">
-      {this.state.open ? 
-      this.renderOpen() : 
-      this.renderClosed()}
+        {this.state.open ? this.renderOpen() : this.renderClosed()}
       </div>
     );
   }
 
   renderOpen = () => {
-    const optionButtons = []
+    const optionButtons = [];
     let handleChoice = () => {
-      this.setState({open: false})
-    }
-    optionButtons.push(<div className="title-select-title" onClick={handleChoice}>{this.state.selected}</div>)
+      this.setState({ open: false });
+    };
+    optionButtons.push(
+      <div className="title-select-title" onClick={handleChoice}>
+        {this.state.selected}
+      </div>
+    );
 
     this.options.forEach(option => {
       handleChoice = () => {
         this.setState({
           selected: option,
-          open: false,
-        })
-        this.setSelected(option)
-      }
-      optionButtons.push(<div className="title-select-options" onClick={handleChoice}>{option}</div>)
-
+          open: false
+        });
+        this.setSelected(option);
+      };
+      optionButtons.push(
+        <div className="title-select-options" onClick={handleChoice}>
+          {option}
+        </div>
+      );
     });
-    return (optionButtons)
-  }
+    return optionButtons;
+  };
 }
 
 export default Dropdown;

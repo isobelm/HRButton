@@ -21,11 +21,11 @@ class Page extends Component {
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
     this.colorScheme = {
       "Goof Chold": "pink_yellowGreen",
-      "Master": "red_purple",
-      "Yike": "dark2",
-      "MISTAKE": "set3",
-      "HR": "red_yellow_green",
-    }
+      Master: "red_purple",
+      Yike: "dark2",
+      MISTAKE: "set3",
+      HR: "red_yellow_green"
+    };
 
     this.createHomeCharts();
   }
@@ -45,11 +45,11 @@ class Page extends Component {
           this.state.selectedUser !== "everyone" ? (
             this.renderPersonPage()
           ) : (
-            this.renderHomePage()
-          )
+              this.renderHomePage()
+            )
         ) : (
-          <div className="total">Loading...</div>
-        )}
+            <div className="total">Loading...</div>
+          )}
       </div>
     );
   }
@@ -416,7 +416,7 @@ class Page extends Component {
     for (let i = 0; i < data.length; i++) {
       lineChartData[0].data[i] = {
         x: i + 1,
-        y: data[i],
+        y: data[i]
       };
     }
 
@@ -425,7 +425,7 @@ class Page extends Component {
 
   createBarChartData(data, selectedUser) {
     let chartData = {
-      person: selectedUser,
+      person: selectedUser
     };
     chartData[selectedUser] = data;
     return chartData;
