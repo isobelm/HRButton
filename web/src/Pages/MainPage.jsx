@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Dropdown from "./Dropdown";
+import { MapType } from "../Utilities/Types";
 
 const mode = {
   Master: "Master",
@@ -21,12 +22,7 @@ class MainPage extends Component {
   
   constructor(props) {
     super(props);
-
-    let startMode = mode.Master;
-    const type = props.location.pathname.slice(1);
-    if (type) {
-      startMode = type;
-    }
+    const startMode = MapType(props.location.pathname.slice(1));
 
     this.state = {
       stylePath: css[startMode],

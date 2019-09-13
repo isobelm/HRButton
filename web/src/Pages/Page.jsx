@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
+import { MapType } from "../Utilities/Types";
 
 class Page extends Component {
   constructor(props) {
@@ -13,26 +14,26 @@ class Page extends Component {
       disabled: false,
       lineChartData: undefined,
       barChartData: undefined,
-      type: this.props.match.params.type
+      type: MapType(this.props.match.params.type)
     };
 
     this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
     this.colorScheme = {
       "Goof Chold": "red_purple",
-      "Master": "red_purple",
-      "Yike": "red_purple",
-      "MISTAKE": "red_purple",
-      "HR": "red_purple",
-    }
+      Master: "red_purple",
+      Yike: "red_purple",
+      MISTAKE: "red_purple",
+      HR: "red_purple"
+    };
 
     this.createHomeCharts();
   }
 
   componentWillReceiveProps(props, state) {
-    if(props.match.params.type !== state.type) {
+    if (props.match.params.type !== state.type) {
       this.createHomeCharts();
     }
-    this.setState({type: props.match.params.type});
+    this.setState({ type: props.match.params.type });
   }
 
   render() {
@@ -163,7 +164,7 @@ class Page extends Component {
               legendOffset: -40,
               legendPosition: "middle"
             }}
-            colors={{ scheme: "red_purple" }}
+            colors={{ scheme: this.colorScheme[this.state.type] }}
             pointSize={10}
             pointColor={{ theme: "background" }}
             pointBorderWidth={2}
