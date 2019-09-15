@@ -35,7 +35,7 @@ const GraphColours = {
         "Donal": "#369954",
         "Ebin": "#FFD300",
         "Gemma": "#1119B2",
-        "Isobel": "#E6724A",
+        "Isobel": "#E6725A",
         "Niall": "#A63FE1",
         "Rory": "#818181",
     },

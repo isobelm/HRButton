@@ -13,20 +13,23 @@ class Master extends Component {
           totalCount: "Loading..",
           dailyCount: undefined,
           disabled: false,
-          totalChartData: undefined,
-          dailyChartData: undefined,
+          totalChartData: [],
+          dailyChartData: [],
         };
     
         this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
+        this.totalChartData = []
+        this.dailyChartData = []
 
         this.types = ["MISTAKE", "HR", "Goof Chold", "Yike"];
 
-        this.createHomeCharts()
+        this.createChartData("total")
+        this.createChartData("daily")
     }
 
     render() {
         return (
-            <div>
+            <div className="graph-container">
                 {this.renderRadarGraph(this.state.dailyChartData, "Daily")}
                 {this.renderRadarGraph(this.state.totalChartData, "Total")}
             </div>
@@ -34,37 +37,28 @@ class Master extends Component {
     }
 
     async createRadarChartData(id, type) {
-        const totalChartData = { "id": id };
+        const chartData = { "id": id };
     
         for (let i = 0; i < this.us.length; i++) {
             const data = await getTotals(this.us[i], id)
-            totalChartData[this.us[i]] = data[type]
+            chartData[this.us[i]] = data[type]
         }
-    
-        return totalChartData;
+
+        this[type + "ChartData"].push(this.normalise(chartData))
+        if (this.dailyChartData.length >= 4) {
+            this.setState({dailyChartData: this.dailyChartData})
+        }
+        if(this.totalChartData.length >= 4) {
+            this.setState({totalChartData: this.totalChartData})
+        }
       }
-
-      createHomeCharts = async () => {
-        const totalChartData = await this.createChartData("total");
-        const dailyChartData = await this.createChartData("daily");
-
-        this.createChartData("total")
-
-        this.setState({
-            totalChartData: totalChartData,
-            dailyChartData: dailyChartData})
-    }
 
     createChartData = async (type) => {
         const chartData = [];
-        const normalisedData = [];
 
         for (let i = 0; i < this.types.length; i++) {
             chartData[i] = await this.createRadarChartData(this.types[i], type)
-            normalisedData[i] = this.normalise(chartData[i])
         }
-
-        return normalisedData
     }
 
     normalise = (chartData) => {
@@ -94,7 +88,6 @@ class Master extends Component {
         return (
             <div className="chart-area">
             <div className="chartTitle">{title}</div>
-                {(data == null ? null :
                 <div className="graph-parent">
                     <div className="chart">
                     <ResponsiveRadar
@@ -102,7 +95,7 @@ class Master extends Component {
                     keys={this.us}
                     indexBy="id"
                     maxValue="auto"
-                    margin={{ top: 0, right: 40, bottom: 40, left: 40 }}
+                    margin={{ top: 40, right: 40, bottom: 60, left: 40 }}
                     curve="linearClosed"
                     borderWidth={2}
                     borderColor={{ from: 'color' }}
@@ -118,8 +111,8 @@ class Master extends Component {
                     dotLabel="value"
                     dotLabelYOffset={-12}
                     colors={Object.values(GraphColours["Master"])}
-                    fillOpacity={0.25}
-                    blendMode="multiply"
+                    fillOpacity={0.1}
+                    blendMode="normal"
                     animate={true}
                     motionStiffness={90}
                     motionDamping={15}
@@ -129,7 +122,7 @@ class Master extends Component {
                             anchor: 'bottom',
                             direction: 'row',
                             translateX: -30,
-                            translateY: -80,
+                            translateY: -50,
                             itemWidth: 60,
                             itemHeight: 20,
                             itemTextColor: '#999',
@@ -147,7 +140,7 @@ class Master extends Component {
                     ]}
                 />
                 </div>
-                </div>)}
+                </div>
         </div>);
       }
 
