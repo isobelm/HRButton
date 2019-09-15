@@ -101,3 +101,12 @@
 .content {
   background: var(--color-2); 
 }
+
+.switch-button {
+  color: #fff;
+  background: var(--color-1);
+}
+
+.switch-button:hover, .switch-button:focus, .switch-button:disabled {
+  background: var(--color-3); 
+}
