@@ -4,7 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
-import { getUserCounts, getUserDailyCounts, getUserPress } from './requests';
+import { getContinuousCounts, getCounts, getPress } from './requests';
 
 const API_PORT = 8080;
 const app = express();
@@ -36,7 +36,7 @@ router.get('/getPress', cors(), (req, res) => {
       success: false,
     });
   }
-  getUserPress(
+  getPress(
     user,
     type,
     () => {
@@ -61,7 +61,7 @@ router.get('/getCounts', cors(), (req, res) => {
       success: false,
     });
   }
-  getUserCounts(
+  getCounts(
     user,
     type,
     (total, daily, highscore) => {
@@ -89,12 +89,13 @@ router.get('/getDailyCounts', cors(), (req, res) => {
       success: false,
     });
   }
-  getUserDailyCounts(
+  getContinuousCounts(
     user,
     type,
-    data => {
+    (dailyData, weeklyData) => {
       return res.json({
-        data,
+        dailyData,
+        data: weeklyData,
         success: true,
       });
     },

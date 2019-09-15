@@ -6,6 +6,7 @@ export interface IDailyPressesData extends Document, IDailyPresses {}
 const dailyPresses = new Schema({
   count: String,
   date: Date,
+  hourly: { type: Map, hour: Number },
   type: String,
   user: String,
 });
