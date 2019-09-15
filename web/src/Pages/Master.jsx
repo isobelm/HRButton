@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveRadar } from '@nivo/radar'
-import { ResponsiveBar } from "@nivo/bar";
 import GraphColours from "./GraphColours";
+import { Types } from "../Utilities/Types"
 
 class Master extends Component {
 
@@ -21,7 +21,7 @@ class Master extends Component {
         this.totalChartData = []
         this.dailyChartData = []
 
-        this.types = ["MISTAKE", "HR", "Goof Chold", "Yike"];
+        // Types = ["MISTAKE", "HR", "Goof Chold", "Yike", "Dumb"];
 
         this.createChartData("total")
         this.createChartData("daily")
@@ -56,8 +56,8 @@ class Master extends Component {
     createChartData = async (type) => {
         const chartData = [];
 
-        for (let i = 0; i < this.types.length; i++) {
-            chartData[i] = await this.createRadarChartData(this.types[i], type)
+        for (let i = 0; i < Types.length; i++) {
+            chartData[i] = await this.createRadarChartData(Types[i], type)
         }
     }
 
@@ -82,6 +82,23 @@ class Master extends Component {
             return normalisedData
         }
         else return chartData
+    }
+
+    renderTabs() {
+        const tabs = [];
+        this.us.forEach(person => {
+          const tab = (
+            <form className="row" onClick={() => this._handleChange(person)}>
+              <input
+                className="ghost-input-small"
+                type="button"
+                value={person}
+                disabled={this.state.selectedUser === person}
+              />
+            </form>
+          );
+          tabs.push(tab);
+        });
     }
 
     renderRadarGraph(data, title) {

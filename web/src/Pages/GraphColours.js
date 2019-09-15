@@ -39,6 +39,14 @@ const GraphColours = {
         "Niall": "#A63FE1",
         "Rory": "#818181",
     },
+    "Dumb":{
+        "Donal": "#C2E59C",
+        "Ebin": "#65B3F3",
+        "Gemma": "#005FAD",
+        "Isobel": "#509A00",
+        "Niall": "#0022AF",
+        "Rory": "#172508",
+    },
 }
 
 export default GraphColours;

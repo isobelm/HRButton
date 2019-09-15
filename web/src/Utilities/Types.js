@@ -3,7 +3,8 @@ export const Types = {
   HR: "HR",
   "Goof Chold": "Goof Chold",
   MISTAKE: "MISTAKE",
-  Yike: "Yike"
+  Yike: "Yike",
+  Dumb: "Dumb",
 };
 
 let typeMap = {};

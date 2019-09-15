@@ -7,7 +7,8 @@ const mode = {
   HR: "HR",
   GoofChold: "Goof Chold",
   MISTAKE: "MISTAKE",
-  Yike: "Yike"
+  Yike: "Yike",
+  Dumb: "Dumb",
 };
 
 const css = {
@@ -15,7 +16,8 @@ const css = {
   HR: process.env.PUBLIC_URL + "../HR.css",
   "Goof Chold": process.env.PUBLIC_URL + "../GoofChold.css",
   MISTAKE: process.env.PUBLIC_URL + "../MISTAKE.css",
-  Yike: process.env.PUBLIC_URL + "../yike.css"
+  Yike: process.env.PUBLIC_URL + "../yike.css",
+  Dumb: process.env.PUBLIC_URL + "../Dumb.css",
 };
 
 class MainPage extends Component {

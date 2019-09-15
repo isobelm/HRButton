@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import { Types } from "../Utilities/Types"
 
-class Dropdown extends React.Component {
-  options = ["Master", "HR", "Goof Chold", "MISTAKE", "Yike"];
-
+class Dropdown extends Component {
   setSelected = () => { };
 
   constructor(props) {
@@ -45,7 +44,7 @@ class Dropdown extends React.Component {
       </div>
     );
 
-    this.options.forEach(option => {
+    Object.keys(Types).forEach(option => {
       handleChoice = () => {
         this.setState({
           selected: option,
