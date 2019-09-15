@@ -2,16 +2,40 @@
   background: #444444
 }
 
-.page {
-  background: rgb(166, 209, 228);
-  color: #203A43;
-  min-height: 1000px
-}
-
 :root{
     --color-1: #0F2027;
     --color-2: #203A43;
     --color-3: #2C5364;
+    background: rgb(166, 209, 228);
+    background: var(--color-2), var(--color-3); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, var(--color-1), var(--color-2), var(--color-3)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
+    /* min-height: 1000px; */
+}
+
+.graph-parent .chart {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.graph-parent {
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+}
+
+.chart-area {
+  background: #FFF;
+  border-radius: 10px;
+  /* border: 1px solid #FFF; */
+  margin: 5px;
+  padding: 2px -2px 2px 2px;
+  display: flexbox;
+  /* height: 70%; */
+  /* color: #FFF */
 }
 
 .App-header {
@@ -20,7 +44,6 @@
     background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
-    color: white;
 }
 
 .App-footer {
@@ -29,7 +52,6 @@
   background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
-    color: White;
 }
 
 .App-link {
@@ -98,6 +120,7 @@
   background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
+  margin: 0;
 }
 
 .App-footer li a:active, .App-footer li a:hover{
