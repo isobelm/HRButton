@@ -87,6 +87,53 @@ class Master extends Component {
         else return chartData
     }
 
+    async _handlePress() {
+        this.setState({
+          disabled: true
+        });
+        await getPress(this.state.selectedUser, this.state.type);
+        const data = await getTotals(this.state.selectedUser, this.state.type);
+        const returnedLineChartData = await getDailyCounts(
+          this.state.selectedUser,
+          this.state.type
+        );
+        const weeklyChartData = this.createLineChartData(
+          returnedLineChartData.data,
+          this.state.selectedUser
+        );
+        const dailyChartData = this.createLineChartData(
+          returnedLineChartData.dailyData,
+          this.state.selectedUser
+        );
+        const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
+        this.setState({
+          dailyCount: data.daily,
+          totalCount: data.total,
+          highScore: data.highscore,
+          selectedUser: this.state.selectedUser,
+          lineChartData,
+          weeklyChartData,
+          dailyChartData,
+          disabled: false
+        });
+      }
+    
+      async _handleHomePress() {
+        this.setState({
+          disabled: true
+        });
+        await this.createHomeCharts();
+      }
+    
+      async _handleSwitch() {
+        this.setState({
+          daily: !this.state.daily,
+          lineChartData: !this.state.daily
+            ? this.state.dailyChartData
+            : this.state.weeklyChartData
+        });
+      }
+
     renderTabs() {
         const tabs = [];
         People.forEach(person => {
