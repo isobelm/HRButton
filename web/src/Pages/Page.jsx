@@ -315,13 +315,15 @@ class Page extends Component {
 
   renderSwitchCharts() {
     return (
-      <div className="switch-layout">
-        <div className="switch-labels">Weekly</div>
-        <label class="switch">
-          <input checked={this.state.daily} type="checkbox" onChange={() => this._handleSwitch()} />
-          <span class="slider"></span>
-        </label>
-        <div className="switch-labels">Today</div>
+      <div className="switch-container">
+        <div className="switch-layout">
+          <div className="switch-labels">Weekly</div>
+          <label class="switch">
+            <input checked={this.state.daily} type="checkbox" onChange={() => this._handleSwitch()} />
+            <span class="slider"></span>
+          </label>
+          <div className="switch-labels">Today</div>
+        </div>
       </div>
     );
   }

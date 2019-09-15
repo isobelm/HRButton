@@ -340,16 +340,19 @@ li {
   text-align: center;
 }
 
+.switch-container {
+text-align: center;
+}
+
 .switch-layout {
   background: transparent;
   -webkit-appearance: none;
   border: 0;
   font-size: 25px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 2px 40px 2px 40px;
+  display: inline-flex;
+  margin: auto;
+  margin-top: 2px;
+  margin-bottom: 2px;
   font-size: calc(10px + 2vmin);
   color: black;
 }
@@ -357,7 +360,7 @@ li {
 .switch-labels {
   font-size: 16px;
   color: black;
-  margin: 10px;
+  margin: 5px 10px 5px 10px;
 }
 
 /* The switch - the box around the slider */
@@ -366,7 +369,7 @@ li {
   display: inline-block;
   width: 60px;
   height: 34px;
-  margin: 10px;
+  margin: auto;
 }
 
 /* Hide default HTML checkbox */
@@ -387,6 +390,7 @@ li {
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
+  border-radius: 2px;
 }
 
 .slider:before {
@@ -399,6 +403,7 @@ li {
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  border-radius: 2px;
 }
 
 input:checked + .slider {
