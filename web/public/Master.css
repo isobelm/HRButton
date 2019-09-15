@@ -12,30 +12,40 @@
     background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
-    /* min-height: 1000px; */
+    justify-content: center;
+
 }
 
 .graph-parent .chart {
   height: 100%;
-  width: 100%;
+  max-width: 400px;
   z-index: 1;
+}
+
+.graph-container {
+  margin: 0 10px 0 10px;
 }
 
 .graph-parent {
   position: relative;
   height: 100%;
-  min-height: 400px;
+  min-height: 410px;
+  max-width: 400px;
 }
 
 .chart-area {
   background: #FFF;
   border-radius: 10px;
-  /* border: 1px solid #FFF; */
-  margin: 5px;
-  padding: 2px -2px 2px 2px;
+  width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5px 0px 5px 10px;
   display: flexbox;
-  /* height: 70%; */
-  /* color: #FFF */
+  flex-direction: column;
+  max-width: 400px;
+  justify-self: center;
 }
 
 .App-header {
