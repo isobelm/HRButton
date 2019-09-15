@@ -3,6 +3,7 @@ export interface IDailyPresses {
   count: number;
   date: Date;
   hourly: Map<string, number>;
+  startHighscore: number;
   type: string;
 }
 
