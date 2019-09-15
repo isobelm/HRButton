@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveRadar } from '@nivo/radar'
-import GraphColours from "./GraphColours";
+import GraphColours from "../Utilities/GraphColours";
 import { Types } from "../Utilities/Types"
+import People from "../Utilities/People"
 
 class Master extends Component {
 
@@ -17,11 +18,8 @@ class Master extends Component {
           dailyChartData: [],
         };
     
-        this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
         this.totalChartData = []
         this.dailyChartData = []
-
-        // Types = ["MISTAKE", "HR", "Goof Chold", "Yike", "Dumb"];
 
         this.createChartData("total")
         this.createChartData("daily")
@@ -29,9 +27,12 @@ class Master extends Component {
 
     render() {
         return (
-            <div className="graph-container">
-                {this.renderRadarGraph(this.state.dailyChartData, "Daily")}
-                {this.renderRadarGraph(this.state.totalChartData, "Total")}
+            <div>
+                {this.renderTabs()}
+                <div className="graph-container">
+                    {this.renderRadarGraph(this.state.dailyChartData, "Daily")}
+                    {this.renderRadarGraph(this.state.totalChartData, "Total")}
+                </div>
             </div>
         )
     }
@@ -39,9 +40,9 @@ class Master extends Component {
     async createRadarChartData(id, type) {
         const chartData = { "id": id };
     
-        for (let i = 0; i < this.us.length; i++) {
-            const data = await getTotals(this.us[i], id)
-            chartData[this.us[i]] = data[type]
+        for (let i = 0; i < People.length; i++) {
+            const data = await getTotals(People[i], id)
+            chartData[People[i]] = data[type]
         }
 
         this[type + "ChartData"].push(this.normalise(chartData))
@@ -86,7 +87,7 @@ class Master extends Component {
 
     renderTabs() {
         const tabs = [];
-        this.us.forEach(person => {
+        People.forEach(person => {
           const tab = (
             <form className="row" onClick={() => this._handleChange(person)}>
               <input
@@ -99,6 +100,12 @@ class Master extends Component {
           );
           tabs.push(tab);
         });
+
+        return (
+            <div className="App-header">
+              <div className="rows">{tabs}</div>
+            </div>
+          );
     }
 
     renderRadarGraph(data, title) {
@@ -109,7 +116,7 @@ class Master extends Component {
                     <div className="chart">
                     <ResponsiveRadar
                     data={data}
-                    keys={this.us}
+                    keys={People}
                     indexBy="id"
                     maxValue="auto"
                     margin={{ top: 40, right: 40, bottom: 60, left: 40 }}

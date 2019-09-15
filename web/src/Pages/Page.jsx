@@ -3,7 +3,8 @@ import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
-import GraphColours from "./GraphColours";
+import GraphColours from "../Utilities/GraphColours";
+import People from "../Utilities/People"
 
 class Page extends Component {
   constructor(props) {
@@ -21,9 +22,7 @@ class Page extends Component {
       daily: false,
       type: MapType(decodeURIComponent(this.props.match.params.type))
     };
-
-    this.us = ["Donal", "Ebin", "Gemma", "Isobel", "Niall", "Rory"];
-
+    
     this.createHomeCharts();
   }
 
@@ -202,7 +201,7 @@ class Page extends Component {
           <ResponsiveBar
             data={this.state.barChartData}
             colors={d => d.color}
-            keys={this.us}
+            keys={People}
             indexBy="person"
             margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
             padding={0.3}
@@ -293,7 +292,7 @@ class Page extends Component {
 
   renderTabs() {
     const tabs = [];
-    this.us.forEach(person => {
+    People.forEach(person => {
       const tab = (
         <form className="row" onClick={() => this._handleChange(person)}>
           <input
@@ -400,7 +399,7 @@ class Page extends Component {
       );
     };
 
-    for await (const person of this.us) {
+    for await (const person of People) {
       await getData(person);
     }
 
@@ -410,7 +409,7 @@ class Page extends Component {
       barChartData.push(this.createBarChartData(totalCountData.total, person));
     };
 
-    for await (const person of this.us) {
+    for await (const person of People) {
       await getData(person);
     }
 
