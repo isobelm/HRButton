@@ -4,7 +4,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
 import GraphColours from "../Utilities/GraphColours";
-import People from "../Utilities/People"
+import People from "../Utilities/People";
 
 class Page extends Component {
   constructor(props) {
@@ -17,13 +17,16 @@ class Page extends Component {
       disabled: false,
       lineChartData: undefined,
       dailyChartData: undefined,
-      weekyChartData: undefined,
+      weeklyChartData: undefined,
       barChartData: undefined,
       daily: false,
-      type: MapType(decodeURIComponent(this.props.match.params.type))
+      type: MapType(decodeURIComponent(this.props.match.params.type)),
+      width: 0,
+      height: 0
     };
-    
+
     this.createHomeCharts();
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentWillReceiveProps(props, state) {
@@ -31,6 +34,19 @@ class Page extends Component {
       this.createHomeCharts();
     }
     this.setState({ type: props.match.params.type });
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   render() {
@@ -104,7 +120,10 @@ class Page extends Component {
               legend: this.state.daily ? "Today" : "Last 14 Days",
               legendOffset: 40,
               legendPosition: "middle",
-              tickValues: this.state.daily ? [1,3,5,7,9,11,13,15,17,19,21,23] : "linear"
+              tickValues:
+                this.state.daily && this.state.width < 600
+                  ? [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+                  : "linear"
             }}
             axisLeft={{
               orient: "left",
@@ -320,7 +339,11 @@ class Page extends Component {
         <div className="switch-layout">
           <div className="switch-labels">Weekly</div>
           <label class="switch">
-            <input checked={this.state.daily} type="checkbox" onChange={() => this._handleSwitch()} />
+            <input
+              checked={this.state.daily}
+              type="checkbox"
+              onChange={() => this._handleSwitch()}
+            />
             <span class="slider"></span>
           </label>
           <div className="switch-labels">Today</div>
