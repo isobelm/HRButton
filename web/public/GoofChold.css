@@ -2,12 +2,6 @@
   background: #444444
 }
 
-.page {
-    background: rgb(255, 255, 255);
-    color: #2b0101;
-    min-height: 1000px
-}
-
 :root{
     --color-1: rgb(146, 0, 134);
     --color-2: #FF7575;

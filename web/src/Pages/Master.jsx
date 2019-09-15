@@ -57,17 +57,42 @@ class Master extends Component {
 
     createChartData = async (type) => {
         const chartData = [];
+        const normalisedData = [];
 
         for (let i = 0; i < this.types.length; i++) {
             chartData[i] = await this.createRadarChartData(this.types[i], type)
+            normalisedData[i] = this.normalise(chartData[i])
         }
 
-        return chartData
+        return normalisedData
+    }
+
+    normalise = (chartData) => {
+        const normalisedData = {}
+        normalisedData["id"] = chartData["id"]
+
+        let total = 0
+        Object.keys(chartData).forEach(key => {
+            if (key != "id") {
+                total += chartData[key]
+            }
+        });
+
+        if (total > 0)
+        {
+            Object.keys(chartData).forEach(key => {
+                if (key != "id") {
+                    normalisedData[key] = Math.trunc((chartData[key] / total) * 100)
+                }   
+            })
+            return normalisedData
+        }
+        else return chartData
     }
 
     renderRadarGraph(data, title) {
         return (
-            <div>
+            <div className="chart-area">
             <div className="chartTitle">{title}</div>
                 {(data == null ? null :
                 <div className="graph-parent">
@@ -77,7 +102,7 @@ class Master extends Component {
                     keys={this.us}
                     indexBy="id"
                     maxValue="auto"
-                    margin={{ top: 70, right: 80, bottom: 80, left: 80 }}
+                    margin={{ top: 0, right: 40, bottom: 40, left: 40 }}
                     curve="linearClosed"
                     borderWidth={2}
                     borderColor={{ from: 'color' }}
@@ -85,11 +110,11 @@ class Master extends Component {
                     gridShape="circular"
                     gridLabelOffset={16}
                     enableDots={true}
-                    dotSize={10}
+                    dotSize={2}
                     dotColor={{ theme: 'background' }}
                     dotBorderWidth={2}
                     dotBorderColor={{ from: 'color' }}
-                    enableDotLabel={true}
+                    enableDotLabel={false}
                     dotLabel="value"
                     dotLabelYOffset={-12}
                     colors={Object.values(GraphColours["Master"])}
@@ -103,8 +128,8 @@ class Master extends Component {
                         {
                             anchor: 'bottom',
                             direction: 'row',
-                            translateX: -70,
-                            translateY: -100,
+                            translateX: -30,
+                            translateY: -80,
                             itemWidth: 60,
                             itemHeight: 20,
                             itemTextColor: '#999',

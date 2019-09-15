@@ -2,11 +2,6 @@
   background: #444444
 }
 
-.page {
-  background: #6e3333;
-  color: #ff0000;
-}
-
 :root{
     --color-1: rgb(0, 255, 13);
     --color-2: rgb(85, 58, 85);
