@@ -20,7 +20,9 @@ class Master extends Component {
     
         this.totalChartData = []
         this.dailyChartData = []
+        this.types = Object.keys(Types)
 
+        debugger
         this.createChartData("total")
         this.createChartData("daily")
     }
@@ -46,19 +48,19 @@ class Master extends Component {
         }
 
         this[type + "ChartData"].push(this.normalise(chartData))
-        if (this.dailyChartData.length >= 4) {
+        if (this.dailyChartData.length >= this.types.length - 1) {
             this.setState({dailyChartData: this.dailyChartData})
         }
-        if(this.totalChartData.length >= 4) {
+        if(this.totalChartData.length >= this.types.length - 1) {
             this.setState({totalChartData: this.totalChartData})
         }
       }
 
     createChartData = async (type) => {
-        const chartData = [];
-
-        for (let i = 0; i < Types.length; i++) {
-            chartData[i] = await this.createRadarChartData(Types[i], type)
+        for (let i = 0; i < this.types.length; i++) {
+            if (this.types[i] !== "Master"){
+                this.createRadarChartData(this.types[i], type)
+            }
         }
     }
 
