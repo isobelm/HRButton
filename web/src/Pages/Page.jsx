@@ -58,7 +58,7 @@ class Page extends Component {
         {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
-        {this.renderSwitchChartsButtons()}
+        {this.renderSwitchCharts()}
         {this.renderHomeButton()}
       </div>
     );
@@ -313,32 +313,15 @@ class Page extends Component {
     );
   }
 
-  renderSwitchChartsButtons() {
+  renderSwitchCharts() {
     return (
-
       <div className="switch-layout">
-        <div className="rows">
-          <div className="row">
-            <form onClick={() => this._handleSwitch()}>
-              <input
-                className="switch-button"
-                type="button"
-                value={"Weekly"}
-                disabled={!this.state.daily}
-              />
-            </form>
-          </div>
-          <div className="row">
-            <form onClick={() => this._handleSwitch()}>
-              <input
-                className="switch-button"
-                type="button"
-                value={"Daily"}
-                disabled={this.state.daily}
-              />
-            </form>
-          </div>
-        </div>
+        <div className="switch-labels">Weekly</div>
+        <label class="switch">
+          <input type="checkbox" onChange={() => this._handleSwitch()} />
+          <span class="slider"></span>
+        </label>
+        <div className="switch-labels">Today</div>
       </div>
     );
   }
@@ -468,7 +451,7 @@ class Page extends Component {
 
     for (let i = 0; i < data.length; i++) {
       lineChartData[0].data[i] = {
-        x: i + 1,
+        x: i,
         y: data[i]
       };
     }

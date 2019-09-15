@@ -101,11 +101,14 @@
   background: var(--color-2); 
 }
 
-.switch-button {
-  color: #fff;
+input:checked + .slider {
   background: var(--color-1);
 }
 
-.switch-button:hover, .switch-button:focus, .switch-button:disabled {
-  background: var(--color-2); 
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--color-1);
+}
+
+.slider {
+  background: var(--color-2);  
 }
