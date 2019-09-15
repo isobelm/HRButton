@@ -341,17 +341,7 @@ li {
 }
 
 .switch-layout {
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: transparent;
   -webkit-appearance: none;
   border: 0;
   font-size: 40px;
@@ -373,7 +363,6 @@ li {
   font-size: 14px;
   border: 0px;
   outline: none;
-  width: 100%;
   -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -381,7 +370,7 @@ li {
   color: #fff;
   background: transparent;
   padding: 10px;
-  margin: 0px 0px;
+  margin: 0px 0px 0px 0px;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
@@ -403,7 +392,7 @@ li {
 }
 
 .switch-button:hover, .switch-button:focus, .switch-button:disabled{
-  background: var(--color-2); 
+  background: #ff7417; 
 }
 
 .chartTitle {

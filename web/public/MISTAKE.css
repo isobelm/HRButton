@@ -8,12 +8,12 @@
 }
 
 .App-header {
-    background: var(--color-2); /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, var(--color-1), var(--color-2)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
-    color: white;
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, var(--color-1), var(--color-2)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
+  color: white;
 }
 
 .App-footer {
@@ -22,7 +22,7 @@
   background: -o-linear-gradient(right, var(--color-1), var(--color-2)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2)); /* Standard syntax (must be last) */
-    color: White;
+  color: White;
 }
 
 .App-link {
@@ -97,19 +97,11 @@
   background: var(--color-2); 
 }
 
-.switch-layout {
-  background: var(--color-2), var(--color-3); /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, var(--color-1), var(--color-2), var(--color-3)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
-  color: white;
-}
-
-.switch-button, p {
+.switch-button {
   color: #fff;
+  background: var(--color-1);
 }
 
-.switch-button:hover, .switch-button:focus, .switch-button:disabled{
+.switch-button:hover, .switch-button:focus, .switch-button:disabled {
   background: var(--color-2); 
 }

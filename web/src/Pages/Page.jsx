@@ -15,7 +15,10 @@ class Page extends Component {
       dailyCount: undefined,
       disabled: false,
       lineChartData: undefined,
+      dailyChartData: undefined,
+      weekyChartData: undefined,
       barChartData: undefined,
+      daily: false,
       type: MapType(decodeURIComponent(this.props.match.params.type))
     };
 
@@ -106,7 +109,7 @@ class Page extends Component {
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "Last 14 Days",
+              legend: this.state.daily ? "Today" : "Last 14 Days",
               legendOffset: 36,
               legendPosition: "middle"
             }}
@@ -320,6 +323,7 @@ class Page extends Component {
 
   renderSwitchChartsButtons() {
     return (
+
       <div className="switch-layout">
         <div className="rows">
           <div className="row">
@@ -327,8 +331,8 @@ class Page extends Component {
               <input
                 className="switch-button"
                 type="button"
-                value={"Daily"}
-                disabled={false}
+                value={"Weekly"}
+                disabled={!this.state.daily}
               />
             </form>
           </div>
@@ -337,8 +341,8 @@ class Page extends Component {
               <input
                 className="switch-button"
                 type="button"
-                value={"Weekly"}
-                disabled={false}
+                value={"Daily"}
+                disabled={this.state.daily}
               />
             </form>
           </div>
@@ -357,16 +361,23 @@ class Page extends Component {
       this.state.selectedUser,
       this.state.type
     );
-    const lineChartData = this.createLineChartData(
+    const weeklyChartData = this.createLineChartData(
       returnedLineChartData.data,
       this.state.selectedUser
     );
+    const dailyChartData = this.createLineChartData(
+      returnedLineChartData.dailyData,
+      this.state.selectedUser
+    );
+    const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
       highScore: data.highscore,
       selectedUser: this.state.selectedUser,
-      lineChartData: lineChartData,
+      lineChartData,
+      weeklyChartData,
+      dailyChartData,
       disabled: false
     });
   }
@@ -376,6 +387,15 @@ class Page extends Component {
       disabled: true
     });
     await this.createHomeCharts();
+  }
+
+  async _handleSwitch() {
+    this.setState({
+      daily: !this.state.daily,
+      lineChartData: !this.state.daily
+        ? this.state.dailyChartData
+        : this.state.weeklyChartData
+    });
   }
 
   createHomeCharts = async () => {
@@ -424,13 +444,23 @@ class Page extends Component {
       selectedUser,
       this.state.type
     );
-    const lineChartData = this.createLineChartData(returnedLineChartData.data);
+    const weeklyChartData = this.createLineChartData(
+      returnedLineChartData.data,
+      selectedUser
+    );
+    const dailyChartData = this.createLineChartData(
+      returnedLineChartData.dailyData,
+      selectedUser
+    );
+    const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
       highScore: data.highscore,
       selectedUser: selectedUser,
-      lineChartData: lineChartData,
+      lineChartData,
+      weeklyChartData,
+      dailyChartData,
       disabled: false
     });
   }
