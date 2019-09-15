@@ -13,7 +13,7 @@
   background: -moz-linear-gradient(right, var(--color-1), var(--color-2), var(--color-3)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right,var(--color-1), var(--color-2), var(--color-3)); /* Standard syntax (must be last) */
   justify-content: center;
-
+  color: #FFF;
 }
 
 .graph-parent .chart {
@@ -35,6 +35,7 @@
 
 .chart-area {
   background: #FFF;
+  color: #222;
   border-radius: 10px;
   width: auto;
   margin-top: 10px;
@@ -71,7 +72,7 @@
   }
 
 .chart-title{
-  color: #000;
+  color: #FFF;
 }
 
 .ghost-input:focus{
