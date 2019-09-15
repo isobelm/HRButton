@@ -11,6 +11,7 @@ class Page extends Component {
     this.state = {
       selectedUser: "",
       totalCount: "Loading..",
+      highScore: undefined,
       dailyCount: undefined,
       disabled: false,
       lineChartData: undefined,
@@ -45,11 +46,11 @@ class Page extends Component {
           this.state.selectedUser !== "everyone" ? (
             this.renderPersonPage()
           ) : (
-              this.renderHomePage()
-            )
+            this.renderHomePage()
+          )
         ) : (
-            <div className="total">Loading...</div>
-          )}
+          <div className="total">Loading...</div>
+        )}
       </div>
     );
   }
@@ -62,6 +63,7 @@ class Page extends Component {
         {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
+        {this.renderSwitchChartsButtons()}
         {this.renderHomeButton()}
       </div>
     );
@@ -316,6 +318,35 @@ class Page extends Component {
     );
   }
 
+  renderSwitchChartsButtons() {
+    return (
+      <div className="switch-layout">
+        <div className="rows">
+          <div className="row">
+            <form onClick={() => this._handleSwitch()}>
+              <input
+                className="switch-button"
+                type="button"
+                value={"Daily"}
+                disabled={false}
+              />
+            </form>
+          </div>
+          <div className="row">
+            <form onClick={() => this._handleSwitch()}>
+              <input
+                className="switch-button"
+                type="button"
+                value={"Weekly"}
+                disabled={false}
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   async _handlePress() {
     this.setState({
       disabled: true
@@ -333,6 +364,7 @@ class Page extends Component {
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
+      highScore: data.highscore,
       selectedUser: this.state.selectedUser,
       lineChartData: lineChartData,
       disabled: false
@@ -372,6 +404,7 @@ class Page extends Component {
     this.setState({
       dailyCount: undefined,
       totalCount: undefined,
+      highScore: undefined,
       selectedUser: "everyone",
       lineChartData: lineChartData,
       barChartData: barChartData,
@@ -395,6 +428,7 @@ class Page extends Component {
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
+      highScore: data.highscore,
       selectedUser: selectedUser,
       lineChartData: lineChartData,
       disabled: false
