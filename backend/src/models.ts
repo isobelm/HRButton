@@ -2,7 +2,7 @@ export interface IDailyPresses {
   user: string;
   count: number;
   date: Date;
-  hourly: { [key: string]: number };
+  hourly: Map<string, number>;
   type: string;
 }
 

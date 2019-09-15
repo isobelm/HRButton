@@ -1,24 +1,32 @@
 import { DateTime } from 'luxon';
 import { DailyPresses, TotalPresses } from './data';
 
-const zone = DateTime.local().setZone('Europe/Dublin');
-if (!zone.isValid) {
-  DateTime.local().setZone('UTC+1');
-}
-
-export const getUserPress = async (user: string, type: string, callback: any, error: any) => {
+export const getPress = async (user: string, type: string, callback: any, error: any) => {
   try {
-    const today = DateTime.local().toISODate();
+    let time = DateTime.local().setZone('Europe/Dublin');
+    if (!time.isValid) {
+      time = DateTime.local().setZone('UTC+1');
+    }
+    const today = time.toISODate();
     let dailyPresses = await DailyPresses.findOne({ user, date: today, type });
     let totalPresses = await TotalPresses.findOne({ user, type });
 
     if (!totalPresses) {
       totalPresses = new TotalPresses({ user, count: 1, type, highscore: 1 });
       if (!dailyPresses) {
-        dailyPresses = new DailyPresses({ user, date: today, count: 1, type });
+        dailyPresses = new DailyPresses({ user, date: today, count: 1, type, hourly: new Map<string, number>() });
+        dailyPresses.hourly.set(`${time.hour}`, 1);
         await dailyPresses.save();
       } else {
         dailyPresses.count = +dailyPresses.count + 1;
+        if (dailyPresses.hourly && dailyPresses.hourly.get(`${time.hour}`)) {
+          dailyPresses.hourly.set(`${time.hour}`, dailyPresses.hourly.get(`${time.hour}`) + 1);
+        } else {
+          if (!dailyPresses.hourly) {
+            dailyPresses.hourly = new Map<string, number>();
+          }
+          dailyPresses.hourly.set(`${time.hour}`, 1);
+        }
         await dailyPresses.save();
       }
       totalPresses.highscore = dailyPresses.count;
@@ -27,10 +35,19 @@ export const getUserPress = async (user: string, type: string, callback: any, er
     } else {
       totalPresses.count = +totalPresses.count + 1;
       if (!dailyPresses) {
-        dailyPresses = new DailyPresses({ user, date: today, count: 1, type });
+        dailyPresses = new DailyPresses({ user, date: today, count: 1, type, hourly: new Map<string, number>() });
+        dailyPresses.hourly.set(`${time.hour}`, 1);
         await dailyPresses.save();
       } else {
         dailyPresses.count = +dailyPresses.count + 1;
+        if (dailyPresses.hourly && dailyPresses.hourly.get(`${time.hour}`)) {
+          dailyPresses.hourly.set(`${time.hour}`, dailyPresses.hourly.get(`${time.hour}`) + 1);
+        } else {
+          if (!dailyPresses.hourly) {
+            dailyPresses.hourly = new Map<string, number>();
+          }
+          dailyPresses.hourly.set(`${time.hour}`, 1);
+        }
         await dailyPresses.save();
       }
       if (dailyPresses.count > totalPresses.highscore) {
@@ -44,9 +61,13 @@ export const getUserPress = async (user: string, type: string, callback: any, er
   }
 };
 
-export const getUserCounts = async (user: string, type: string, callback: any, error: any) => {
+export const getCounts = async (user: string, type: string, callback: any, error: any) => {
   try {
-    const today = DateTime.local().toISODate();
+    let time = DateTime.local().setZone('Europe/Dublin');
+    if (!time.isValid) {
+      time = DateTime.local().setZone('UTC+1');
+    }
+    const today = time.toISODate();
     const dailyPresses = await DailyPresses.findOne({ user, date: today, type });
     const totalPresses = await TotalPresses.findOne({ user, type });
 
@@ -68,22 +89,35 @@ export const getUserCounts = async (user: string, type: string, callback: any, e
   }
 };
 
-export const getUserDailyCounts = async (user: string, type: string, callback: any, error: any) => {
+export const getContinuousCounts = async (user: string, type: string, callback: any, error: any) => {
   try {
-    let dateTime = DateTime.local();
-    const data = new Array(14);
+    let time = DateTime.local().setZone('Europe/Dublin');
+    if (!time.isValid) {
+      time = DateTime.local().setZone('UTC+1');
+    }
+    let day = time.toISODate();
+    let dailyPresses = await DailyPresses.findOne({ user, type, date: day });
+
+    const dailyData = new Array(24).fill(0);
+    if (dailyPresses && dailyPresses.hourly) {
+      dailyPresses.hourly.forEach((count, hour) => {
+        dailyData[+hour] = count;
+      });
+    }
+
+    const weeklyData = new Array(14);
 
     for (let i = 0; i < 14; i++) {
-      const day = dateTime.toISODate();
-      const dailyPresses = await DailyPresses.findOne({ user, type, date: day });
+      day = time.toISODate();
+      dailyPresses = await DailyPresses.findOne({ user, type, date: day });
       if (!dailyPresses) {
-        data[13 - i] = 0;
+        weeklyData[13 - i] = 0;
       } else {
-        data[13 - i] = +dailyPresses.count;
+        weeklyData[13 - i] = +dailyPresses.count;
       }
-      dateTime = dateTime.minus({ days: 1 });
+      time = time.minus({ days: 1 });
     }
-    callback(data);
+    callback(dailyData, weeklyData);
   } catch (e) {
     error();
   }
