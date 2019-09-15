@@ -102,8 +102,9 @@ class Page extends Component {
               tickPadding: 5,
               tickRotation: 0,
               legend: this.state.daily ? "Today" : "Last 14 Days",
-              legendOffset: 36,
-              legendPosition: "middle"
+              legendOffset: 40,
+              legendPosition: "middle",
+              tickValues: this.state.daily ? [1,3,5,7,9,11,13,15,17,19,21,23] : "linear"
             }}
             axisLeft={{
               orient: "left",
