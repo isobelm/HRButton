@@ -344,55 +344,84 @@ li {
   background: transparent;
   -webkit-appearance: none;
   border: 0;
-  font-size: 40px;
+  font-size: 25px;
   display: flex;
-  flex-direction: row-reverse;
-  align-items: right;
-  justify-content: center;
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 2px 40px 2px 40px;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
-.switch-button {
-  display: block;
-  font-weight: 300;
-  width: 100%;
-  font-size: 14px;
-  border: 0px;
-  outline: none;
-  -webkit-appearance: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #fff;
-  background: transparent;
-  padding: 10px;
-  margin: 0px 0px 0px 0px;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  align-self: right;
-  text-align: right;
+.switch-labels {
+  font-size: 16px;
+  color: black;
+  margin: 10px;
 }
 
-.switch-button:hover,
-.switch-button:focus,
-.switch-button:disabled {
-  background: #f12711;
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
   cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-.switch-button, p {
-  color: #fff;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-.switch-button:hover, .switch-button:focus, .switch-button:disabled{
-  background: #ff7417; 
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 .chartTitle {
