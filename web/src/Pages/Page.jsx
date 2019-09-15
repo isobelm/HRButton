@@ -318,7 +318,7 @@ class Page extends Component {
       <div className="switch-layout">
         <div className="switch-labels">Weekly</div>
         <label class="switch">
-          <input type="checkbox" onChange={() => this._handleSwitch()} />
+          <input checked={this.state.daily} type="checkbox" onChange={() => this._handleSwitch()} />
           <span class="slider"></span>
         </label>
         <div className="switch-labels">Today</div>
