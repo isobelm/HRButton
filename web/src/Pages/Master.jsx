@@ -45,17 +45,17 @@ class Master extends Component {
       }
 
       createHomeCharts = async () => {
-        const totalChartData = await this.createChart("total");
-        const dailyChartData = await this.createChart("daily");
+        const totalChartData = await this.createChartData("total");
+        const dailyChartData = await this.createChartData("daily");
 
-        this.createChart("total")
+        this.createChartData("total")
 
         this.setState({
             totalChartData: totalChartData,
             dailyChartData: dailyChartData})
     }
 
-    createChart = async (type) => {
+    createChartData = async (type) => {
         const chartData = [];
 
         for (let i = 0; i < this.types.length; i++) {
@@ -77,7 +77,7 @@ class Master extends Component {
                     keys={this.us}
                     indexBy="id"
                     maxValue="auto"
-                    margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+                    margin={{ top: 70, right: 80, bottom: 80, left: 80 }}
                     curve="linearClosed"
                     borderWidth={2}
                     borderColor={{ from: 'color' }}
@@ -101,14 +101,14 @@ class Master extends Component {
                     isInteractive={true}
                     legends={[
                         {
-                            anchor: 'top-left',
-                            direction: 'column',
-                            translateX: -50,
-                            translateY: -40,
-                            itemWidth: 80,
+                            anchor: 'bottom',
+                            direction: 'row',
+                            translateX: -70,
+                            translateY: -100,
+                            itemWidth: 60,
                             itemHeight: 20,
                             itemTextColor: '#999',
-                            symbolSize: 12,
+                            symbolSize: 10,
                             symbolShape: 'circle',
                             effects: [
                                 {

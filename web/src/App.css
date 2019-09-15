@@ -134,6 +134,7 @@
 
 .ghost-input-small:hover, .ghost-input-small:focus, .ghost-input-small:disabled{
   background:#f12711;
+  cursor: pointer;
 }
 
 .ghost-input-button{
@@ -160,6 +161,7 @@
 
 .ghost-input-button:hover, .ghost-input-button:focus{
   background:#f12711;
+  cursor: pointer;
 }
 
 .ghost-input-button:disabled{
@@ -209,6 +211,7 @@
 
 .home-button:hover{
   background: #ce2e12;
+  cursor: pointer;
 }
 
 h1, h2, p, ul, li {
@@ -271,6 +274,7 @@ h1, h2, p, ul, li {
 
 .App-footer li a:active, .App-footer li a:hover{
   background: #f12711;
+  cursor: pointer;
 }
 
 .content {
