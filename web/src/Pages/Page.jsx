@@ -17,20 +17,46 @@ class Page extends Component {
 			disabled: false,
 			lineChartData: undefined,
 			dailyChartData: undefined,
-			weekyChartData: undefined,
+			weeklyChartData: undefined,
 			barChartData: undefined,
 			daily: false,
 			type: MapType(decodeURIComponent(this.props.match.params.type)),
+			width: 0,
+			height: 0,
 		};
 
 		this.createHomeCharts();
+		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 	}
 
-	componentWillReceiveProps(props, state) {
-		if (props.match.params.type !== state.type) {
-			this.createHomeCharts();
-		}
-		this.setState({ type: props.match.params.type });
+	componentDidMount() {
+		this.updateWindowDimensions();
+		window.addEventListener("resize", this.updateWindowDimensions);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateWindowDimensions);
+	}
+
+	updateWindowDimensions() {
+		this.setState({ width: window.innerWidth, height: window.innerHeight });
+	}
+
+	render() {
+		return (
+			<div>
+				{this.renderTabs()}
+				{this.state.selectedUser !== "" ? (
+					this.state.selectedUser !== "everyone" ? (
+						this.renderPersonPage()
+					) : (
+						this.renderHomePage()
+					)
+				) : (
+					<div className="total">Loading...</div>
+				)}
+			</div>
+		);
 	}
 
 	render() {
@@ -78,7 +104,6 @@ class Page extends Component {
 			</div>
 		);
 	}
-
 	renderGraph() {
 		return (
 			<div className="graph-parent">
@@ -102,8 +127,25 @@ class Page extends Component {
 							tickPadding: 5,
 							tickRotation: 0,
 							legend: this.state.daily ? "Today" : "Last 14 Days",
-							legendOffset: 36,
+							legendOffset: 40,
 							legendPosition: "middle",
+							tickValues:
+								this.state.daily && this.state.width < 600
+									? [
+											1,
+											3,
+											5,
+											7,
+											9,
+											11,
+											13,
+											15,
+											17,
+											19,
+											21,
+											23,
+									  ]
+									: "linear",
 						}}
 						axisLeft={{
 							orient: "left",
@@ -318,7 +360,6 @@ class Page extends Component {
 			</div>
 		);
 	}
-
 	renderSwitchCharts() {
 		return (
 			<div className="switch-container">

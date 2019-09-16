@@ -4,7 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
-import { getContinuousCounts, getCounts, getPress } from './requests';
+import { getContinuousCounts, getCounts, getPress, getUndo } from './requests';
 
 const API_PORT = 8080;
 const app = express();
@@ -96,6 +96,31 @@ router.get('/getDailyCounts', cors(), (req, res) => {
       return res.json({
         dailyData,
         data: weeklyData,
+        success: true,
+      });
+    },
+    () => {
+      return res.json({
+        success: false,
+      });
+    },
+  );
+});
+
+router.get('/getUndo', cors(), (req, res) => {
+  const user = req.query.user;
+  const type = req.query.type;
+  if (!user || !type) {
+    return res.json({
+      error: 'INVALID INPUTS\n',
+      success: false,
+    });
+  }
+  getUndo(
+    user,
+    type,
+    () => {
+      return res.json({
         success: true,
       });
     },

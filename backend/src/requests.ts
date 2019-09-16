@@ -14,7 +14,14 @@ export const getPress = async (user: string, type: string, callback: any, error:
     if (!totalPresses) {
       totalPresses = new TotalPresses({ user, count: 1, type, highscore: 1 });
       if (!dailyPresses) {
-        dailyPresses = new DailyPresses({ user, date: today, count: 1, type, hourly: new Map<string, number>() });
+        dailyPresses = new DailyPresses({
+          user,
+          date: today,
+          count: 1,
+          type,
+          hourly: new Map<string, number>(),
+          startHighscore: 1,
+        });
         dailyPresses.hourly.set(`${time.hour}`, 1);
         await dailyPresses.save();
       } else {
@@ -35,7 +42,14 @@ export const getPress = async (user: string, type: string, callback: any, error:
     } else {
       totalPresses.count = +totalPresses.count + 1;
       if (!dailyPresses) {
-        dailyPresses = new DailyPresses({ user, date: today, count: 1, type, hourly: new Map<string, number>() });
+        dailyPresses = new DailyPresses({
+          user,
+          date: today,
+          count: 1,
+          type,
+          hourly: new Map<string, number>(),
+          startHighscore: totalPresses.highscore,
+        });
         dailyPresses.hourly.set(`${time.hour}`, 1);
         await dailyPresses.save();
       } else {
@@ -118,6 +132,41 @@ export const getContinuousCounts = async (user: string, type: string, callback: 
       time = time.minus({ days: 1 });
     }
     callback(dailyData, weeklyData);
+  } catch (e) {
+    error();
+  }
+};
+
+export const getUndo = async (user: string, type: string, callback: any, error: any) => {
+  try {
+    let time = DateTime.local().setZone('Europe/Dublin');
+    if (!time.isValid) {
+      time = DateTime.local().setZone('UTC+1');
+    }
+    const day = time.toISODate();
+    const dailyPresses = await DailyPresses.findOne({ user, type, date: day });
+    const totalPresses = await TotalPresses.findOne({ user, type });
+
+    if (dailyPresses && dailyPresses.hourly && dailyPresses.hourly.get(`${time.hour}`) > 0) {
+      dailyPresses.hourly.set(`${time.hour}`, dailyPresses.hourly.get(`${time.hour}`) - 1);
+      dailyPresses.count--;
+
+      if (totalPresses) {
+        if (dailyPresses.count + 1 >= totalPresses.highscore) {
+          totalPresses.highscore = dailyPresses.count;
+        } else {
+          totalPresses.highscore = dailyPresses.count;
+        }
+        totalPresses.count--;
+      }
+    } else if (dailyPresses && !dailyPresses.hourly) {
+      dailyPresses.count--;
+    }
+
+    dailyPresses.save();
+    totalPresses.save();
+
+    callback();
   } catch (e) {
     error();
   }

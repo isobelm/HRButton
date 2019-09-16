@@ -9,6 +9,7 @@ const dailyPresses = new Schema({
   hourly: { type: Map, hour: Number },
   type: String,
   user: String,
+  startHighscore: Number,
 });
 
 export interface ITotalPressesData extends Document, ITotalPresses {}
