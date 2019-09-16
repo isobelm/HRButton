@@ -19,3 +19,8 @@ export const getDailyCounts = async (user, type) => {
   const result = await API.get(`getDailyCounts`, { params: { user, type } });
   return result.data;
 };
+
+export const getUndo = async (user, type) => {
+  const result = await API.get(`getUndo`, { params: { user, type } });
+  return result.data;
+};
