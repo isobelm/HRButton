@@ -148,7 +148,8 @@ p {
 
 .home-button {
 	color: #fff;
-	background: #ff7417;
+	background: transparent;
+	border: 1px solid #fff;
 }
 
 .home-button:disabled {
@@ -156,7 +157,8 @@ p {
 }
 
 .home-button:hover {
-	background: var(--color-2), var(--color-3);
+	border-color: #fffa;
+	background: transparent;
 }
 
 .App-footer li a {

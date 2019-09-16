@@ -164,11 +164,11 @@ class Master extends Component {
       returnedLineChartData.data,
       this.state.selectedUser
     );
-    const dailyChartData = this.createLineChartData(
+    const dailyLineChartData = this.createLineChartData(
       returnedLineChartData.dailyData,
       this.state.selectedUser
     );
-    const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
+    const lineChartData = this.state.daily ? dailyLineChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
@@ -176,7 +176,7 @@ class Master extends Component {
       selectedUser: this.state.selectedUser,
       lineChartData,
       weeklyChartData,
-      dailyChartData,
+      dailyLineChartData,
       disabled: false
     });
   }
@@ -197,11 +197,11 @@ class Master extends Component {
       returnedLineChartData.data,
       selectedUser
     );
-    const dailyChartData = this.createLineChartData(
+    const dailyLineChartData = this.createLineChartData(
       returnedLineChartData.dailyData,
       selectedUser
     );
-    const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
+    const lineChartData = this.state.daily ? dailyLineChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
@@ -209,7 +209,7 @@ class Master extends Component {
       selectedUser: selectedUser,
       lineChartData,
       weeklyChartData,
-      dailyChartData,
+      dailyLineChartData,
       disabled: false
     });
   }
@@ -227,7 +227,7 @@ class Master extends Component {
     this.setState({
       daily: !this.state.daily,
       lineChartData: !this.state.daily
-        ? this.state.dailyChartData
+        ? this.state.dailyLineChartData
         : this.state.weeklyChartData
     });
   }
