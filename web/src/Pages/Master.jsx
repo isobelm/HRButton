@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
 import { ResponsiveRadar } from "@nivo/radar";
+import { ResponsiveLine } from "@nivo/line";
 import GraphColours from "../Utilities/GraphColours";
 import { Types } from "../Utilities/Types";
 import People from "../Utilities/People";
@@ -157,68 +158,37 @@ class Master extends Component {
     } else return chartData;
   };
 
-  createLineChartData() {
+  createLineChartData(data) {
+    const returnData = [];
     for (let i = 0; i < this.types.length; i++) {
       if (this.types[i] !== "Master") {
-        this.createLineChartDataByType(
-          this.types[i],
-          this.state.daily ? "daily" : "weekly",
-          this.state.selectedUser
+        returnData.push(
+          this.createLineChartDataByType(
+            this.types[i],
+            data[this.types[i]],
+            this.state.selectedUser
+          )
         );
       }
     }
+
+    return returnData;
   }
 
-  async createLineChartDataByType(type, data, selectedUser) {
-    const lineChartData = [
-      {
-        id: selectedUser,
-        data: new Array(data.length),
-        color: GraphColours[type][selectedUser]
-      }
-    ];
-
+  createLineChartDataByType(type, data, selectedUser) {
+    const lineChartData = {
+      id: type,
+      data: new Array(data.length),
+      color: GraphColours[type][selectedUser]
+    };
     for (let i = 0; i < data.length; i++) {
-      lineChartData[0].data[i] = {
+      lineChartData.data[i] = {
         x: i,
         y: data[i]
       };
     }
 
     return lineChartData;
-  }
-
-  async _handlePress() {
-    this.setState({
-      disabled: true
-    });
-    await getPress(this.state.selectedUser, this.state.type);
-    const data = await getTotals(this.state.selectedUser, this.state.type);
-    const returnedLineChartData = await getDailyCounts(
-      this.state.selectedUser,
-      this.state.type
-    );
-    const weeklyChartData = this.createLineChartData(
-      returnedLineChartData.data,
-      this.state.selectedUser
-    );
-    const dailyLineChartData = this.createLineChartData(
-      returnedLineChartData.dailyData,
-      this.state.selectedUser
-    );
-    const lineChartData = this.state.daily
-      ? dailyLineChartData
-      : weeklyChartData;
-    this.setState({
-      dailyCount: data.daily,
-      totalCount: data.total,
-      highScore: data.highscore,
-      selectedUser: this.state.selectedUser,
-      lineChartData,
-      weeklyChartData,
-      dailyLineChartData,
-      disabled: false
-    });
   }
 
   async _handleChange(selectedUser) {
@@ -228,26 +198,26 @@ class Master extends Component {
       totalCount: "Loading..",
       disabled: true
     });
-    const data = await getTotals(selectedUser, this.state.type);
-    const returnedLineChartData = await getDailyCounts(
-      selectedUser,
-      this.state.type
-    );
-    const weeklyChartData = this.createLineChartData(
-      returnedLineChartData.data,
-      selectedUser
-    );
-    const dailyLineChartData = this.createLineChartData(
-      returnedLineChartData.dailyData,
-      selectedUser
-    );
+    const returnedLineChartData = [];
+    const dailyData = {};
+    const weeklyData = {};
+
+    for (const type of this.types) {
+      const tmpData = await getDailyCounts(this.state.selectedUser, type);
+      tmpData.data.id = type;
+      tmpData.dailyData.id = type;
+      returnedLineChartData.push(tmpData);
+      dailyData[type] = tmpData.dailyData;
+      weeklyData[type] = tmpData.data;
+    }
+
+    const weeklyChartData = this.createLineChartData(weeklyData);
+    const dailyLineChartData = this.createLineChartData(dailyData);
+
     const lineChartData = this.state.daily
       ? dailyLineChartData
       : weeklyChartData;
     this.setState({
-      dailyCount: data.daily,
-      totalCount: data.total,
-      highScore: data.highscore,
       selectedUser: selectedUser,
       lineChartData,
       weeklyChartData,
@@ -257,12 +227,9 @@ class Master extends Component {
   }
 
   async _handleHomePress() {
-    debugger;
     this.setState({
       selectedUser: "everyone"
     });
-    debugger;
-    // await this.createHomeCharts();
   }
 
   async _handleSwitch() {
@@ -300,9 +267,11 @@ class Master extends Component {
   renderPersonPage() {
     return (
       <div>
-        {this.state.lineChartData !== undefined && !this.state.disabled
-          ? this.renderGraph()
-          : undefined}
+        <div className="chart-area">
+          {this.state.lineChartData !== undefined && !this.state.disabled
+            ? this.renderGraph()
+            : undefined}
+        </div>
         {this.renderSwitchCharts()}
         {this.renderHomeButton()}
       </div>
@@ -339,6 +308,59 @@ class Master extends Component {
             disabled={this.state.disabled}
           />
         </form>
+      </div>
+    );
+  }
+
+  renderGraph() {
+    return (
+      <div className="graph-parent">
+        <div className="chart">
+          <ResponsiveLine
+            data={this.state.lineChartData}
+            colors={d => d.color}
+            margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+            xScale={{ type: "point" }}
+            yScale={{
+              type: "linear",
+              stacked: false,
+              min: "auto",
+              max: "auto"
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              orient: "bottom",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: this.state.daily ? "Today" : "Last 14 Days",
+              legendOffset: 40,
+              legendPosition: "middle",
+              tickValues:
+                this.state.daily && this.state.width < 600
+                  ? [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+                  : "linear"
+            }}
+            axisLeft={{
+              orient: "left",
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "count",
+              legendOffset: -40,
+              legendPosition: "middle"
+            }}
+            pointSize={2}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            pointLabel="y"
+            pointLabelYOffset={-12}
+            useMesh={true}
+            legends={[]}
+          />
+        </div>
       </div>
     );
   }
