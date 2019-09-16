@@ -1,161 +1,161 @@
 .App {
-  text-align: center;
-  justify-content: center;
+	text-align: center;
+	justify-content: center;
 }
 
 .App-header {
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-appearance: none;
-  border: 0;
-  font-size: 40px;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: right;
-  justify-content: end;
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background: #f12711; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	-webkit-appearance: none;
+	border: 0;
+	font-size: 40px;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: right;
+	justify-content: end;
+	margin: 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-footer {
-  clear: both;
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: White;
-  padding: 0;
-  text-align: center;
-  vertical-align: middle;
-  line-height: normal;
-  margin: 0;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  z-index: 100;
+	clear: both;
+	background: #f12711; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: White;
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+	line-height: normal;
+	margin: 0;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	z-index: 100;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 .center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+	margin: auto;
+	width: 50%;
+	padding: 10px;
 }
 
 .parent {
-  position: relative;
-  height: 100%;
-  min-height: 700px;
+	position: relative;
+	height: 100%;
+	min-height: 700px;
 }
 
 .parent .chart {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
 }
 
 .graph-parent {
-  position: relative;
-  height: 100%;
-  min-height: 500px;
+	position: relative;
+	height: 100%;
+	min-height: 500px;
 }
 
 .graph-parent .chart {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
 }
 
 .ghost-input,
 p {
-  display: block;
-  font-weight: 300;
-  width: 100%;
-  font-size: 25px;
-  border: 0px;
-  outline: none;
-  width: 100%;
-  -webkit-appearance: none;
-  font-size: 60px;
-  color: #fff;
-  background: transparent;
-  padding: 100px 15px 10px 15px;
-  margin: 20px 0px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+	display: block;
+	font-weight: 300;
+	width: 100%;
+	font-size: 25px;
+	border: 0px;
+	outline: none;
+	width: 100%;
+	-webkit-appearance: none;
+	font-size: 60px;
+	color: #fff;
+	background: transparent;
+	padding: 100px 15px 10px 15px;
+	margin: 20px 0px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
 
 ::placeholder {
-  color: white;
-  opacity: 1;
+	color: white;
+	opacity: 1;
 }
 
 .chart-title {
-  font-weight: 300;
-  font-size: 18px;
-  color: #000;
-  padding: 20px;
+	font-weight: 300;
+	font-size: 18px;
+	color: #000;
+	padding: 20px;
 }
 
 .ghost-input:focus {
-  border-bottom: 1px solid #f12711;
+	border-bottom: 1px solid #f12711;
 }
 
 .ghost-input-small,
 p {
-  display: block;
-  font-weight: 300;
-  width: 100%;
-  font-size: 14px;
-  border: 0px;
-  outline: none;
-  width: 100%;
-  -webkit-appearance: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #fff;
-  background: transparent;
-  padding: 5px 10px;
-  margin: 0px 0px;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  align-self: right;
-  text-align: right;
+	display: block;
+	font-weight: 300;
+	width: 100%;
+	font-size: 14px;
+	border: 0px;
+	outline: none;
+	width: 100%;
+	-webkit-appearance: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #fff;
+	background: transparent;
+	padding: 5px 10px;
+	margin: 0px 0px;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	align-self: right;
+	text-align: right;
 }
 
 .ghost-input-small:hover,
 .ghost-input-small:focus,
 .ghost-input-small:disabled {
-  background: #f12711;
-  cursor: pointer;
+	background: #f12711;
+	cursor: pointer;
 }
 
 .ghost-input-button {
@@ -183,59 +183,59 @@ p {
 
 .ghost-input-button:hover,
 .ghost-input-button:focus {
-  background: #f12711;
-  cursor: pointer;
+	background: #f12711;
+	cursor: pointer;
 }
 
 .ghost-input-button:disabled {
-  background: #999999;
+	background: #999999;
 }
 
 .ghost-button {
-  background-color: transparent;
-  padding: 10px 30px;
-  width: 100%;
-  -webkit-appearance: none;
-  min-width: 350px;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+	background-color: transparent;
+	padding: 10px 30px;
+	width: 100%;
+	-webkit-appearance: none;
+	min-width: 350px;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
 }
 
 .home-button {
-  display: block;
-  font-weight: 300;
-  width: 30%;
-  font-size: 18px;
-  border: 0px;
-  -webkit-appearance: none;
-  outline: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #fff;
-  background: #ff7417;
-  padding: 10px;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  text-align: center;
+	display: block;
+	font-weight: 300;
+	width: 30%;
+	font-size: 18px;
+	border: 0px;
+	-webkit-appearance: none;
+	outline: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #fff;
+	background: #ff7417;
+	padding: 10px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	text-align: center;
 }
 
 .home-button:disabled {
-  background: #999999;
+	background: #999999;
 }
 
 .home-button:hover {
-  background: #ce2e12;
-  cursor: pointer;
+	background: #ce2e12;
+	cursor: pointer;
 }
 
 h1,
@@ -243,101 +243,101 @@ h2,
 p,
 ul,
 li {
-  font-family: sans-serif;
+	font-family: sans-serif;
 }
 
 .App-footer li {
-  display: inline;
-  list-style-type: none;
-  margin: 0;
+	display: inline;
+	list-style-type: none;
+	margin: 0;
 }
 
 .rows .row {
-  display: inline-flex;
-  justify-content: flex-end;
+	display: inline-flex;
+	justify-content: flex-end;
 }
 
 .App-footer li a {
-  font-size: 18px;
-  color: #fff;
-  font-weight: 300;
-  text-decoration: none;
-  padding: 20px;
-  display: inline-block;
+	font-size: 18px;
+	color: #fff;
+	font-weight: 300;
+	text-decoration: none;
+	padding: 20px;
+	display: inline-block;
 }
 
 .title-select {
-  position: relative;
-  border: 0;
-  border-radius: 0;
-  width: 100%;
-  margin: 0 0 1px 0;
-  font-weight: 300;
-  text-align: left;
-  font-size: calc(14px + 2vmin);
-  color: white;
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-appearance: none;
-  appearance: none;
-  -moz-appearance: none;
+	position: relative;
+	border: 0;
+	border-radius: 0;
+	width: 100%;
+	margin: 0 0 1px 0;
+	font-weight: 300;
+	text-align: left;
+	font-size: calc(14px + 2vmin);
+	color: white;
+	background: #f12711; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#f12711,
+		#f5af19
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	-webkit-appearance: none;
+	appearance: none;
+	-moz-appearance: none;
 }
 
 .title-select-title {
-  padding: 20px 16px 15px 30px;
+	padding: 20px 16px 15px 30px;
 }
 
 .title-select-options {
-  font-size: calc(12px + 2vmin);
-  padding: 0px 26px 10px 30px;
+	font-size: calc(12px + 2vmin);
+	padding: 0px 26px 10px 30px;
 }
 
 .title-select-options:hover,
 .title-select-title:hover {
-  -webkit-backdrop-filter: brightness(80%);
-  backdrop-filter: brightness(80%);
-  cursor: pointer;
+	-webkit-backdrop-filter: brightness(80%);
+	backdrop-filter: brightness(80%);
+	cursor: pointer;
 }
 
 .App-footer li a:active,
 .App-footer li a:hover {
-  background: #f12711;
-  cursor: pointer;
+	background: #f12711;
+	cursor: pointer;
 }
 
 .content {
-  background-color: #f12711;
-  padding: 20px;
+	background-color: #f12711;
+	padding: 20px;
 }
 
 .content h2 {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .content li {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .daily {
-  margin-bottom: 10px;
-  font-size: 140px;
-  text-align: center;
+	margin-bottom: 10px;
+	font-size: 140px;
+	text-align: center;
 }
 
 .total {
-  padding: 10px;
-  font-size: 30px;
-  text-align: center;
+	padding: 10px;
+	font-size: 30px;
+	text-align: center;
 }
 
 .switch-container {
@@ -345,94 +345,98 @@ li {
 }
 
 .switch-layout {
-  background: transparent;
-  -webkit-appearance: none;
-  border: 0;
-  font-size: 25px;
-  display: inline-flex;
-  margin: auto;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-size: calc(10px + 2vmin);
-  color: black;
+	background: transparent;
+	-webkit-appearance: none;
+	border: 0;
+	font-size: 25px;
+	display: inline-flex;
+	margin: auto;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	font-size: calc(10px + 2vmin);
+	color: black;
 }
 
 .switch-labels {
-  font-size: 16px;
-  color: black;
-  margin: 5px 10px 5px 10px;
+	font-size: 16px;
+	color: black;
+	margin: 5px 10px 5px 10px;
 }
 
 /* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: auto;
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	margin: auto;
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 2px;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	border-radius: 2px;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 2px;
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	border-radius: 2px;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+	background-color: #2196f3;
+}
+
+input:checked:disabled + .slider:disabled {
+	background-color: #999999;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+	box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+	border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 
 .chartTitle {
-  margin-top: 10px;
-  font-size: 30px;
-  text-align: center;
+	margin-top: 10px;
+	font-size: 30px;
+	text-align: center;
 }
 
 .button-container {
@@ -450,10 +454,10 @@ input:checked + .slider:before {
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
