@@ -162,7 +162,6 @@ p {
   display: block;
   font-weight: 300;
   width: 100%;
-  margin: 5px;
   -webkit-appearance: none;
   font-size: 40px;
   border: 0px;
@@ -375,11 +374,13 @@ li {
 .button-layout-main {
   display: inline-flex;
   width: 60%;
+  padding: 5px;
 }
 
 .button-layout-undo {
   display: inline-flex;
-  width: 10%;
+  width: 15%;
+  padding: 5px;
 }
 
 input[type="radio"] {
@@ -394,7 +395,8 @@ label {
   display: inline-block;
   cursor: pointer;
   padding: 5px 20px;
-  background:#999999;
+  background: #999999;
+  font-size: 12px;
 }
 
 input[type="radio"]:checked + label {
@@ -405,8 +407,9 @@ input[type="radio"]:checked + label {
 .radio-group {
   display: inline-block;
   margin: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
+  border: solid 3px #675f6b;
 }
 
 @keyframes App-logo-spin {

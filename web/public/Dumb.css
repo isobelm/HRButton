@@ -1,160 +1,168 @@
 .App {
-	background: #444444;
+  background: #444444;
 }
 
 :root {
-	--color-1: #c2e59c;
-	--color-2: #64b3f4;
+  --color-1: #c2e59c;
+  --color-2: #64b3f4;
 }
 
 .App-header {
-	background: var(--color-2); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2)
-	); /* Standard syntax (must be last) */
-	color: white;
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2)
+  ); /* Standard syntax (must be last) */
+  color: white;
 }
 
 .App-footer {
-	background: var(--color-2); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2)
-	); /* Standard syntax (must be last) */
-	color: White;
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2)
+  ); /* Standard syntax (must be last) */
+  color: White;
 }
 
 .App-link {
-	color: #61dafb;
+  color: #61dafb;
 }
 
 .ghost-input,
 p {
-	color: #fff;
-	border-bottom: 1px solid #ddd;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 
 ::placeholder {
-	color: white;
+  color: white;
 }
 
 .chart-title {
-	color: #000;
+  color: #000;
 }
 
 .ghost-input:focus {
-	border-bottom: 1px solid #f12711;
+  border-bottom: 1px solid #f12711;
 }
 
 .ghost-input-small,
 p {
-	color: #fff;
+  color: #fff;
 }
 
 .ghost-input-small:hover,
 .ghost-input-small:focus,
 .ghost-input-small:disabled {
-	background: var(--color-2);
+  background: var(--color-2);
 }
 
 .ghost-input-button {
-	color: #fff;
-	background: var(--color-1);
+  color: #fff;
+  background: var(--color-1);
 }
 
 .ghost-input-button:hover,
 .ghost-input-button:focus {
-	background: var(--color-2);
+  background: var(--color-2);
 }
 
 .ghost-input-button:disabled {
-	background: #999999;
+  background: #999999;
 }
 
 .home-button {
-	color: #fff;
-	background: var(--color-2);
+  color: #fff;
+  background: var(--color-2);
 }
 
 .home-button:disabled {
-	background: #999999;
+  background: #999999;
 }
 
 .home-button:hover {
-	background: var(--color-1);
+  background: var(--color-1);
 }
 
 .App-footer li a {
-	color: #fff;
+  color: #fff;
 }
 
 .title-select {
-	color: white;
-	background: var(--color-2); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2)
-	); /* Standard syntax (must be last) */
+  color: white;
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2)
+  ); /* Standard syntax (must be last) */
 }
 
 .App-footer li a:active,
 .App-footer li a:hover {
-	background: var(--color-2);
+  background: var(--color-2);
 }
 
 .content {
-	background: var(--color-2);
+  background: var(--color-2);
+}
+
+input[type="radio"] + label {
+  background: var(--color-1);
 }
 
 input[type="radio"]:checked + label {
-	background: var(--color-2);  
-  }
+  background: var(--color-2);
+}
+
+.radio-group {
+  border: solid 3px var(--color-2);
+}

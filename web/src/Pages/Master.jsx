@@ -168,7 +168,9 @@ class Master extends Component {
       returnedLineChartData.dailyData,
       this.state.selectedUser
     );
-    const lineChartData = this.state.daily ? dailyLineChartData : weeklyChartData;
+    const lineChartData = this.state.daily
+      ? dailyLineChartData
+      : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
@@ -201,7 +203,9 @@ class Master extends Component {
       returnedLineChartData.dailyData,
       selectedUser
     );
-    const lineChartData = this.state.daily ? dailyLineChartData : weeklyChartData;
+    const lineChartData = this.state.daily
+      ? dailyLineChartData
+      : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
       totalCount: data.total,
