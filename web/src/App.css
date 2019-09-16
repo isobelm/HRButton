@@ -161,7 +161,8 @@ p {
 .ghost-input-button {
   display: block;
   font-weight: 300;
-  width: 80%;
+  width: 100%;
+  margin: 10px;
   -webkit-appearance: none;
   font-size: 40px;
   border: 0px;
@@ -172,7 +173,6 @@ p {
   color: #fff;
   background: #f5af19;
   padding: 10px;
-  margin: 0 auto;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
@@ -341,7 +341,7 @@ li {
 }
 
 .switch-container {
-text-align: center;
+  text-align: center;
 }
 
 .switch-layout {
@@ -433,6 +433,20 @@ input:checked + .slider:before {
   margin-top: 10px;
   font-size: 30px;
   text-align: center;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button-layout-main {
+  display: inline-flex;
+  width: 60%;
+}
+
+.button-layout-undo {
+  display: inline-flex;
+  width: 10%;
 }
 
 @keyframes App-logo-spin {

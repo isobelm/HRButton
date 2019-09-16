@@ -70,7 +70,7 @@ class Page extends Component {
     return (
       <div>
         {this.renderInfo()}
-        {this.renderButton()}
+        {this.renderButtons()}
         {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
@@ -280,14 +280,22 @@ class Page extends Component {
     );
   }
 
-  renderButton() {
+  renderButtons() {
     return (
-      <div>
-        <form onClick={() => this._handlePress()}>
+      <div className="button-container">
+        <form className="button-layout-main" onClick={() => this._handlePress()}>
           <input
             className="ghost-input-button"
             type="button"
             value={this.state.type}
+            disabled={this.state.disabled}
+          />
+        </form>
+        <form className="button-layout-undo" onClick={() => undefined}>
+          <input
+            className="ghost-input-button"
+            type="button"
+            value={"Undo"}
             disabled={this.state.disabled}
           />
         </form>
