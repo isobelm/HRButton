@@ -400,8 +400,9 @@ label {
 }
 
 input[type="radio"]:checked + label {
-  color: #fff;
-  background: #675f6b;
+  color: #675f6b;
+  border-radius: 20px;
+  background: #fff;
 }
 
 .radio-group {

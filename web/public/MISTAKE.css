@@ -152,13 +152,14 @@ p {
 }
 
 input[type="radio"] + label {
-  background: var(--color-1);
+  background: var(--color-2);
 }
 
 input[type="radio"]:checked + label {
-  background: var(--color-2);
+  color: var(--color-2);
 }
 
 .radio-group {
   border: solid 3px var(--color-2);
+  background: var(--color-2);
 }

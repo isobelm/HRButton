@@ -160,9 +160,10 @@ input[type="radio"] + label {
 }
 
 input[type="radio"]:checked + label {
-  background: var(--color-1);
+  color: var(--color-2);
 }
 
 .radio-group {
-  border: solid 3px var(--color-1);
+  border: solid 3px var(--color-2);
+  background: var(--color-2);
 }
