@@ -12,7 +12,7 @@ import GraphColours from "../Utilities/GraphColours";
 import People from "../Utilities/People";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndo } from "@fortawesome/free-solid-svg-icons";
-import Switch from "react-switch";
+import { ClipLoader } from "react-spinners";
 
 class Page extends Component {
   constructor(props) {
@@ -30,7 +30,8 @@ class Page extends Component {
       daily: false,
       type: MapType(decodeURIComponent(this.props.match.params.type)),
       width: 0,
-      height: 0
+      height: 0,
+      loading: true
     };
 
     this.createHomeCharts();
@@ -58,6 +59,21 @@ class Page extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          {this.renderTabs()}
+          <div className="loader-container">
+            <ClipLoader
+              sizeUnit={"px"}
+              size={35}
+              color={"#000000"}
+              loading={this.state.loading}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         {this.renderTabs()}
@@ -385,7 +401,8 @@ class Page extends Component {
 
   async _handlePress() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await getPress(this.state.selectedUser, this.state.type);
     const data = await getTotals(this.state.selectedUser, this.state.type);
@@ -410,13 +427,15 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 
   async _handleUndo() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await getUndo(this.state.selectedUser, this.state.type);
     const data = await getTotals(this.state.selectedUser, this.state.type);
@@ -441,13 +460,15 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 
   async _handleHomePress() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await this.createHomeCharts();
   }
@@ -491,7 +512,8 @@ class Page extends Component {
       selectedUser: "everyone",
       lineChartData: lineChartData,
       barChartData: barChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   };
 
@@ -500,7 +522,8 @@ class Page extends Component {
       selectedUser: selectedUser,
       dailyCount: undefined,
       totalCount: "Loading..",
-      disabled: true
+      disabled: true,
+      loading: true
     });
     const data = await getTotals(selectedUser, this.state.type);
     const returnedLineChartData = await getDailyCounts(
@@ -524,7 +547,8 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 

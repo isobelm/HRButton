@@ -428,6 +428,14 @@ input[type="radio"]:checked + label {
   border: solid 3px #675f6b;
 }
 
+.loader-container {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 150px;
+  display: flex;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
