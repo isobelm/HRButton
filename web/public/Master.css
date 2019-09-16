@@ -1,210 +1,223 @@
 .App {
-	background: #444444;
+  background: #444444;
 }
 
 :root {
-	--color-1: #0f2027;
-	--color-2: #203a43;
-	--color-3: #2c5364;
-	background: rgb(166, 209, 228);
-	background: var(--color-2); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* Standard syntax (must be last) */
-	justify-content: center;
-	color: #fff;
-	font-weight: 300;
+  --color-1: #0f2027;
+  --color-2: #203a43;
+  --color-3: #2c5364;
+  background: rgb(166, 209, 228);
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* Standard syntax (must be last) */
+  justify-content: center;
+  color: #fff;
+  font-weight: 300;
 }
 
 .graph-parent .chart {
-	height: 100%;
-	max-width: 400px;
-	z-index: 1;
+  height: 100%;
+  max-width: 400px;
+  z-index: 1;
 }
 
 .graph-container {
-	margin: 0 10px 0 10px;
+  margin: 0 10px 0 10px;
 }
 
 .graph-parent {
-	position: relative;
-	height: 100%;
-	min-height: 410px;
-	max-width: 400px;
+  position: relative;
+  height: 100%;
+  min-height: 410px;
+  max-width: 400px;
 }
 
 .chart-area {
-	background: #fff;
-	color: #222;
-	border-radius: 8px;
-	width: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-right: auto;
-	margin-left: auto;
-	padding: 5px 0px 5px 10px;
-	display: flexbox;
-	flex-direction: column;
-	max-width: 400px;
-	justify-self: center;
+  background: #fff;
+  color: #222;
+  border-radius: 8px;
+  width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5px 0px 5px 10px;
+  display: flexbox;
+  flex-direction: column;
+  max-width: 400px;
+  justify-self: center;
 }
 
 .App-header {
-	border-top: 1px solid #fff;
-	background: var(--color-2); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* Standard syntax (must be last) */
+  border-top: 1px solid #fff;
+  background: var(--color-2); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* Standard syntax (must be last) */
 }
 
 .App-link {
-	color: #61dafb;
+  color: #61dafb;
 }
 
 .ghost-input,
 p {
-	color: #fff;
-	border-bottom: 1px solid #ddd;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 
 ::placeholder {
-	color: white;
+  color: white;
 }
 
 .chart-title {
-	color: #fff;
+  color: #fff;
 }
 
 .ghost-input:focus {
-	border-bottom: 1px solid #f12711;
+  border-bottom: 1px solid #f12711;
 }
 
 .ghost-input-small,
 p {
-	color: #fff;
+  color: #fff;
 }
 
 .ghost-input-small:hover,
 .ghost-input-small:focus,
 .ghost-input-small:disabled {
-	background: var(--color-2), var(--color-3);
+  background: var(--color-2), var(--color-3);
 }
 
 .ghost-input-button {
-	color: #fff;
-	background: #f5af19;
+  color: #fff;
+  background: #f5af19;
 }
 
 .ghost-input-button:hover,
 .ghost-input-button:focus {
-	background: var(--color-2), var(--color-3);
+  background: var(--color-2), var(--color-3);
 }
 
 .ghost-input-button:disabled {
-	background: #999999;
+  background: #999999;
 }
 
 .home-button {
-	color: #fff;
-	background: transparent;
-	border: 1px solid #fff;
-	border-radius: 2px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 2px;
 }
 
 .home-button:disabled {
-	background: #999999;
+  background: #999999;
 }
 
 .home-button:hover {
-	border-color: #fffa;
-	background: transparent;
+  border-color: #fffa;
+  background: transparent;
 }
 
 .App-footer li a {
-	color: #fff;
+  color: #fff;
 }
 
 .title-select {
-	color: white;
-	background: var(--color-2), var(--color-3); /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(
-		left,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(
-		right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(
-		to right,
-		var(--color-1),
-		var(--color-2),
-		var(--color-3)
-	); /* Standard syntax (must be last) */
-	margin: 0;
+  color: white;
+  background: var(--color-2), var(--color-3); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    var(--color-1),
+    var(--color-2),
+    var(--color-3)
+  ); /* Standard syntax (must be last) */
+  margin: 0;
 }
 
 .App-footer li a:active,
 .App-footer li a:hover {
-	background: var(--color-2), var(--color-3);
+  background: var(--color-2), var(--color-3);
 }
 
 .content {
-	background: var(--color-2), var(--color-3);
+  background: var(--color-2), var(--color-3);
 }
 
 .slider {
-	background: var(--color-3);
+  background: var(--color-3);
+}
+
+input[type="radio"] + label {
+  background: var(--color-2);
+}
+
+input[type="radio"]:checked + label {
+  color: var(--color-2);
+}
+
+.radio-group {
+  border: solid 3px var(--color-2);
+  background: var(--color-2);
 }
