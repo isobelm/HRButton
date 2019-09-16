@@ -159,26 +159,26 @@ p {
 }
 
 .ghost-input-button {
-  display: block;
-  font-weight: 300;
-  width: 100%;
-  margin: 10px;
-  -webkit-appearance: none;
-  font-size: 40px;
-  border: 0px;
-  outline: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #fff;
-  background: #f5af19;
-  padding: 10px;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  text-align: center;
+	display: block;
+	font-weight: 300;
+	width: 100%;
+	margin: 10px;
+	-webkit-appearance: none;
+	font-size: 40px;
+	border: 0px;
+	outline: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #fff;
+	background: #f5af19;
+	padding: 10px;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	text-align: center;
 }
 
 .ghost-input-button:hover,
@@ -341,7 +341,7 @@ li {
 }
 
 .switch-container {
-  text-align: center;
+	text-align: center;
 }
 
 .switch-layout {
@@ -354,12 +354,10 @@ li {
 	margin-top: 2px;
 	margin-bottom: 2px;
 	font-size: calc(10px + 2vmin);
-	color: black;
 }
 
 .switch-labels {
 	font-size: 16px;
-	color: black;
 	margin: 5px 10px 5px 10px;
 }
 
@@ -440,17 +438,17 @@ input:checked + .slider:before {
 }
 
 .button-container {
-  text-align: center;
+	text-align: center;
 }
 
 .button-layout-main {
-  display: inline-flex;
-  width: 60%;
+	display: inline-flex;
+	width: 60%;
 }
 
 .button-layout-undo {
-  display: inline-flex;
-  width: 10%;
+	display: inline-flex;
+	width: 10%;
 }
 
 @keyframes App-logo-spin {
