@@ -155,7 +155,7 @@ export const getUndo = async (user: string, type: string, callback: any, error: 
         if (dailyPresses.count + 1 >= totalPresses.highscore) {
           totalPresses.highscore = dailyPresses.count;
         } else {
-          totalPresses.highscore = dailyPresses.count;
+          totalPresses.highscore = dailyPresses.startHighscore;
         }
         totalPresses.count--;
       }
