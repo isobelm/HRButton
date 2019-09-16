@@ -42,7 +42,7 @@ class Page extends Component {
     if (props.match.params.type !== state.type) {
       this.createHomeCharts();
     }
-    this.setState({ type: props.match.params.type });
+    this.setState({ type: props.match.params.type, loading: true });
   }
 
   componentDidMount() {
