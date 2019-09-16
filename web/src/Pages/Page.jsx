@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { getDailyCounts, getPress, getTotals, getUndo } from "../Services/Requests";
+import {
+  getDailyCounts,
+  getPress,
+  getTotals,
+  getUndo
+} from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
 import GraphColours from "../Utilities/GraphColours";
 import People from "../Utilities/People";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUndo } from "@fortawesome/free-solid-svg-icons";
+import { ClipLoader } from "react-spinners";
 
 class Page extends Component {
   constructor(props) {
@@ -18,11 +26,13 @@ class Page extends Component {
       lineChartData: undefined,
       dailyChartData: undefined,
       weeklyChartData: undefined,
-      barChartData: undefined,
+      highScoresChartData: undefined,
+      totalChartData: undefined,
       daily: false,
       type: MapType(decodeURIComponent(this.props.match.params.type)),
       width: 0,
-      height: 0
+      height: 0,
+      loading: true
     };
 
     this.createHomeCharts();
@@ -33,7 +43,7 @@ class Page extends Component {
     if (props.match.params.type !== state.type) {
       this.createHomeCharts();
     }
-    this.setState({ type: props.match.params.type });
+    this.setState({ type: props.match.params.type, loading: true });
   }
 
   componentDidMount() {
@@ -50,6 +60,14 @@ class Page extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          {this.renderTabs()}
+          {this.renderLoader()}
+        </div>
+      );
+    }
     return (
       <div>
         {this.renderTabs()}
@@ -62,6 +80,19 @@ class Page extends Component {
         ) : (
           <div className="total">Loading...</div>
         )}
+      </div>
+    );
+  }
+
+  renderLoader() {
+    return (
+      <div className="loader-container">
+        <ClipLoader
+          sizeUnit={"px"}
+          size={35}
+          color={"#000000"}
+          loading={this.state.loading}
+        />
       </div>
     );
   }
@@ -88,8 +119,12 @@ class Page extends Component {
           ? this.renderBigGraph()
           : undefined}
         <div className="chartTitle">Total Presses</div>
-        {this.state.barChartData !== undefined
-          ? this.renderTotalChart()
+        {this.state.totalChartData !== undefined
+          ? this.renderBarChart(this.state.totalChartData)
+          : undefined}
+        <div className="chartTitle">Highscores</div>
+        {this.state.highScoresChartData !== undefined
+          ? this.renderBarChart(this.state.highScoresChartData)
           : undefined}
       </div>
     );
@@ -214,12 +249,12 @@ class Page extends Component {
     );
   }
 
-  renderTotalChart() {
+  renderBarChart(chartData) {
     return (
       <div className="graph-parent">
         <div className="chart">
           <ResponsiveBar
-            data={this.state.barChartData}
+            data={chartData}
             colors={d => d.color}
             keys={People}
             indexBy="person"
@@ -274,7 +309,10 @@ class Page extends Component {
   renderInfo() {
     return (
       <div>
-        <div className="total">{this.state.totalCount}</div>
+        <div className="count-container">
+          <div className="total">{this.state.totalCount}</div>
+          <div className="highscore">{this.state.highScore}</div>
+        </div>
         <div className="daily">{this.state.dailyCount}</div>
       </div>
     );
@@ -283,7 +321,10 @@ class Page extends Component {
   renderButtons() {
     return (
       <div className="button-container">
-        <form className="button-layout-main" onClick={() => this._handlePress()}>
+        <form
+          className="button-layout-main"
+          onClick={() => this._handlePress()}
+        >
           <input
             className="ghost-input-button"
             type="button"
@@ -291,14 +332,15 @@ class Page extends Component {
             disabled={this.state.disabled}
           />
         </form>
-        <form className="button-layout-undo" onClick={() => this._handleUndo()}>
-          <input
-            className="ghost-input-button"
-            type="button"
-            value={"Undo"}
+        <div className="button-layout-undo">
+          <button
             disabled={this.state.disabled}
-          />
-        </form>
+            className="ghost-input-button"
+            onClick={() => this._handleUndo()}
+          >
+            <FontAwesomeIcon icon={faUndo} size="xs" />
+          </button>
+        </div>
       </div>
     );
   }
@@ -344,25 +386,34 @@ class Page extends Component {
   renderSwitchCharts() {
     return (
       <div className="switch-container">
-        <div className="switch-layout">
-          <div className="switch-labels">Weekly</div>
-          <label class="switch">
+        <form>
+          <div class="radio-group">
             <input
-              checked={this.state.daily}
-              type="checkbox"
-              onChange={() => this._handleSwitch()}
+              type="radio"
+              id="option-one"
+              name="selector"
+              checked={!this.state.daily}
+              onClick={() => this._handleSwitch()}
             />
-            <span class="slider"></span>
-          </label>
-          <div className="switch-labels">Today</div>
-        </div>
+            <label for="option-one">Weekly</label>
+            <input
+              type="radio"
+              id="option-two"
+              name="selector"
+              checked={this.state.daily}
+              onClick={() => this._handleSwitch()}
+            />
+            <label for="option-two">Daily</label>
+          </div>
+        </form>
       </div>
     );
   }
 
   async _handlePress() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await getPress(this.state.selectedUser, this.state.type);
     const data = await getTotals(this.state.selectedUser, this.state.type);
@@ -387,13 +438,15 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 
   async _handleUndo() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await getUndo(this.state.selectedUser, this.state.type);
     const data = await getTotals(this.state.selectedUser, this.state.type);
@@ -418,13 +471,15 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 
   async _handleHomePress() {
     this.setState({
-      disabled: true
+      disabled: true,
+      loading: true
     });
     await this.createHomeCharts();
   }
@@ -451,10 +506,16 @@ class Page extends Component {
       await getData(person);
     }
 
-    const barChartData = [];
+    const totalChartData = [];
+    const highScoresChartData = [];
     getData = async person => {
       const totalCountData = await getTotals(person, this.state.type);
-      barChartData.push(this.createBarChartData(totalCountData.total, person));
+      totalChartData.push(
+        this.createBarChartData(totalCountData.total, person)
+      );
+      highScoresChartData.push(
+        this.createBarChartData(totalCountData.highscore, person)
+      );
     };
 
     for await (const person of People) {
@@ -466,9 +527,11 @@ class Page extends Component {
       totalCount: undefined,
       highScore: undefined,
       selectedUser: "everyone",
-      lineChartData: lineChartData,
-      barChartData: barChartData,
-      disabled: false
+      lineChartData,
+      totalChartData,
+      highScoresChartData,
+      disabled: false,
+      loading: false
     });
   };
 
@@ -477,7 +540,8 @@ class Page extends Component {
       selectedUser: selectedUser,
       dailyCount: undefined,
       totalCount: "Loading..",
-      disabled: true
+      disabled: true,
+      loading: true
     });
     const data = await getTotals(selectedUser, this.state.type);
     const returnedLineChartData = await getDailyCounts(
@@ -502,7 +566,8 @@ class Page extends Component {
       lineChartData,
       weeklyChartData,
       dailyChartData,
-      disabled: false
+      disabled: false,
+      loading: false
     });
   }
 
