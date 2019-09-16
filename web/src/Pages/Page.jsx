@@ -63,14 +63,7 @@ class Page extends Component {
       return (
         <div>
           {this.renderTabs()}
-          <div className="loader-container">
-            <ClipLoader
-              sizeUnit={"px"}
-              size={35}
-              color={"#000000"}
-              loading={this.state.loading}
-            />
-          </div>
+          {this.renderLoader()}
         </div>
       );
     }
@@ -86,6 +79,19 @@ class Page extends Component {
         ) : (
           <div className="total">Loading...</div>
         )}
+      </div>
+    );
+  }
+
+  renderLoader() {
+    return (
+      <div className="loader-container">
+        <ClipLoader
+          sizeUnit={"px"}
+          size={35}
+          color={"#000000"}
+          loading={this.state.loading}
+        />
       </div>
     );
   }
