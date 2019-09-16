@@ -436,6 +436,26 @@ input[type="radio"]:checked + label {
   display: flex;
 }
 
+.chart-area {
+  background: #fff;
+  color: #222;
+  border-radius: 10px;
+  width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5px 0px 5px 10px;
+  display: flexbox;
+  flex-direction: column;
+  max-width: 400px;
+  justify-self: center;
+}
+
+.chart-title {
+  color: #fff;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
