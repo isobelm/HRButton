@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { getDailyCounts, getPress, getTotals, getUndo } from "../Services/Requests";
+import {
+  getDailyCounts,
+  getPress,
+  getTotals,
+  getUndo
+} from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
 import GraphColours from "../Utilities/GraphColours";
 import People from "../Utilities/People";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUndo } from "@fortawesome/free-solid-svg-icons";
 import Switch from "react-switch";
-
 
 class Page extends Component {
   constructor(props) {
@@ -61,11 +65,11 @@ class Page extends Component {
           this.state.selectedUser !== "everyone" ? (
             this.renderPersonPage()
           ) : (
-              this.renderHomePage()
-            )
+            this.renderHomePage()
+          )
         ) : (
-            <div className="total">Loading...</div>
-          )}
+          <div className="total">Loading...</div>
+        )}
       </div>
     );
   }
@@ -278,7 +282,10 @@ class Page extends Component {
   renderInfo() {
     return (
       <div>
-        <div className="total">{this.state.totalCount}</div>
+        <div className="count-container">
+          <div className="total">{this.state.totalCount}</div>
+          <div className="highscore">{this.state.highScore}</div>
+        </div>
         <div className="daily">{this.state.dailyCount}</div>
       </div>
     );
@@ -287,7 +294,10 @@ class Page extends Component {
   renderButtons() {
     return (
       <div className="button-container">
-        <form className="button-layout-main" onClick={() => this._handlePress()}>
+        <form
+          className="button-layout-main"
+          onClick={() => this._handlePress()}
+        >
           <input
             className="ghost-input-button"
             type="button"
@@ -295,8 +305,12 @@ class Page extends Component {
             disabled={this.state.disabled}
           />
         </form>
-        <div className="button-layout-undo" >
-          <button disabled={this.state.disabled} className="ghost-input-button" onClick={() => this._handleUndo()}>
+        <div className="button-layout-undo">
+          <button
+            disabled={this.state.disabled}
+            className="ghost-input-button"
+            onClick={() => this._handleUndo()}
+          >
             <FontAwesomeIcon icon={faUndo} size="xs" />
           </button>
         </div>
@@ -347,8 +361,22 @@ class Page extends Component {
       <div className="switch-container">
         <form>
           <div class="radio-group">
-            <input type="radio" id="option-one" name="selector" checked={!this.state.daily} onClick={() => this._handleSwitch()} /><label for="option-one">Weekly</label>
-            <input type="radio" id="option-two" name="selector" checked={this.state.daily} onClick={() => this._handleSwitch()} /><label for="option-two">Daily</label>
+            <input
+              type="radio"
+              id="option-one"
+              name="selector"
+              checked={!this.state.daily}
+              onClick={() => this._handleSwitch()}
+            />
+            <label for="option-one">Weekly</label>
+            <input
+              type="radio"
+              id="option-two"
+              name="selector"
+              checked={this.state.daily}
+              onClick={() => this._handleSwitch()}
+            />
+            <label for="option-two">Daily</label>
           </div>
         </form>
       </div>

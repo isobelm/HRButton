@@ -333,10 +333,25 @@ li {
   text-align: center;
 }
 
+.count-container {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .total {
-  padding: 10px;
+  display: inline-flex;
+  font-size: 20px;
+  text-align: center;
+  color: #675f6b;
+  padding: 20px 5px 20px 5px;
+}
+
+.highscore {
+  display: inline-flex;
   font-size: 30px;
   text-align: center;
+  padding: 10px 5px 10px 5px;
 }
 
 .switch-container {
