@@ -15,15 +15,19 @@ class Master extends Component {
 			disabled: false,
 			totalChartData: [],
 			dailyChartData: [],
+			lineChartData: [],
+			dailyLineChartData: undefined,
+			weekyLineChartData: undefined,
+			daily: false,
 		};
 
 		this.totalChartData = [];
 		this.dailyChartData = [];
+		this.lineChartData = [];
 		this.types = Object.keys(Types);
 
 		debugger;
-		this.createChartData("total");
-		this.createChartData("daily");
+		this.createHomeCharts();
 	}
 
 	renderHomePage() {
@@ -33,6 +37,11 @@ class Master extends Component {
 				{this.renderRadarGraph(this.state.totalChartData, "Total")}
 			</div>
 		);
+	}
+
+	createHomeCharts() {
+		this.createChartData("total");
+		this.createChartData("daily");
 	}
 
 	render() {
@@ -65,12 +74,15 @@ class Master extends Component {
 			this.setState({
 				dailyChartData: this.dailyChartData,
 				selectedUser: "everyone",
+				// disabled: false,
 			});
 		}
+		debugger;
 		if (this.totalChartData.length >= this.types.length - 1) {
 			this.setState({
 				totalChartData: this.totalChartData,
 				selectedUser: "everyone",
+				// disabled: false,
 			});
 		}
 	}
@@ -106,9 +118,19 @@ class Master extends Component {
 		} else return chartData;
 	};
 
-	createLineChartData() {}
+	createLineChartData() {
+		for (let i = 0; i < this.types.length; i++) {
+			if (this.types[i] !== "Master") {
+				this.createLineChartDataByType(
+					this.types[i],
+					this.state.daily ? "daily" : "weekly",
+					this.state.selectedUser
+				);
+			}
+		}
+	}
 
-	createLineChartDataByType(type, data, selectedUser) {
+	async createLineChartDataByType(type, data, selectedUser) {
 		const lineChartData = [
 			{
 				id: selectedUser,
@@ -196,10 +218,12 @@ class Master extends Component {
 	}
 
 	async _handleHomePress() {
+		debugger;
 		this.setState({
-			disabled: true,
+			selectedUser: "everyone",
 		});
-		await this.createHomeCharts();
+		debugger;
+		// await this.createHomeCharts();
 	}
 
 	async _handleSwitch() {
@@ -233,6 +257,52 @@ class Master extends Component {
 		return (
 			<div className="App-header">
 				<div className="rows">{tabs}</div>
+			</div>
+		);
+	}
+
+	renderPersonPage() {
+		return (
+			<div>
+				{this.state.lineChartData !== undefined && !this.state.disabled
+					? this.renderGraph()
+					: undefined}
+				{this.renderSwitchCharts()}
+				{this.renderHomeButton()}
+			</div>
+		);
+	}
+
+	renderSwitchCharts() {
+		return (
+			<div className="switch-container">
+				<div className="switch-layout">
+					<div className="switch-labels">Weekly</div>
+					<label class="switch">
+						<input
+							checked={this.state.daily}
+							type="checkbox"
+							onChange={() => this._handleSwitch()}
+						/>
+						<span class="slider"></span>
+					</label>
+					<div className="switch-labels">Today</div>
+				</div>
+			</div>
+		);
+	}
+
+	renderHomeButton() {
+		return (
+			<div>
+				<form onClick={() => this._handleHomePress()}>
+					<input
+						className="home-button"
+						type="button"
+						value="Home"
+						disabled={this.state.disabled}
+					/>
+				</form>
 			</div>
 		);
 	}
