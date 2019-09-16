@@ -26,7 +26,8 @@ class Page extends Component {
       lineChartData: undefined,
       dailyChartData: undefined,
       weeklyChartData: undefined,
-      barChartData: undefined,
+      highScoresChartData: undefined,
+      totalChartData: undefined,
       daily: false,
       type: MapType(decodeURIComponent(this.props.match.params.type)),
       width: 0,
@@ -118,8 +119,12 @@ class Page extends Component {
           ? this.renderBigGraph()
           : undefined}
         <div className="chartTitle">Total Presses</div>
-        {this.state.barChartData !== undefined
-          ? this.renderTotalChart()
+        {this.state.totalChartData !== undefined
+          ? this.renderBarChart(this.state.totalChartData)
+          : undefined}
+        <div className="chartTitle">Highscores</div>
+        {this.state.highScoresChartData !== undefined
+          ? this.renderBarChart(this.state.highScoresChartData)
           : undefined}
       </div>
     );
@@ -244,12 +249,12 @@ class Page extends Component {
     );
   }
 
-  renderTotalChart() {
+  renderBarChart(chartData) {
     return (
       <div className="graph-parent">
         <div className="chart">
           <ResponsiveBar
-            data={this.state.barChartData}
+            data={chartData}
             colors={d => d.color}
             keys={People}
             indexBy="person"
@@ -501,10 +506,16 @@ class Page extends Component {
       await getData(person);
     }
 
-    const barChartData = [];
+    const totalChartData = [];
+    const highScoresChartData = [];
     getData = async person => {
       const totalCountData = await getTotals(person, this.state.type);
-      barChartData.push(this.createBarChartData(totalCountData.total, person));
+      totalChartData.push(
+        this.createBarChartData(totalCountData.total, person)
+      );
+      highScoresChartData.push(
+        this.createBarChartData(totalCountData.highscore, person)
+      );
     };
 
     for await (const person of People) {
@@ -516,8 +527,9 @@ class Page extends Component {
       totalCount: undefined,
       highScore: undefined,
       selectedUser: "everyone",
-      lineChartData: lineChartData,
-      barChartData: barChartData,
+      lineChartData,
+      totalChartData,
+      highScoresChartData,
       disabled: false,
       loading: false
     });
