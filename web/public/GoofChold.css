@@ -101,14 +101,6 @@
   background: var(--color-2); 
 }
 
-input:checked + .slider {
-  background: var(--color-1);
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--color-1);
-}
-
-.slider {
+input[type="radio"]:checked + label {
   background: var(--color-2);  
 }

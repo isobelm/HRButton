@@ -5,6 +5,10 @@ import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
 import GraphColours from "../Utilities/GraphColours";
 import People from "../Utilities/People";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import Switch from "react-switch";
+
 
 class Page extends Component {
   constructor(props) {
@@ -57,11 +61,11 @@ class Page extends Component {
           this.state.selectedUser !== "everyone" ? (
             this.renderPersonPage()
           ) : (
-            this.renderHomePage()
-          )
+              this.renderHomePage()
+            )
         ) : (
-          <div className="total">Loading...</div>
-        )}
+            <div className="total">Loading...</div>
+          )}
       </div>
     );
   }
@@ -291,14 +295,11 @@ class Page extends Component {
             disabled={this.state.disabled}
           />
         </form>
-        <form className="button-layout-undo" onClick={() => this._handleUndo()}>
-          <input
-            className="ghost-input-button"
-            type="button"
-            value={"Undo"}
-            disabled={this.state.disabled}
-          />
-        </form>
+        <div className="button-layout-undo" >
+          <button disabled={this.state.disabled} className="ghost-input-button" onClick={() => this._handleUndo()}>
+            <FontAwesomeIcon icon={faUndo} size="xs" />
+          </button>
+        </div>
       </div>
     );
   }
@@ -344,18 +345,12 @@ class Page extends Component {
   renderSwitchCharts() {
     return (
       <div className="switch-container">
-        <div className="switch-layout">
-          <div className="switch-labels">Weekly</div>
-          <label class="switch">
-            <input
-              checked={this.state.daily}
-              type="checkbox"
-              onChange={() => this._handleSwitch()}
-            />
-            <span class="slider"></span>
-          </label>
-          <div className="switch-labels">Today</div>
-        </div>
+        <form>
+          <div class="radio-group">
+            <input type="radio" id="option-one" name="selector" checked={!this.state.daily} onClick={() => this._handleSwitch()} /><label for="option-one">Weekly</label>
+            <input type="radio" id="option-two" name="selector" checked={this.state.daily} onClick={() => this._handleSwitch()} /><label for="option-two">Daily</label>
+          </div>
+        </form>
       </div>
     );
   }
