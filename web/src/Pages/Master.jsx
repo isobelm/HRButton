@@ -4,6 +4,7 @@ import { ResponsiveRadar } from "@nivo/radar";
 import GraphColours from "../Utilities/GraphColours";
 import { Types } from "../Utilities/Types";
 import People from "../Utilities/People";
+import { ClipLoader } from "react-spinners";
 
 class Master extends Component {
   constructor(props) {
@@ -15,14 +16,17 @@ class Master extends Component {
       disabled: false,
       totalChartData: [],
       dailyChartData: [],
+      highscoreChartData: [],
       lineChartData: [],
       dailyLineChartData: undefined,
       weekyLineChartData: undefined,
-      daily: false
+      daily: false,
+      loading: true
     };
 
     this.totalChartData = [];
     this.dailyChartData = [];
+    this.highscoreChartData = [];
     this.lineChartData = [];
     this.types = Object.keys(Types);
 
@@ -32,11 +36,14 @@ class Master extends Component {
   renderHomePage() {
     return (
       <div className="graph-container">
-        {this.state.dailyChartData !== undefined && !this.state.disabled
+        {this.state.dailyChartData && !this.state.disabled
           ? this.renderRadarGraph(this.state.dailyChartData, "Daily")
           : undefined}
-        {this.state.totalChartData !== undefined && !this.state.disabled
+        {this.state.totalChartData && !this.state.disabled
           ? this.renderRadarGraph(this.state.totalChartData, "Total")
+          : undefined}
+        {this.state.highscoreChartData && !this.state.disabled
+          ? this.renderRadarGraph(this.state.highscoreChartData, "High Scores")
           : undefined}
       </div>
     );
@@ -45,9 +52,18 @@ class Master extends Component {
   createHomeCharts() {
     this.createChartData("total");
     this.createChartData("daily");
+    this.createChartData("highscore");
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          {this.renderTabs()}
+          {this.renderLoader()}
+        </div>
+      );
+    }
     return (
       <div>
         {this.renderTabs()}
@@ -64,6 +80,19 @@ class Master extends Component {
     );
   }
 
+  renderLoader() {
+    return (
+      <div className="loader-container">
+        <ClipLoader
+          sizeUnit={"px"}
+          size={35}
+          color={"#ffffff"}
+          loading={this.state.loading}
+        />
+      </div>
+    );
+  }
+
   async createRadarChartData(id, type) {
     const chartData = { id: id };
 
@@ -73,19 +102,28 @@ class Master extends Component {
     }
 
     this[type + "ChartData"].push(this.normalise(chartData));
+
     if (this.dailyChartData.length >= this.types.length - 1) {
       this.setState({
         dailyChartData: this.dailyChartData,
-        selectedUser: "everyone"
-        // disabled: false,
+        selectedUser: "everyone",
+        loading: false
       });
     }
-    debugger;
+
     if (this.totalChartData.length >= this.types.length - 1) {
       this.setState({
         totalChartData: this.totalChartData,
-        selectedUser: "everyone"
-        // disabled: false,
+        selectedUser: "everyone",
+        loading: false
+      });
+    }
+
+    if (this.highscoreChartData.length >= this.types.length - 1) {
+      this.setState({
+        highscoreChartData: this.highscoreChartData,
+        selectedUser: "everyone",
+        loading: false
       });
     }
   }
