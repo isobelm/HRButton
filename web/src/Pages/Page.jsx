@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
+import { getDailyCounts, getPress, getTotals, getUndo } from "../Services/Requests";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
 import { MapType } from "../Utilities/Types";
@@ -291,7 +291,7 @@ class Page extends Component {
             disabled={this.state.disabled}
           />
         </form>
-        <form className="button-layout-undo" onClick={() => undefined}>
+        <form className="button-layout-undo" onClick={() => this._handleUndo()}>
           <input
             className="ghost-input-button"
             type="button"
@@ -365,6 +365,37 @@ class Page extends Component {
       disabled: true
     });
     await getPress(this.state.selectedUser, this.state.type);
+    const data = await getTotals(this.state.selectedUser, this.state.type);
+    const returnedLineChartData = await getDailyCounts(
+      this.state.selectedUser,
+      this.state.type
+    );
+    const weeklyChartData = this.createLineChartData(
+      returnedLineChartData.data,
+      this.state.selectedUser
+    );
+    const dailyChartData = this.createLineChartData(
+      returnedLineChartData.dailyData,
+      this.state.selectedUser
+    );
+    const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
+    this.setState({
+      dailyCount: data.daily,
+      totalCount: data.total,
+      highScore: data.highscore,
+      selectedUser: this.state.selectedUser,
+      lineChartData,
+      weeklyChartData,
+      dailyChartData,
+      disabled: false
+    });
+  }
+
+  async _handleUndo() {
+    this.setState({
+      disabled: true
+    });
+    await getUndo(this.state.selectedUser, this.state.type);
     const data = await getTotals(this.state.selectedUser, this.state.type);
     const returnedLineChartData = await getDailyCounts(
       this.state.selectedUser,
