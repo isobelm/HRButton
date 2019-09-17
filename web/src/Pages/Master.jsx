@@ -474,6 +474,7 @@ class Master extends Component {
 									],
 								},
 							]}
+							tooltipFormat={(value) => `${value}%`}
 						/>
 					</div>
 				</div>
