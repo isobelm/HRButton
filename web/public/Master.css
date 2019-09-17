@@ -204,7 +204,3 @@ p {
 .content {
 	background: var(--color-2), var(--color-3);
 }
-
-.slider {
-	background: var(--color-3);
-}
