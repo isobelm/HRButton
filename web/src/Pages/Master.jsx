@@ -170,8 +170,7 @@ class Master extends Component {
 				returnData.push(
 					this.createLineChartDataByType(
 						this.types[i],
-						data[this.types[i]],
-						this.state.selectedUser
+						data[this.types[i]]
 					)
 				);
 			}
@@ -180,11 +179,11 @@ class Master extends Component {
 		return returnData;
 	}
 
-	createLineChartDataByType(type, data, selectedUser) {
+	createLineChartDataByType(type, data) {
 		const lineChartData = {
 			id: type,
 			data: new Array(data.length),
-			color: GraphColours[type][selectedUser],
+			color: GraphColours["MasterByType"][type],
 		};
 		for (let i = 0; i < data.length; i++) {
 			lineChartData.data[i] = {
