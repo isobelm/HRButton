@@ -202,6 +202,7 @@ class Master extends Component {
 			dailyCount: undefined,
 			totalCount: "Loading..",
 			disabled: true,
+			loading: true,
 		});
 		const returnedLineChartData = [];
 		const dailyData = {};
@@ -228,6 +229,7 @@ class Master extends Component {
 			weeklyChartData,
 			dailyLineChartData,
 			disabled: false,
+			loading: false,
 		});
 	}
 
@@ -290,18 +292,26 @@ class Master extends Component {
 	renderSwitchCharts() {
 		return (
 			<div className="switch-container">
-				<div className="switch-layout">
-					<div className="switch-labels">Weekly</div>
-					<label class="switch">
+				<form>
+					<div class="radio-group">
 						<input
-							checked={this.state.daily}
-							type="checkbox"
-							onChange={() => this._handleSwitch()}
+							type="radio"
+							id="option-one"
+							name="selector"
+							checked={!this.state.daily}
+							onClick={() => this._handleSwitch()}
 						/>
-						<span class="slider"></span>
-					</label>
-					<div className="switch-labels">Today</div>
-				</div>
+						<label for="option-one">Weekly</label>
+						<input
+							type="radio"
+							id="option-two"
+							name="selector"
+							checked={this.state.daily}
+							onClick={() => this._handleSwitch()}
+						/>
+						<label for="option-two">Daily</label>
+					</div>
+				</form>
 			</div>
 		);
 	}

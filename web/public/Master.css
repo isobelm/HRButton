@@ -204,3 +204,20 @@ p {
 .content {
 	background: var(--color-2), var(--color-3);
 }
+
+.slider {
+	background: var(--color-3);
+}
+
+input[type="radio"] + label {
+	background: var(--color-2);
+}
+
+input[type="radio"]:checked + label {
+	color: var(--color-2);
+}
+
+.radio-group {
+	border: solid 3px var(--color-2);
+	background: var(--color-2);
+}

@@ -90,7 +90,7 @@ class Page extends Component {
         <ClipLoader
           sizeUnit={"px"}
           size={35}
-          color={"#000000"}
+          color={"#ffffff"}
           loading={this.state.loading}
         />
       </div>
@@ -99,32 +99,36 @@ class Page extends Component {
 
   renderPersonPage() {
     return (
-      <div>
-        {this.renderInfo()}
-        {this.renderButtons()}
+      <div className="graph-container">
+        {this.renderInfoCard()}
         {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
           : undefined}
-        {this.renderSwitchCharts()}
         {this.renderHomeButton()}
+      </div>
+    );
+  }
+
+  renderInfoCard() {
+    return (
+      <div className="chart-area">
+        {this.renderInfo()}
+        {this.renderButtons()}
       </div>
     );
   }
 
   renderHomePage() {
     return (
-      <div>
-        <div className="chartTitle">Recent Behaviour</div>
+      <div className="graph-container">
         {this.state.lineChartData !== undefined
           ? this.renderBigGraph()
           : undefined}
-        <div className="chartTitle">Total Presses</div>
         {this.state.totalChartData !== undefined
-          ? this.renderBarChart(this.state.totalChartData)
+          ? this.renderBarChart(this.state.totalChartData, "Total Presses")
           : undefined}
-        <div className="chartTitle">Highscores</div>
         {this.state.highScoresChartData !== undefined
-          ? this.renderBarChart(this.state.highScoresChartData)
+          ? this.renderBarChart(this.state.highScoresChartData, "Highscores")
           : undefined}
       </div>
     );
@@ -132,175 +136,184 @@ class Page extends Component {
 
   renderGraph() {
     return (
-      <div className="graph-parent">
-        <div className="chart">
-          <ResponsiveLine
-            data={this.state.lineChartData}
-            colors={d => d.color}
-            margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              stacked: false,
-              min: "auto",
-              max: "auto"
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              orient: "bottom",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: this.state.daily ? "Today" : "Last 14 Days",
-              legendOffset: 40,
-              legendPosition: "middle",
-              tickValues:
-                this.state.daily && this.state.width < 600
-                  ? [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
-                  : "linear"
-            }}
-            axisLeft={{
-              orient: "left",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "count",
-              legendOffset: -40,
-              legendPosition: "middle"
-            }}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabel="y"
-            pointLabelYOffset={-12}
-            useMesh={true}
-            legends={[]}
-          />
+      <div className="chart-area">
+        <div className="graph-parent">
+          <div className="chart">
+            <ResponsiveLine
+              data={this.state.lineChartData}
+              colors={d => d.color}
+              margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+              xScale={{ type: "point" }}
+              yScale={{
+                type: "linear",
+                stacked: false,
+                min: "auto",
+                max: "auto"
+              }}
+              axisTop={null}
+              axisRight={null}
+              axisBottom={{
+                orient: "bottom",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: this.state.daily ? "Today" : "Last 14 Days",
+                legendOffset: 40,
+                legendPosition: "middle",
+                tickValues:
+                  this.state.daily && this.state.width < 600
+                    ? [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+                    : "linear"
+              }}
+              axisLeft={{
+                orient: "left",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "count",
+                legendOffset: -40,
+                legendPosition: "middle"
+              }}
+              pointSize={10}
+              pointColor={{ theme: "background" }}
+              pointBorderWidth={2}
+              pointBorderColor={{ from: "serieColor" }}
+              pointLabel="y"
+              pointLabelYOffset={-12}
+              useMesh={true}
+              legends={[]}
+            />
+          </div>
         </div>
+        {this.renderSwitchCharts()}
       </div>
     );
   }
 
   renderBigGraph() {
     return (
-      <div className="graph-parent">
-        <div className="chart">
-          <ResponsiveLine
-            data={this.state.lineChartData}
-            margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              stacked: false,
-              min: "auto",
-              max: "auto"
-            }}
-            colors={d => d.color}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              orient: "bottom",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "Last 14 Days",
-              legendOffset: 35,
-              legendPosition: "middle"
-            }}
-            axisLeft={{
-              orient: "left",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "count",
-              legendOffset: -40,
-              legendPosition: "middle"
-            }}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabel="y"
-            pointLabelYOffset={-12}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 70,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 60,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 10,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: []
-              }
-            ]}
-          />
+      <div className="chart-area">
+        <div className="chartTitle">Recent Behaviour</div>
+        <div className="graph-parent">
+          <div className="chart">
+            <ResponsiveLine
+              data={this.state.lineChartData}
+              margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
+              xScale={{ type: "point" }}
+              yScale={{
+                type: "linear",
+                stacked: false,
+                min: "auto",
+                max: "auto"
+              }}
+              colors={d => d.color}
+              axisTop={null}
+              axisRight={null}
+              axisBottom={{
+                orient: "bottom",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "Last 14 Days",
+                legendOffset: 35,
+                legendPosition: "middle"
+              }}
+              axisLeft={{
+                orient: "left",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "count",
+                legendOffset: -40,
+                legendPosition: "middle"
+              }}
+              pointSize={10}
+              pointColor={{ theme: "background" }}
+              pointBorderWidth={2}
+              pointBorderColor={{ from: "serieColor" }}
+              pointLabel="y"
+              pointLabelYOffset={-12}
+              useMesh={true}
+              legends={[
+                {
+                  anchor: "bottom",
+                  direction: "row",
+                  justify: false,
+                  translateX: 0,
+                  translateY: 70,
+                  itemsSpacing: 0,
+                  itemDirection: "left-to-right",
+                  itemWidth: 60,
+                  itemHeight: 20,
+                  itemOpacity: 0.75,
+                  symbolSize: 10,
+                  symbolShape: "circle",
+                  symbolBorderColor: "rgba(0, 0, 0, .5)",
+                  effects: []
+                }
+              ]}
+            />
+          </div>
         </div>
       </div>
     );
   }
 
-  renderBarChart(chartData) {
+  renderBarChart(chartData, title) {
     return (
-      <div className="graph-parent">
-        <div className="chart">
-          <ResponsiveBar
-            data={chartData}
-            colors={d => d.color}
-            keys={People}
-            indexBy="person"
-            margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
-            padding={0.3}
-            borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              orient: "bottom",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0
-            }}
-            axisLeft={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "total",
-              legendPosition: "middle",
-              legendOffset: -40
-            }}
-            colors={Object.values(GraphColours[this.state.type])}
-            enableLabel={false}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 70,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 60,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 10,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: []
-              }
-            ]}
-          />
+      <div className="chart-area">
+        <div className="chartTitle">{title}</div>
+        <div className="graph-parent">
+          <div className="chart">
+            <ResponsiveBar
+              data={chartData}
+              colors={d => d.color}
+              keys={People}
+              indexBy="person"
+              margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
+              padding={0.3}
+              borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+              axisTop={null}
+              axisRight={null}
+              axisBottom={{
+                orient: "bottom",
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0
+              }}
+              axisLeft={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "total",
+                legendPosition: "middle",
+                legendOffset: -40
+              }}
+              colors={Object.values(GraphColours[this.state.type])}
+              enableLabel={false}
+              animate={true}
+              motionStiffness={90}
+              motionDamping={15}
+              legends={[
+                {
+                  anchor: "bottom",
+                  direction: "row",
+                  justify: false,
+                  translateX: 0,
+                  translateY: 70,
+                  itemsSpacing: 0,
+                  itemDirection: "left-to-right",
+                  itemWidth: 60,
+                  itemHeight: 20,
+                  itemOpacity: 0.75,
+                  symbolSize: 10,
+                  symbolShape: "circle",
+                  symbolBorderColor: "rgba(0, 0, 0, .5)",
+                  effects: []
+                }
+              ]}
+            />
+          </div>
         </div>
       </div>
     );
@@ -556,7 +569,7 @@ class Page extends Component {
       returnedLineChartData.dailyData,
       selectedUser
     );
-    debugger
+    debugger;
     const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
