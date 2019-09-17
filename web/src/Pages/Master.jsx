@@ -276,12 +276,14 @@ class Master extends Component {
 	renderPersonPage() {
 		return (
 			<div>
-				<div className="chart-area">
-					{this.state.lineChartData !== undefined &&
-					!this.state.disabled
-						? this.renderGraph()
-						: undefined}
-					{this.renderSwitchCharts()}
+				<div className="graph-container">
+					<div className="chart-area">
+						{this.state.lineChartData !== undefined &&
+						!this.state.disabled
+							? this.renderGraph()
+							: undefined}
+						{this.renderSwitchCharts()}
+					</div>
 				</div>
 				{this.renderHomeButton()}
 			</div>

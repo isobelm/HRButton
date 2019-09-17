@@ -569,7 +569,6 @@ class Page extends Component {
       returnedLineChartData.dailyData,
       selectedUser
     );
-    debugger;
     const lineChartData = this.state.daily ? dailyChartData : weeklyChartData;
     this.setState({
       dailyCount: data.daily,
