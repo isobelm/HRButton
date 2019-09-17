@@ -338,7 +338,7 @@ class Master extends Component {
 					<ResponsiveLine
 						data={this.state.lineChartData}
 						colors={(d) => d.color}
-						margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+						margin={{ top: 50, right: 50, bottom: 80, left: 60 }}
 						xScale={{ type: "point" }}
 						yScale={{
 							type: "linear",
@@ -390,7 +390,24 @@ class Master extends Component {
 						pointLabel="y"
 						pointLabelYOffset={-12}
 						useMesh={true}
-						legends={[]}
+						legends={[
+							{
+								anchor: "bottom",
+								direction: "row",
+								justify: false,
+								translateX: 0,
+								translateY: 80,
+								itemsSpacing: 20,
+								itemDirection: "left-to-right",
+								itemWidth: 60,
+								itemHeight: 20,
+								itemOpacity: 0.75,
+								symbolSize: 10,
+								symbolShape: "circle",
+								symbolBorderColor: "rgba(0, 0, 0, .5)",
+								effects: [],
+							},
+						]}
 					/>
 				</div>
 			</div>

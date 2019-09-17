@@ -174,7 +174,7 @@ class Page extends Component {
                 legendOffset: -40,
                 legendPosition: "middle"
               }}
-              pointSize={10}
+              pointSize={2}
               pointColor={{ theme: "background" }}
               pointBorderWidth={2}
               pointBorderColor={{ from: "serieColor" }}
@@ -227,7 +227,7 @@ class Page extends Component {
                 legendOffset: -40,
                 legendPosition: "middle"
               }}
-              pointSize={10}
+              pointSize={2}
               pointColor={{ theme: "background" }}
               pointBorderWidth={2}
               pointBorderColor={{ from: "serieColor" }}
