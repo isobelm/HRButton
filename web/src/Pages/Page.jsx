@@ -99,7 +99,7 @@ class Page extends Component {
 
   renderPersonPage() {
     return (
-      <div>
+      <div className="graph-container">
         {this.renderInfoCard()}
         {this.state.lineChartData !== undefined && !this.state.disabled
           ? this.renderGraph()
