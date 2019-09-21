@@ -141,7 +141,6 @@ class Page extends Component {
           <div className="chart">
             <ResponsiveLine
               data={this.state.lineChartData}
-              colors={d => d.color}
               margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
               xScale={{ type: "point" }}
               yScale={{
@@ -182,6 +181,7 @@ class Page extends Component {
               pointLabelYOffset={-12}
               useMesh={true}
               legends={[]}
+              colors={[GraphColours[this.state.type][this.state.selectedUser]]}
             />
           </div>
         </div>
@@ -206,7 +206,7 @@ class Page extends Component {
                 min: "auto",
                 max: "auto"
               }}
-              colors={d => d.color}
+              colors={Object.values(GraphColours[this.state.type])}
               axisTop={null}
               axisRight={null}
               axisBottom={{
@@ -267,7 +267,6 @@ class Page extends Component {
           <div className="chart">
             <ResponsiveBar
               data={chartData}
-              colors={d => d.color}
               keys={People}
               indexBy="person"
               margin={{ top: 20, right: 50, bottom: 100, left: 60 }}

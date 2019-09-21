@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDailyCounts, getPress, getTotals } from "../Services/Requests";
+import { getDailyCounts, getTotals } from "../Services/Requests";
 import { ResponsiveRadar } from "@nivo/radar";
 import { ResponsiveLine } from "@nivo/line";
 import GraphColours from "../Utilities/GraphColours";
@@ -146,14 +146,14 @@ class Master extends Component {
 
 		let total = 0;
 		Object.keys(chartData).forEach((key) => {
-			if (key != "id") {
+			if (key !== "id") {
 				total += chartData[key];
 			}
 		});
 
 		if (total > 0) {
 			Object.keys(chartData).forEach((key) => {
-				if (key != "id") {
+				if (key !== "id") {
 					normalisedData[key] = Math.trunc(
 						(chartData[key] / total) * 100
 					);
