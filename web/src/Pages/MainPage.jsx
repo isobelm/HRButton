@@ -8,7 +8,7 @@ const mode = {
   GoofChold: "Goof Chold",
   MISTAKE: "MISTAKE",
   Yike: "Yike",
-  Dumb: "Dumb",
+  Dumb: "Dumb"
 };
 
 const css = {
@@ -17,7 +17,7 @@ const css = {
   "Goof Chold": process.env.PUBLIC_URL + "../GoofChold.css",
   MISTAKE: process.env.PUBLIC_URL + "../MISTAKE.css",
   Yike: process.env.PUBLIC_URL + "../yike.css",
-  Dumb: process.env.PUBLIC_URL + "../Dumb.css",
+  Dumb: process.env.PUBLIC_URL + "../Dumb.css"
 };
 
 class MainPage extends Component {
@@ -36,7 +36,7 @@ class MainPage extends Component {
   setSelected = option => {
     this.setState({ mode: option, stylePath: css[option] });
     if (option !== mode.Master) {
-      this.props.history.push(`/${MapType(option)}`);
+      this.props.history.push(`/${option.toLowerCase()}`);
     } else {
       this.props.history.push("/");
     }

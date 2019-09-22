@@ -43,7 +43,10 @@ class Page extends Component {
     if (props.match.params.type !== state.type) {
       this.createHomeCharts();
     }
-    this.setState({ type: props.match.params.type, loading: true });
+    this.setState({
+      type: MapType(decodeURIComponent(props.match.params.type)),
+      loading: true
+    });
   }
 
   componentDidMount() {
@@ -583,6 +586,7 @@ class Page extends Component {
   }
 
   createLineChartData(data, selectedUser) {
+    console.log(this.state.type);
     const lineChartData = [
       {
         id: selectedUser,
