@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Types } from "../Utilities/Types"
+import { Types } from "../Utilities/Types";
 
 class Dropdown extends Component {
-  setSelected = () => { };
+  setSelected = () => {};
 
   constructor(props) {
     super(props);

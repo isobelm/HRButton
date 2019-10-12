@@ -10,7 +10,6 @@ function App() {
     <Router>
       <Route path="/" component={MainPage} />
       <Route exact path="/" component={Master} />
-      <Route exact path="/Master" component={Master} />
       <Route path="/:type" component={Page} />
     </Router>
   );
