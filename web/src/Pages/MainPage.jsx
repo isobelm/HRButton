@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "../Components/Dropdown";
 import { MapType } from "../Utilities/Types";
 
 const mode = {
